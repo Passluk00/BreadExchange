@@ -10,8 +10,9 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import io.swagger.v3.oas.annotations.servers.Server;
 
-@OpenAPIDefinition(
 
+
+@OpenAPIDefinition(
         info = @Info(
                 contact = @Contact(
                         name = "Passluk",
@@ -19,7 +20,7 @@ import io.swagger.v3.oas.annotations.servers.Server;
                 ),
                 description = "OpenApi documentation for Spring Security",
                 title = "OpenApi specification - Passluk",
-                version = "1.0",
+                version = "2.0",
                 license = @License(
                         name = "Licence BradExchange",
                         url = "https://BreadExchange.com"
@@ -29,7 +30,7 @@ import io.swagger.v3.oas.annotations.servers.Server;
         servers = {
                 @Server(
                         description = "Local ENV",
-                        url = "http://localhost:8080"
+                        url = "http://localhost:8080/api/v1"
                 )
         },
         security = {
@@ -38,7 +39,6 @@ import io.swagger.v3.oas.annotations.servers.Server;
                 )
         }
 )
-
 
 @SecurityScheme(
         name = "bearerAuth",

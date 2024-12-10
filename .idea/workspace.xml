@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="def00291-6796-4523-8aed-85c7574e50f3" name="Changes" comment="">
+    <list default="true" id="def00291-6796-4523-8aed-85c7574e50f3" name="Changes" comment="Commit iniziale Base BackEnd + Impostaioni cartelle">
       <change afterPath="$PROJECT_DIR$/BackEnd/BackEnd/src/main/java/it/uniromatre/breadexchange2_0/config/OpenApiConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/it/uniromatre/breadexchange2_0/config/OpenApiConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/src/main/java/it/uniromatre/breadexchange2_0/config/OpenApiConfig.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,6 +16,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="OpenAPI" />
       </list>
     </option>
   </component>
@@ -89,7 +89,7 @@
       <option name="presentableId" value="Default" />
       <updated>1733847987447</updated>
       <workItem from="1733847988501" duration="1192000" />
-      <workItem from="1733849206193" duration="3477000" />
+      <workItem from="1733849206193" duration="7143000" />
     </task>
     <servers />
   </component>
