@@ -1,0 +1,7 @@
+<div
+  class="bread-container"
+  *ngFor="let bread of breads"
+  [ngStyle]="{'left': bread.left, 'animation-delay': bread.delay, 'animation-duration': bread.duration}"
+>
+  {{bread.emoji}}
+</div>

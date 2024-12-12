@@ -1,0 +1,49 @@
+<app-falling-bread></app-falling-bread>
+
+
+<div class="container">
+
+  <div class="wrapper">
+
+    <h1>Login</h1>
+
+    <div class="alert alert-danger" role="alert" *ngIf="errorMessage.length">
+      <p *ngFor="let msg of errorMessage">{{msg}}</p>
+    </div>
+
+
+
+    <div class="input-box">
+      <input  [(ngModel)]="authRequest.email"  type="email" placeholder="Email">
+
+      <!-- Cambare icone  -->
+
+      <i class="icone fa-user"></i>
+    </div>
+
+
+    <div class="input-box">
+      <input [(ngModel)]="authRequest.password" type="password" placeholder="Password">
+      <i class="icone fa-key"></i>
+    </div>
+
+
+    <div class="forgot-password ">
+      <a routerLink="/forgot-password">Forgot Password?</a>
+    </div>
+
+
+    <button (click)="login()" type="button" class="btn btn-primary">Login</button>
+
+
+
+    <div class="register-button">
+      <p id="scritta">Non hai un account?</p>
+      <button class="btn btn-outline-light" (click)="register()">Register</button>
+    </div>
+
+
+
+  </div>
+
+</div>
