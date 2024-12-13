@@ -6,18 +6,21 @@ import {Router, RouterLink} from "@angular/router";
 import {AuthenticationRequest} from "../../services/models/authentication-request";
 import {AuthenticationService} from "../../services/services/authentication.service";
 import {TokenService} from "../../services/token/token.service";
+import {faKey, faUser} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 
 @Component({
   selector: 'app-login',
-  standalone: true,
   imports: [
     FallingBreadComponent,
+    FontAwesomeModule,
     NgIf,
     NgForOf,
     FormsModule,
     RouterLink
   ],
   templateUrl: './login.component.html',
+  standalone: true,
   styleUrl: './login.component.scss'
 })
 export class LoginComponent {
@@ -49,14 +52,14 @@ export class LoginComponent {
           this.tokenService.token = toc;
 
         }
-        this.router.navigate(['homepage']);
+        this.router.navigate(['']);
       },
       error: (err) => {
         console.log(err);
         if (err.error.validationErrors) {
           this.errorMessage = err.error.validationErrors;
         } else {
-          this.errorMessage.push(err.error.errorMsg);
+          this.errorMessage.push(err.error.error);
         }
       }
     });
@@ -71,13 +74,6 @@ export class LoginComponent {
   }
 
 
-
-
-
-
-
-
-
-  //TODO fare pagina forgot password   e    Icone non Visibili
-
+  protected readonly faKey = faKey;
+  protected readonly faUser = faUser;
 }

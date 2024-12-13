@@ -2,6 +2,7 @@ package it.uniromatre.breadexchange2_0.auth;
 
 import it.uniromatre.breadexchange2_0.email.EmailService;
 import it.uniromatre.breadexchange2_0.email.EmailTemplateName;
+import it.uniromatre.breadexchange2_0.exception.EmailAlreadyInUseExceprion;
 import it.uniromatre.breadexchange2_0.role.Role;
 import it.uniromatre.breadexchange2_0.security.JwtService;
 import it.uniromatre.breadexchange2_0.token.Token;
@@ -44,6 +45,10 @@ public class AuthService {
 
     public void register(RegistrationRequest request) throws MessagingException {
 
+        if(userRepository.existsByEmail(request.getEmail())){
+            throw new EmailAlreadyInUseExceprion("Email already in use");
+        }
+
         var user = User.builder()
                 .email(request.getEmail())
                 .username(request.getUsername())
@@ -53,8 +58,9 @@ public class AuthService {
                 .roles(Role.CUSTOMER)
                 .build();
 
-        userRepository.save(user);
-        sendValidationEmail(user);
+
+            userRepository.save(user);
+            sendValidationEmail(user);
     }
 
     public void adminRegisterAndActive(RegistrationRequest request){

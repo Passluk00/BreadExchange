@@ -1,0 +1,125 @@
+
+<div class="main-container">
+
+  <div class="navbar">
+
+
+
+    <!-- Logo -->
+    <div class="logo bg-white">
+
+      <a routerLink="/homepage" aria-current="page">
+        <img src="public/testImg/lct.png" alt="logo" >
+      </a>
+
+    </div>
+
+
+
+    <!-- Search -->
+
+    <!-- Il Problema di Grandezza viene da qui -->
+
+    <div class="container-search ">
+      <form>
+
+        <div class="search bg-white">
+          <fa-icon [icon]="faMagnifyingGlass" class="bg-white"></fa-icon>
+          <input class="search-input" type="search" placeholder="Search">
+        </div>
+
+      </form>
+    </div>
+
+
+
+
+
+    <!-- bottone menu -->
+
+    <div class="menu-container bg-white">
+
+        <div id="dropdownDefaultButton" data-dropdown-toggle="dropdown" type="button" class="menu-toggle bg-white" >
+
+          <div *ngIf="userData.url_Profile" class="profile-img bg-white" >
+            <img [src]="userData.url_Profile" id="img" class="bg-white">
+          </div>
+
+          <span>
+              <div *ngIf="userData?.username" >
+                <p class="bg-white">{{userData.username}}</p>
+              </div>
+
+              <div *ngIf="!userData?.username" class="bg-white">
+                <p>Username</p>
+
+                <!-- Qui va inserita la parte dove non è autenticato l'utente -->
+
+              </div>
+
+
+            </span>
+
+        </div>
+
+        <!-- Dropdown menu -->
+        <div id="dropdown" class=" z-10 hidden menu">
+          <ul class="text-sm mt-2 bg-white" aria-labelledby="dropdownDefaultButton">
+
+            <li class="elements-list" >
+              <a routerLink="/homepage/user" class="primo">
+                <fa-icon class="icon" [icon]="faUser"></fa-icon>
+                Profile
+              </a>
+            </li>
+
+            <li class="elements-list">
+              <a routerLink="/homepage/newOrder">
+                <fa-icon class="icon" [icon]="faCartShopping"></fa-icon>
+                New Order
+              </a>
+            </li>
+
+            <li class="elements-list">
+              <a href="#">
+                <fa-icon class="icon" [icon]="faChartLine"></fa-icon>
+                Analytics
+              </a>
+            </li>
+
+            <li class="elements-list">
+              <a href="#">
+                <fa-icon class="icon" [icon]="faSliders"></fa-icon>
+                Settings
+              </a>
+            </li>
+
+            <li class="elements-list">
+              <a href="#">
+                <fa-icon class="icon" [icon]="faCircleQuestion"></fa-icon>
+                Help & Support
+              </a>
+            </li>
+
+
+            <hr class="mt-2">
+
+            <li class="elements-list">
+              <div  class="elements-list">
+                <a href="#">
+                  <fa-icon class="icon logout" [icon]="faArrowRightFromBracket"></fa-icon>
+                  Log out
+                </a>
+              </div>
+            </li>
+
+
+          </ul>
+        </div>
+
+    </div>
+
+  </div>
+
+
+</div>

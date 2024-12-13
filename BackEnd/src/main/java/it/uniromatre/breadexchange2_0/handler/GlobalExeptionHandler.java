@@ -1,6 +1,7 @@
 package it.uniromatre.breadexchange2_0.handler;
 
 import it.uniromatre.breadexchange2_0.exception.ActivationTokenException;
+import it.uniromatre.breadexchange2_0.exception.EmailAlreadyInUseExceprion;
 import it.uniromatre.breadexchange2_0.exception.OperationNotPermittedException;
 import jakarta.mail.MessagingException;
 import org.springframework.http.ResponseEntity;
@@ -66,6 +67,19 @@ public class GlobalExeptionHandler {
                 );
     }
 
+    @ExceptionHandler(EmailAlreadyInUseExceprion.class)
+    public ResponseEntity<ExceptionResponse> handleExceptionEmailAlreadyInUse(EmailAlreadyInUseExceprion ex){
+        return ResponseEntity
+                .status(BAD_REQUEST)
+                .body(
+                        ExceptionResponse.builder()
+                                .businessErrorCode(EMAIL_ALREADY_IN_USE.getCode())
+                                .businessErrorDescription(EMAIL_ALREADY_IN_USE.getDescription())
+                                .error("Email already in use")
+                                .build()
+                );
+    }
+
     @ExceptionHandler(MessagingException.class)
     public ResponseEntity<ExceptionResponse> handleException(MessagingException exp) {
         return ResponseEntity
@@ -117,6 +131,10 @@ public class GlobalExeptionHandler {
                                 .build()
                 );
     }
+
+
+
+
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ExceptionResponse> handleException(Exception exp) {

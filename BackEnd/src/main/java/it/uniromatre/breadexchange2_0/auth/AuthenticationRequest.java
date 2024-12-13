@@ -20,7 +20,6 @@ public class AuthenticationRequest {
 
     @NotEmpty(message = "Password è Obbligatoria")
     @NotBlank(message = "Password è Obbligatoria")
-    @Size(min = 8, message = "Passwod deve essere di Almeno 8 Caratteri")
     private String password;
 
 

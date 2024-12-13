@@ -1,0 +1,19 @@
+root {
+
+  // TODO  Cambiare il palette di colori
+
+  --primary: rgb(129, 28, 0);                                    // Colore da cambiare troppo rosso
+  --secondary: #000000;
+  --green: #82cd47;
+  --secondary-light: rgb(34, 124, 112, 0.2);
+  --secondary-light-2: rgb(127, 183, 126, 0.1);
+  --white: #fff;
+  --black: #000000;
+  --light-brown: #813a00;
+  --darker-brown: #662e00;
+  --light-gray: #A0A3A1;
+  --test: rgb(129, 58, 0);                                       // Stesso colore del Darker Brown
+
+  --shadow: 0px 2px 8px 0px var(--secondary-light);
+
+}

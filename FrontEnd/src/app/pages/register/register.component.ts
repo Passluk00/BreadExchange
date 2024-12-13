@@ -6,17 +6,19 @@ import {Router} from "@angular/router";
 import {AuthenticationService} from "../../services/services/authentication.service";
 import {RegistrationRequest} from "../../services/models/registration-request";
 import {faUser, faKey, faEnvelope} from "@fortawesome/free-solid-svg-icons"
+import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 
 @Component({
   selector: 'app-register',
-  standalone: true,
   imports: [
+    FontAwesomeModule,
     FallingBreadComponent,
     FormsModule,
     NgForOf,
     NgIf
   ],
   templateUrl: './register.component.html',
+  standalone: true,
   styleUrl: './register.component.scss'
 })
 export class RegisterComponent {
@@ -44,7 +46,7 @@ export class RegisterComponent {
         if (err.error.validationErrors) {
           this.errorMessage = err.error.validationErrors;
         }else{
-          this.errorMessage.push(err.error.errorMsg);
+          this.errorMessage.push(err.error.error);
         }
       }
     })

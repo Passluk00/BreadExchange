@@ -3,12 +3,12 @@ import {NgForOf, NgStyle} from "@angular/common";
 
 @Component({
   selector: 'app-falling-bread',
-  standalone: true,
   imports: [
     NgStyle,
     NgForOf
   ],
   templateUrl: './falling-bread.component.html',
+  standalone: true,
   styleUrl: './falling-bread.component.scss'
 })
 export class FallingBreadComponent implements OnInit {

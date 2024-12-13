@@ -7,24 +7,22 @@
 
     <h1>Login</h1>
 
-    <div class="alert alert-danger" role="alert" *ngIf="errorMessage.length">
-      <p *ngFor="let msg of errorMessage">{{msg}}</p>
+    <div class="alert mt-3 text-center" role="alert" *ngIf="errorMessage.length">
+      <p class="text-danger" *ngFor="let msg of errorMessage">{{msg}}</p>
     </div>
 
 
 
     <div class="input-box">
       <input  [(ngModel)]="authRequest.email"  type="email" placeholder="Email">
-
+      <fa-icon [icon]="faUser" class="icone"></fa-icon>
       <!-- Cambare icone  -->
-
-      <i class="icone fa-user"></i>
     </div>
 
 
     <div class="input-box">
       <input [(ngModel)]="authRequest.password" type="password" placeholder="Password">
-      <i class="icone fa-key"></i>
+      <fa-icon [icon]="faKey" class="icone"></fa-icon>
     </div>
 
 

@@ -14,6 +14,7 @@ public enum BusinessErrorCode {
     ACCOUNT_LOCKED(302, FORBIDDEN, "User account is locked"),
     ACCOUNT_DISABLED(303, FORBIDDEN, "User account is disabled"),
     BAD_CREDENTIALS(304, FORBIDDEN, "Login and / or Password is incorrect"),
+    EMAIL_ALREADY_IN_USE(305,BAD_REQUEST, "Email already in use");
 
     ;
     @Getter
