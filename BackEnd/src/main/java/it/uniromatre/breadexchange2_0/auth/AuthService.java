@@ -9,6 +9,8 @@ import it.uniromatre.breadexchange2_0.token.Token;
 import it.uniromatre.breadexchange2_0.token.TokenRepository;
 import it.uniromatre.breadexchange2_0.user.User;
 import it.uniromatre.breadexchange2_0.user.UserRepository;
+import it.uniromatre.breadexchange2_0.user.address.Address;
+import it.uniromatre.breadexchange2_0.user.address.AddressRepository;
 import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -32,6 +34,7 @@ public class AuthService {
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
     private final EmailService emailService;
+    private final AddressRepository addressRepository;
 
 
     @Value("${application.security.mailing.frontend.activation-url}")
@@ -58,9 +61,22 @@ public class AuthService {
                 .roles(Role.CUSTOMER)
                 .build();
 
+        var add = Address.builder()
+                .name("Default")
+                .country("Nazione")
+                .state("Regione")
+                .provincia("Provincia")
+                .city("Città")
+                .postalCode("CAP")
+                .street("Via")
+                .number("Numero civico")
+                .telNumber("Numero Telefonico")
+                .build();
 
-            userRepository.save(user);
-            sendValidationEmail(user);
+        user.setAddress(add);
+        addressRepository.save(add);
+        userRepository.save(user);
+        sendValidationEmail(user);
     }
 
     public void adminRegisterAndActive(RegistrationRequest request){
@@ -73,9 +89,24 @@ public class AuthService {
                 .roles(Role.ADMIN)
                 .build();
 
+        var add = Address.builder()
+                .name("Default")
+                .country("Nazione")
+                .state("Regione")
+                .provincia("Provincia")
+                .city("Città")
+                .postalCode("CAP")
+                .street("Via")
+                .number("Numero civico")
+                .telNumber("Numero Telefonico")
+                .build();
+
+        user.setAddress(add);
+        user.setUrl_BackImg("./public/testImg/ceste_pane.jpeg");
+        user.setUrl_picture("./public/testImg/profile.jpeg");
+        addressRepository.save(add);
         userRepository.save(user);
     }
-
 
 
     /*
@@ -98,8 +129,16 @@ public class AuthService {
         // disattivare tutti i token attivi se ci sono al momento dell'autenticazione
 
         jwtService.revokeAllUserTokens(user);
+
         var jwtToken = jwtService.generateTokenESalva(claims,user);
         return AuthenticationResponse.builder().token(jwtToken).build();
+    }
+
+
+    // controllo se il token è valido
+
+    public Boolean authWithToken(String token){
+        return jwtService.isTokenStillValid(token);
     }
 
 
@@ -136,7 +175,7 @@ public class AuthService {
 
         emailService.sendEmail(
                 user.getEmail(),
-                user.getUsername(),
+                user.getUserName(),
                 EmailTemplateName.ACTIVATE_ACCOUNT,
                 activationUrl,
                     newToken,

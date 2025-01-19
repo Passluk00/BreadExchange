@@ -17,6 +17,8 @@ import { findAllTestByOwner } from '../fn/test/find-all-test-by-owner';
 import { FindAllTestByOwner$Params } from '../fn/test/find-all-test-by-owner';
 import { findById } from '../fn/test/find-by-id';
 import { FindById$Params } from '../fn/test/find-by-id';
+import { newItemWithCover } from '../fn/test/new-item-with-cover';
+import { NewItemWithCover$Params } from '../fn/test/new-item-with-cover';
 import { PageResponseTestResponse } from '../models/page-response-test-response';
 import { saveTest } from '../fn/test/save-test';
 import { SaveTest$Params } from '../fn/test/save-test';
@@ -105,6 +107,35 @@ export class TestService extends BaseService {
   uploadCoverPictures(params: UploadCoverPictures$Params, context?: HttpContext): Observable<{
 }> {
     return this.uploadCoverPictures$Response(params, context).pipe(
+      map((r: StrictHttpResponse<{
+}>): {
+} => r.body)
+    );
+  }
+
+  /** Path part for operation `newItemWithCover()` */
+  static readonly NewItemWithCoverPath = '/test/cover/';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `newItemWithCover()` instead.
+   *
+   * This method sends `multipart/form-data` and handles request body of type `multipart/form-data`.
+   */
+  newItemWithCover$Response(params: NewItemWithCover$Params, context?: HttpContext): Observable<StrictHttpResponse<{
+}>> {
+    return newItemWithCover(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `newItemWithCover$Response()` instead.
+   *
+   * This method sends `multipart/form-data` and handles request body of type `multipart/form-data`.
+   */
+  newItemWithCover(params: NewItemWithCover$Params, context?: HttpContext): Observable<{
+}> {
+    return this.newItemWithCover$Response(params, context).pipe(
       map((r: StrictHttpResponse<{
 }>): {
 } => r.body)

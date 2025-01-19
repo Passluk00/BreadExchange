@@ -2,6 +2,7 @@ package it.uniromatre.breadexchange2_0.user;
 
 import it.uniromatre.breadexchange2_0.role.Role;
 import it.uniromatre.breadexchange2_0.security.JwtToken;
+import it.uniromatre.breadexchange2_0.user.address.Address;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -42,6 +43,9 @@ public class User implements UserDetails , Principal {
 
     private String url_BackImg;
 
+    @OneToOne
+    private Address address;
+
     private boolean enabled;
 
     private boolean accountLocked;
@@ -77,6 +81,10 @@ public class User implements UserDetails , Principal {
     @Override
     public String getUsername() {
         return this.email;
+    }
+
+    public String getUserName(){
+        return this.username;
     }
 
     @Override

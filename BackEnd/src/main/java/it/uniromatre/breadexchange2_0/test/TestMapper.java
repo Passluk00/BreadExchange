@@ -12,7 +12,6 @@ public class TestMapper {
                 .id(request.id())
                 .name(request.name())
                 .description(request.description())
-                .test_url(request.test_url())
                 .build();
     }
 

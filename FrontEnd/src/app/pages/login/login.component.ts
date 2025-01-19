@@ -8,6 +8,7 @@ import {AuthenticationService} from "../../services/services/authentication.serv
 import {TokenService} from "../../services/token/token.service";
 import {faKey, faUser} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
+import {UserControllerService} from "../../services/services/user-controller.service";
 
 @Component({
   selector: 'app-login',
@@ -32,13 +33,13 @@ export class LoginComponent {
   constructor(
     private router:Router,
     private authService: AuthenticationService,
-    private tokenService: TokenService
-  ) {
-  }
+    private tokenService: TokenService,
+  ) {}
 
 
   login() {
     this.errorMessage = [];
+    localStorage.removeItem("token")
     this.authService.authenticate({
       body: this.authRequest
     }).subscribe({
@@ -47,10 +48,8 @@ export class LoginComponent {
 
         var toc = res.token;
         if(toc != undefined) {
-
           //mette il token nel localStorage
           this.tokenService.token = toc;
-
         }
         this.router.navigate(['']);
       },
@@ -64,6 +63,13 @@ export class LoginComponent {
       }
     });
   }
+
+
+
+
+
+
+
 
   register() {
     this.router.navigate(['register']);

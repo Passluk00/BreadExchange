@@ -1,6 +1,8 @@
 package it.uniromatre.breadexchange2_0.auth;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
+import it.uniromatre.breadexchange2_0.user.User;
+import it.uniromatre.breadexchange2_0.user.UserService;
 import jakarta.mail.MessagingException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 public class AuthController {
 
     private final AuthService service;
+    private final UserService userService;
 
 
     @PostMapping("/register")
@@ -41,5 +44,19 @@ public class AuthController {
     }
 
 
+    @PostMapping("/check")
+    public ResponseEntity<?> check(
+            @RequestParam String token
+    ){
+        return ResponseEntity.ok().body(service.authWithToken(token));
+    }
+
+    @PostMapping("/forgotPwd")
+    public ResponseEntity<?> forgotPwd(
+            @RequestBody  ChangePasswordRequest request
+    ){
+        userService.changePassword(request);
+        return ResponseEntity.accepted().build();
+    }
 
 }

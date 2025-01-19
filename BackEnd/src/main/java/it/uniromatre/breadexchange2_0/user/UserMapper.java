@@ -20,4 +20,34 @@ public class UserMapper {
         );
     }
 
+    public UserFrontEndResponse forUserFrontEnd(User user){
+        return UserFrontEndResponse.builder()
+                .id(user.getId())
+                .username(user.getUserName())
+                .email(user.getEmail())
+                .url_picture(user.getUrl_picture())
+                .url_back(user.getUrl_BackImg())
+                .address(user.getAddress())
+                .build();
+
+        // aggiungere altre cose nel caso servono tipo ordini
+
+    }
+
+
+    public UserFrontEndInfoResponse forUserFrontEndInfo(User user){
+        return UserFrontEndInfoResponse.builder()
+                .id(user.getId())
+                .username(user.getUserName())
+                .email(user.getEmail())
+                .url_picture(user.getUrl_picture())
+                .url_back(user.getUrl_BackImg())
+                .address(user.getAddress())
+                .build();
+
+        // aggiungere altre cose nel caso servono tipo ordini
+
+    }
+
+
 }

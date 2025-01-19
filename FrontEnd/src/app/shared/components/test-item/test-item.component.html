@@ -1,0 +1,87 @@
+
+
+
+<div class="p-2">
+
+  <h2>Aggiungi Oggetto</h2>
+  <hr>
+
+  <div class="alert alert-danger mt-2" role="alert" *ngIf="errorMsg.length">
+    <p class="p-0 m-0" *ngFor="let msg of errorMsg">{{msg}}</p>
+  </div>
+
+  <div class="d-flex gap-2">
+    <div class="col-3">
+      <img class="rounded-5 object-fit-cover" width="100%" height="100%" [src]="selectedPicture || defaultImg" >
+      <div class="mt-2">
+        <input (change)="onFileSelected($event)" class="form-control" type="file" id="formFile" accept="image/*">
+      </div>
+    </div>
+    <div class="col-9">
+      <form class="row g-3">
+
+        <div class="col-12">
+          <label for="title" class="form-label">Nome</label>
+          <input [(ngModel)]="testRequest.name" name="title" type="text" class="form-control" id="title" placeholder="Nome Oggetto">
+        </div>
+
+
+
+        <div class="col-6">
+          <label for="desc" class="form-label">Descrizione</label>
+          <textarea [(ngModel)]="testRequest.description" name="description" rows="6" class="form-control" id="desc" placeholder="Piccola descrizione"></textarea>
+        </div>
+
+        <div class="d-flex justify-content-end gap-2 col-12">
+          <button (click)="saveItem()" type="submit" class="btn btn-outline-primary">
+            <fa-icon [icon]="faSave"></fa-icon>&nbsp;Save
+          </button>
+          <a routerLink="/haomepage" class="btn btn-link text-danger">
+            <fa-icon [icon]="faTimes"></fa-icon>&nbsp;Cancel
+          </a>
+        </div>
+
+
+      </form>
+    </div>
+  </div>
+
+
+</div>
+
+
+// auth
+
+isTokenValid(token: string | null): Observable<boolean> {
+  if(!token){
+  return of(false);
+  }
+
+  return this.check({token: token}).pipe(
+      map(() => true ),
+      catchError(() => of(false))
+    );
+  }
+
+
+  logout():void{
+  localStorage.removeItem("token")
+  }
+
+
+  // user
+
+
+  private userDataSubject = new BehaviorSubject<any | null>(null); // Variabile per salvare i dati dell'utente
+    public userData$ = this.userDataSubject.asObservable(); // Observable per condividere i dati con i componenti
+
+
+    fetchUserData(params?: GetCurrentUser$Params, context?: HttpContext): Observable<any> {
+      // Effettua una richiesta al backend utilizzando il metodo esistente
+      return this.getCurrentUser(params, context).pipe(
+        tap((data) => this.userDataSubject.next(data)), // Salva i dati nel BehaviorSubject
+        catchError(() => {
+      return of(null); // Restituisce null se qualcosa va storto
+      })
+    );
+      }

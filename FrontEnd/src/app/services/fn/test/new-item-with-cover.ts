@@ -8,17 +8,20 @@ import { filter, map } from 'rxjs/operators';
 import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
-import { ChangePasswordRequest } from '../../models/change-password-request';
+import { TestRequest } from '../../models/test-request';
 
-export interface ChangePassword$Params {
-      body: ChangePasswordRequest
+export interface NewItemWithCover$Params {
+      body: {
+'request'?: TestRequest;
+'file': Blob;
+}
 }
 
-export function changePassword(http: HttpClient, rootUrl: string, params: ChangePassword$Params, context?: HttpContext): Observable<StrictHttpResponse<{
+export function newItemWithCover(http: HttpClient, rootUrl: string, params: NewItemWithCover$Params, context?: HttpContext): Observable<StrictHttpResponse<{
 }>> {
-  const rb = new RequestBuilder(rootUrl, changePassword.PATH, 'patch');
+  const rb = new RequestBuilder(rootUrl, newItemWithCover.PATH, 'post');
   if (params) {
-    rb.body(params.body, 'application/json');
+    rb.body(params.body, 'multipart/form-data');
   }
 
   return http.request(
@@ -32,4 +35,4 @@ export function changePassword(http: HttpClient, rootUrl: string, params: Change
   );
 }
 
-changePassword.PATH = '/user/changePWD';
+newItemWithCover.PATH = '/test/cover/';

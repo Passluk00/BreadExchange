@@ -12,10 +12,6 @@ import lombok.Setter;
 @Builder
 public class ChangePasswordRequest {
 
-    @NotEmpty(message = "Vecchia Password Obbligatoria")
-    @NotBlank(message = "Vecchia Password Obbligatoria")
-    private String currentPwd;
-
     @NotEmpty(message = "Nuova Password Obbligatoria")
     @NotBlank(message = "Nuova Password Obbligatoria")
     @Size(min = 8, message = "Passwod deve essere di Almeno 8 Caratteri")
@@ -25,5 +21,7 @@ public class ChangePasswordRequest {
     @NotBlank(message = "Le Password Devono Coincidere")
     @Size(min = 8, message = "Passwod deve essere di Almeno 8 Caratteri")
     private String confirmNewPwd;
+
+    private String key;
 
 }

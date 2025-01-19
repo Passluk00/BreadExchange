@@ -62,8 +62,87 @@ public class EmailService {
         helper.setText(template, true);
 
         mailSender.send(mimeMessage);
-
-
     }
+
+    @Async
+    public void sendEmailForVerification(
+            String to,
+            String username,
+            EmailTemplateName emailTemplate,
+            String activationCode,
+            String subject
+    ) throws MessagingException {
+
+        String templateName;
+        if(emailTemplate == null){
+            templateName = "Confirm-Email";
+        }
+        else{
+            templateName = emailTemplate.getName();
+        }
+
+        MimeMessage mimeMessage = mailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(
+                mimeMessage,
+                MimeMessageHelper.MULTIPART_MODE_MIXED,
+                StandardCharsets.UTF_8.name()
+        );
+
+        Map<String, Object> properties = new HashMap<>();
+        properties.put("username", username);
+        properties.put("activation_code", activationCode);
+
+        Context context = new Context();
+        context.setVariables(properties);
+
+        helper.setFrom("contact@breadexchange.it");
+        helper.setTo(to);
+        helper.setSubject(subject);
+
+        String template = templateEngine.process(templateName, context);
+        helper.setText(template, true);
+
+        mailSender.send(mimeMessage);
+    }
+
+    @Async
+    public void sendEmailRejectRequest(
+            String to,
+            String username,
+            EmailTemplateName emailTemplate,
+            String subject
+    ) throws MessagingException {
+
+        String templateName;
+        if(emailTemplate == null){
+            templateName = "Confirm-Email";
+        }
+        else{
+            templateName = emailTemplate.getName();
+        }
+
+        MimeMessage mimeMessage = mailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(
+                mimeMessage,
+                MimeMessageHelper.MULTIPART_MODE_MIXED,
+                StandardCharsets.UTF_8.name()
+        );
+
+        Map<String, Object> properties = new HashMap<>();
+        properties.put("username", username);
+
+        Context context = new Context();
+        context.setVariables(properties);
+
+        helper.setFrom("contact@breadexchange.it");
+        helper.setTo(to);
+        helper.setSubject(subject);
+
+        String template = templateEngine.process(templateName, context);
+        helper.setText(template, true);
+
+        mailSender.send(mimeMessage);
+    }
+
 
 }

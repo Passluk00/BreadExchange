@@ -26,12 +26,83 @@
     }
   ],
   "paths": {
+    "/user/verificaToken": {
+      "post": {
+        "tags": [
+          "user-controller"
+        ],
+        "operationId": "verifyToken",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/tokenVerifyRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/tokenVerifyResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/verificaEmail": {
+      "post": {
+        "tags": [
+          "user-controller"
+        ],
+        "operationId": "verificaEmail",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/emailVerifyRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/user/upload-profile-picture": {
       "post": {
         "tags": [
           "user-controller"
         ],
         "operationId": "uploadProfilePicture",
+        "parameters": [
+          {
+            "name": "direction",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
         "requestBody": {
           "content": {
             "multipart/form-data": {
@@ -49,6 +120,66 @@
               }
             }
           }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/sendRequest": {
+      "post": {
+        "tags": [
+          "user-controller"
+        ],
+        "operationId": "sendRequest",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BakeryRegisterRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/addAddress": {
+      "post": {
+        "tags": [
+          "user-controller"
+        ],
+        "operationId": "addAddress",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewAddress"
+              }
+            }
+          },
+          "required": true
         },
         "responses": {
           "200": {
@@ -184,6 +315,48 @@
         }
       }
     },
+    "/test/cover/": {
+      "post": {
+        "tags": [
+          "Test"
+        ],
+        "operationId": "newItemWithCover",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "required": [
+                  "file"
+                ],
+                "type": "object",
+                "properties": {
+                  "request": {
+                    "$ref": "#/components/schemas/TestRequest"
+                  },
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/auth/register": {
       "post": {
         "tags": [
@@ -203,6 +376,66 @@
         "responses": {
           "202": {
             "description": "Accepted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/forgotPwd": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "operationId": "forgotPwd",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChangePasswordRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/check": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "operationId": "check",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
@@ -244,17 +477,17 @@
         }
       }
     },
-    "/user/changePWD": {
-      "patch": {
+    "/admin/enableBakery": {
+      "post": {
         "tags": [
-          "user-controller"
+          "admin-controller"
         ],
-        "operationId": "changePassword",
+        "operationId": "enableBakery",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ChangePasswordRequest"
+                "$ref": "#/components/schemas/BakeryRegisterRequest"
               }
             }
           },
@@ -330,12 +563,103 @@
         }
       }
     },
+    "/user/{user-id}": {
+      "get": {
+        "tags": [
+          "user-controller"
+        ],
+        "operationId": "getUser",
+        "parameters": [
+          {
+            "name": "user-id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/user/test": {
       "get": {
         "tags": [
           "user-controller"
         ],
         "operationId": "testSicurezza",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/me": {
+      "get": {
+        "tags": [
+          "user-controller"
+        ],
+        "operationId": "getCurrentUser",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserFrontEndResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/info": {
+      "get": {
+        "tags": [
+          "user-controller"
+        ],
+        "operationId": "getUserInfo",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserFrontEndInfoResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/getAddress": {
+      "get": {
+        "tags": [
+          "user-controller"
+        ],
+        "operationId": "getAddress",
         "responses": {
           "200": {
             "description": "OK",
@@ -507,15 +831,349 @@
           }
         }
       }
+    },
+    "/admin/getAllRequest": {
+      "get": {
+        "tags": [
+          "admin-controller"
+        ],
+        "operationId": "getAllRequest",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 10
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageResponseBakeryRegisterRequest"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/admin/rejectRequest": {
+      "delete": {
+        "tags": [
+          "admin-controller"
+        ],
+        "operationId": "rejectRequest",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BakeryRegisterRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
     "schemas": {
+      "tokenVerifyRequest": {
+        "required": [
+          "token"
+        ],
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string"
+          }
+        }
+      },
+      "tokenVerifyResponse": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string"
+          }
+        }
+      },
+      "emailVerifyRequest": {
+        "required": [
+          "cemail",
+          "email"
+        ],
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "cemail": {
+            "type": "string"
+          }
+        }
+      },
+      "Address": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string"
+          },
+          "telNumber": {
+            "type": "string"
+          },
+          "country": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          },
+          "provincia": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "postalCode": {
+            "type": "string"
+          },
+          "street": {
+            "type": "string"
+          },
+          "number": {
+            "type": "string"
+          }
+        }
+      },
+      "BakeryRegisterRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "user": {
+            "$ref": "#/components/schemas/User"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "email_azz": {
+            "type": "string"
+          },
+          "phone_azz": {
+            "type": "string"
+          },
+          "twitter": {
+            "type": "string"
+          },
+          "facebook": {
+            "type": "string"
+          },
+          "address": {
+            "$ref": "#/components/schemas/Address"
+          },
+          "instagram": {
+            "type": "string"
+          }
+        }
+      },
+      "GrantedAuthority": {
+        "type": "object",
+        "properties": {
+          "authority": {
+            "type": "string"
+          }
+        }
+      },
+      "JwtToken": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "token": {
+            "type": "string"
+          },
+          "revoked": {
+            "type": "boolean"
+          },
+          "expired": {
+            "type": "boolean"
+          },
+          "userId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "User": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "username": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "url_picture": {
+            "type": "string"
+          },
+          "url_BackImg": {
+            "type": "string"
+          },
+          "address": {
+            "$ref": "#/components/schemas/Address"
+          },
+          "enabled": {
+            "type": "boolean"
+          },
+          "accountLocked": {
+            "type": "boolean"
+          },
+          "tokens": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/JwtToken"
+            }
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "lastModifiedDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "roles": {
+            "type": "string",
+            "enum": [
+              "CUSTOMER",
+              "BAKERY_OWNER",
+              "ADMIN"
+            ]
+          },
+          "userName": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "credentialsNonExpired": {
+            "type": "boolean"
+          },
+          "authorities": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GrantedAuthority"
+            }
+          },
+          "enable": {
+            "type": "boolean",
+            "writeOnly": true
+          },
+          "accountNonExpired": {
+            "type": "boolean"
+          },
+          "accountNonLocked": {
+            "type": "boolean"
+          }
+        }
+      },
+      "NewAddress": {
+        "required": [
+          "city",
+          "country",
+          "name",
+          "number",
+          "postalCode",
+          "provincia",
+          "state",
+          "street",
+          "telNumber"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string"
+          },
+          "country": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          },
+          "provincia": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "postalCode": {
+            "type": "string"
+          },
+          "street": {
+            "type": "string"
+          },
+          "number": {
+            "type": "string"
+          },
+          "telNumber": {
+            "type": "string"
+          }
+        }
+      },
       "TestRequest": {
         "required": [
           "description",
-          "name",
-          "test_url"
+          "name"
         ],
         "type": "object",
         "properties": {
@@ -527,9 +1185,6 @@
             "type": "string"
           },
           "description": {
-            "type": "string"
-          },
-          "test_url": {
             "type": "string"
           }
         }
@@ -555,6 +1210,28 @@
           }
         }
       },
+      "ChangePasswordRequest": {
+        "required": [
+          "confirmNewPwd",
+          "newPwd"
+        ],
+        "type": "object",
+        "properties": {
+          "newPwd": {
+            "maxLength": 2147483647,
+            "minLength": 8,
+            "type": "string"
+          },
+          "confirmNewPwd": {
+            "maxLength": 2147483647,
+            "minLength": 8,
+            "type": "string"
+          },
+          "key": {
+            "type": "string"
+          }
+        }
+      },
       "AuthenticationRequest": {
         "required": [
           "email",
@@ -566,8 +1243,6 @@
             "type": "string"
           },
           "password": {
-            "maxLength": 2147483647,
-            "minLength": 8,
             "type": "string"
           }
         }
@@ -580,26 +1255,51 @@
           }
         }
       },
-      "ChangePasswordRequest": {
-        "required": [
-          "confirmNewPwd",
-          "currentPwd",
-          "newPwd"
-        ],
+      "UserFrontEndResponse": {
         "type": "object",
         "properties": {
-          "currentPwd": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "username": {
             "type": "string"
           },
-          "newPwd": {
-            "maxLength": 2147483647,
-            "minLength": 8,
+          "email": {
             "type": "string"
           },
-          "confirmNewPwd": {
-            "maxLength": 2147483647,
-            "minLength": 8,
+          "url_picture": {
             "type": "string"
+          },
+          "url_back": {
+            "type": "string"
+          },
+          "address": {
+            "$ref": "#/components/schemas/Address"
+          }
+        }
+      },
+      "UserFrontEndInfoResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "username": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "url_picture": {
+            "type": "string"
+          },
+          "url_back": {
+            "type": "string"
+          },
+          "address": {
+            "$ref": "#/components/schemas/Address"
           }
         }
       },
@@ -714,6 +1414,39 @@
             "type": "boolean"
           },
           "enable": {
+            "type": "boolean"
+          }
+        }
+      },
+      "PageResponseBakeryRegisterRequest": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BakeryRegisterRequest"
+            }
+          },
+          "number": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "size": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalElements": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "totalPages": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "first": {
+            "type": "boolean"
+          },
+          "last": {
             "type": "boolean"
           }
         }

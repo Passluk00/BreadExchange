@@ -6,5 +6,4 @@ export interface TestRequest {
   description: string;
   id?: number;
   name: string;
-  test_url: string;
 }

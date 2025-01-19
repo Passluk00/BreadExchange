@@ -27,10 +27,14 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "src/public",
-
               {
                 "glob": "**/*",
                 "input": "src/public"
+              },
+              {
+                "glob": "**/*",
+                "input": "../uploads",
+                "output": "/uploads"
               }
             ],
             "styles": [

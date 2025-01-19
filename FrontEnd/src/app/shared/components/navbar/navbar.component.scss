@@ -105,8 +105,6 @@
 .menu-container {
   position: relative;
 
-  left: 0;
-  width: fit-content;
   background: var(--light-gray);
   font-size: 20px;
   border-radius: 50px;
@@ -130,10 +128,11 @@
       margin-right: 10px;
       border-radius: 50%;
 
-      #img{
+      .img{
         border-radius: 50%;
         width: 51px;
         height: 51px;
+        object-fit: cover;
         box-shadow: 0 0 0 1px black;
       }
     }
@@ -201,17 +200,28 @@
 
 
 
+.guest{
+  display: flex;
+  cursor: pointer;
+  border: 1px solid black;
+  border-radius: 50px;
+  transition: box-shadow 0.2s ease-in, background-color 0.2s ease-in, border 0.3s;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  height: 51px;
+  width: auto;
+  padding: 20px;
 
+  a{
+    background-color: white;
+    text-decoration: none;
+    font-size: 1.5rem;
+    justify-content: center;
+    color: black;
+  }
 
-
-
-
-
-
-
-
-
-
+}
 
 
 @media (max-width: 1000px){

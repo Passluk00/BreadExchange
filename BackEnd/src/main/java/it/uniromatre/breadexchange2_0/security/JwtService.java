@@ -5,6 +5,8 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import it.uniromatre.breadexchange2_0.user.User;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.GrantedAuthority;
@@ -19,6 +21,7 @@ import java.util.function.Function;
 @Service
 public class JwtService {
 
+    private static final Logger log = LoggerFactory.getLogger(JwtService.class);
     @Value("${application.security.jwt.secret-key}")
     private String secretKey;
     @Value("${application.security.jwt.jwtExpiration}")            // tempo di vita token
@@ -55,7 +58,7 @@ public class JwtService {
         return token;
     }
 
-    private String buildToken(
+    private String buildToken1(
             Map<String, Object> extraClaims,
             UserDetails userDetails,
             long expiration
@@ -75,9 +78,42 @@ public class JwtService {
                 .compact();
     }
 
+
+    private String buildToken(
+            Map<String, Object> extraClaims,
+            UserDetails userDetails,
+            long expiration
+    ) {
+        var authorities = userDetails.getAuthorities()
+                .stream().
+                map(GrantedAuthority::getAuthority)
+                .toList();
+        return Jwts
+                .builder()
+                .claims(extraClaims)
+                .subject(userDetails.getUsername())
+                .issuedAt(new Date(System.currentTimeMillis()))
+                .expiration(new Date(System.currentTimeMillis() + expiration))
+                .claim("authorities", authorities)
+                .signWith(getSignInKey())
+                .compact();
+    }
+
     public boolean isTokenValid(String token, UserDetails userDetails) {
         final String username = extractUsername(token);
         return (username.equals(userDetails.getUsername())) && !isTokenExpired(token);
+    }
+
+    public Boolean isTokenStillValid(String token){
+
+        var toc = this.jwtTokenRepository.findByToken(token)
+                .orElseThrow(() -> new RuntimeException("Token not found"));
+
+        return !toc.isExpired() && !toc.isRevoked();
+
+
+        // cerca nel database se il token eseste
+        // se esiste controlla se è ancara valido
     }
 
     private boolean isTokenExpired(String token) {

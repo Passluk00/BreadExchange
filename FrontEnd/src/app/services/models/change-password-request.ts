@@ -4,6 +4,6 @@
 
 export interface ChangePasswordRequest {
   confirmNewPwd: string;
-  currentPwd: string;
+  key?: string;
   newPwd: string;
 }

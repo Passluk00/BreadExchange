@@ -10,15 +10,17 @@ import { RequestBuilder } from '../../request-builder';
 
 
 export interface UploadProfilePicture$Params {
+  direction: number;
       body?: {
 'file': Blob;
 }
 }
 
-export function uploadProfilePicture(http: HttpClient, rootUrl: string, params?: UploadProfilePicture$Params, context?: HttpContext): Observable<StrictHttpResponse<{
+export function uploadProfilePicture(http: HttpClient, rootUrl: string, params: UploadProfilePicture$Params, context?: HttpContext): Observable<StrictHttpResponse<{
 }>> {
   const rb = new RequestBuilder(rootUrl, uploadProfilePicture.PATH, 'post');
   if (params) {
+    rb.query('direction', params.direction, {});
     rb.body(params.body, 'multipart/form-data');
   }
 

@@ -11,17 +11,88 @@ import { BaseService } from '../base-service';
 import { ApiConfiguration } from '../api-configuration';
 import { StrictHttpResponse } from '../strict-http-response';
 
-import { changePassword } from '../fn/user-controller/change-password';
-import { ChangePassword$Params } from '../fn/user-controller/change-password';
+import { addAddress } from '../fn/user-controller/add-address';
+import { AddAddress$Params } from '../fn/user-controller/add-address';
+import { getAddress } from '../fn/user-controller/get-address';
+import { GetAddress$Params } from '../fn/user-controller/get-address';
+import { getCurrentUser } from '../fn/user-controller/get-current-user';
+import { GetCurrentUser$Params } from '../fn/user-controller/get-current-user';
+import { getUser } from '../fn/user-controller/get-user';
+import { GetUser$Params } from '../fn/user-controller/get-user';
+import { getUserInfo } from '../fn/user-controller/get-user-info';
+import { GetUserInfo$Params } from '../fn/user-controller/get-user-info';
+import { sendRequest } from '../fn/user-controller/send-request';
+import { SendRequest$Params } from '../fn/user-controller/send-request';
 import { testSicurezza } from '../fn/user-controller/test-sicurezza';
 import { TestSicurezza$Params } from '../fn/user-controller/test-sicurezza';
+import { TokenVerifyResponse } from '../models/token-verify-response';
 import { uploadProfilePicture } from '../fn/user-controller/upload-profile-picture';
 import { UploadProfilePicture$Params } from '../fn/user-controller/upload-profile-picture';
+import { UserFrontEndInfoResponse } from '../models/user-front-end-info-response';
+import { UserFrontEndResponse } from '../models/user-front-end-response';
+import { verificaEmail } from '../fn/user-controller/verifica-email';
+import { VerificaEmail$Params } from '../fn/user-controller/verifica-email';
+import { verifyToken } from '../fn/user-controller/verify-token';
+import { VerifyToken$Params } from '../fn/user-controller/verify-token';
 
 @Injectable({ providedIn: 'root' })
 export class UserControllerService extends BaseService {
   constructor(config: ApiConfiguration, http: HttpClient) {
     super(config, http);
+  }
+
+  /** Path part for operation `verifyToken()` */
+  static readonly VerifyTokenPath = '/user/verificaToken';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `verifyToken()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  verifyToken$Response(params: VerifyToken$Params, context?: HttpContext): Observable<StrictHttpResponse<TokenVerifyResponse>> {
+    return verifyToken(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `verifyToken$Response()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  verifyToken(params: VerifyToken$Params, context?: HttpContext): Observable<TokenVerifyResponse> {
+    return this.verifyToken$Response(params, context).pipe(
+      map((r: StrictHttpResponse<TokenVerifyResponse>): TokenVerifyResponse => r.body)
+    );
+  }
+
+  /** Path part for operation `verificaEmail()` */
+  static readonly VerificaEmailPath = '/user/verificaEmail';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `verificaEmail()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  verificaEmail$Response(params: VerificaEmail$Params, context?: HttpContext): Observable<StrictHttpResponse<{
+}>> {
+    return verificaEmail(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `verificaEmail$Response()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  verificaEmail(params: VerificaEmail$Params, context?: HttpContext): Observable<{
+}> {
+    return this.verificaEmail$Response(params, context).pipe(
+      map((r: StrictHttpResponse<{
+}>): {
+} => r.body)
+    );
   }
 
   /** Path part for operation `uploadProfilePicture()` */
@@ -33,7 +104,7 @@ export class UserControllerService extends BaseService {
    *
    * This method sends `multipart/form-data` and handles request body of type `multipart/form-data`.
    */
-  uploadProfilePicture$Response(params?: UploadProfilePicture$Params, context?: HttpContext): Observable<StrictHttpResponse<{
+  uploadProfilePicture$Response(params: UploadProfilePicture$Params, context?: HttpContext): Observable<StrictHttpResponse<{
 }>> {
     return uploadProfilePicture(this.http, this.rootUrl, params, context);
   }
@@ -44,7 +115,7 @@ export class UserControllerService extends BaseService {
    *
    * This method sends `multipart/form-data` and handles request body of type `multipart/form-data`.
    */
-  uploadProfilePicture(params?: UploadProfilePicture$Params, context?: HttpContext): Observable<{
+  uploadProfilePicture(params: UploadProfilePicture$Params, context?: HttpContext): Observable<{
 }> {
     return this.uploadProfilePicture$Response(params, context).pipe(
       map((r: StrictHttpResponse<{
@@ -53,29 +124,87 @@ export class UserControllerService extends BaseService {
     );
   }
 
-  /** Path part for operation `changePassword()` */
-  static readonly ChangePasswordPath = '/user/changePWD';
+  /** Path part for operation `sendRequest()` */
+  static readonly SendRequestPath = '/user/sendRequest';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `changePassword()` instead.
+   * To access only the response body, use `sendRequest()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  changePassword$Response(params: ChangePassword$Params, context?: HttpContext): Observable<StrictHttpResponse<{
+  sendRequest$Response(params: SendRequest$Params, context?: HttpContext): Observable<StrictHttpResponse<{
 }>> {
-    return changePassword(this.http, this.rootUrl, params, context);
+    return sendRequest(this.http, this.rootUrl, params, context);
   }
 
   /**
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `changePassword$Response()` instead.
+   * To access the full response (for headers, for example), `sendRequest$Response()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  changePassword(params: ChangePassword$Params, context?: HttpContext): Observable<{
+  sendRequest(params: SendRequest$Params, context?: HttpContext): Observable<{
 }> {
-    return this.changePassword$Response(params, context).pipe(
+    return this.sendRequest$Response(params, context).pipe(
+      map((r: StrictHttpResponse<{
+}>): {
+} => r.body)
+    );
+  }
+
+  /** Path part for operation `addAddress()` */
+  static readonly AddAddressPath = '/user/addAddress';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `addAddress()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  addAddress$Response(params: AddAddress$Params, context?: HttpContext): Observable<StrictHttpResponse<{
+}>> {
+    return addAddress(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `addAddress$Response()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  addAddress(params: AddAddress$Params, context?: HttpContext): Observable<{
+}> {
+    return this.addAddress$Response(params, context).pipe(
+      map((r: StrictHttpResponse<{
+}>): {
+} => r.body)
+    );
+  }
+
+  /** Path part for operation `getUser()` */
+  static readonly GetUserPath = '/user/{user-id}';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `getUser()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getUser$Response(params: GetUser$Params, context?: HttpContext): Observable<StrictHttpResponse<{
+}>> {
+    return getUser(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `getUser$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getUser(params: GetUser$Params, context?: HttpContext): Observable<{
+}> {
+    return this.getUser$Response(params, context).pipe(
       map((r: StrictHttpResponse<{
 }>): {
 } => r.body)
@@ -105,6 +234,85 @@ export class UserControllerService extends BaseService {
   testSicurezza(params?: TestSicurezza$Params, context?: HttpContext): Observable<{
 }> {
     return this.testSicurezza$Response(params, context).pipe(
+      map((r: StrictHttpResponse<{
+}>): {
+} => r.body)
+    );
+  }
+
+  /** Path part for operation `getCurrentUser()` */
+  static readonly GetCurrentUserPath = '/user/me';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `getCurrentUser()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getCurrentUser$Response(params?: GetCurrentUser$Params, context?: HttpContext): Observable<StrictHttpResponse<UserFrontEndResponse>> {
+    return getCurrentUser(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `getCurrentUser$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getCurrentUser(params?: GetCurrentUser$Params, context?: HttpContext): Observable<UserFrontEndResponse> {
+    return this.getCurrentUser$Response(params, context).pipe(
+      map((r: StrictHttpResponse<UserFrontEndResponse>): UserFrontEndResponse => r.body)
+    );
+  }
+
+  /** Path part for operation `getUserInfo()` */
+  static readonly GetUserInfoPath = '/user/info';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `getUserInfo()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getUserInfo$Response(params?: GetUserInfo$Params, context?: HttpContext): Observable<StrictHttpResponse<UserFrontEndInfoResponse>> {
+    return getUserInfo(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `getUserInfo$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getUserInfo(params?: GetUserInfo$Params, context?: HttpContext): Observable<UserFrontEndInfoResponse> {
+    return this.getUserInfo$Response(params, context).pipe(
+      map((r: StrictHttpResponse<UserFrontEndInfoResponse>): UserFrontEndInfoResponse => r.body)
+    );
+  }
+
+  /** Path part for operation `getAddress()` */
+  static readonly GetAddressPath = '/user/getAddress';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `getAddress()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getAddress$Response(params?: GetAddress$Params, context?: HttpContext): Observable<StrictHttpResponse<{
+}>> {
+    return getAddress(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `getAddress$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getAddress(params?: GetAddress$Params, context?: HttpContext): Observable<{
+}> {
+    return this.getAddress$Response(params, context).pipe(
       map((r: StrictHttpResponse<{
 }>): {
 } => r.body)

@@ -81,6 +81,18 @@ public class TestController {
     }
 
 
+    @PostMapping(value = "/cover/",consumes = "multipart/form-data")
+    public ResponseEntity<?> newItemWithCover(
+            @Valid @RequestBody TestRequest request,
+            @Parameter()
+            @RequestPart("file") MultipartFile file,
+            Authentication connectedUser
+    ){
+        service.newItemAndUploadFile(file, connectedUser, request);
+        return ResponseEntity.accepted().build();
+    }
+
+
 }
 
 

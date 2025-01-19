@@ -1,29 +1,24 @@
 
-<div class="main-container">
+<div class="main-container z-50">
 
   <div class="navbar">
-
 
 
     <!-- Logo -->
     <div class="logo bg-white">
 
-      <a routerLink="/homepage" aria-current="page">
+      <a routerLink="" aria-current="page">
         <img src="public/testImg/lct.png" alt="logo" >
       </a>
 
     </div>
 
 
-
     <!-- Search -->
-
-    <!-- Il Problema di Grandezza viene da qui -->
-
-    <div class="container-search ">
+    <div class="container-search">
       <form>
 
-        <div class="search bg-white">
+        <div class="search bg-white mt-5px">
           <fa-icon [icon]="faMagnifyingGlass" class="bg-white"></fa-icon>
           <input class="search-input" type="search" placeholder="Search">
         </div>
@@ -31,43 +26,64 @@
       </form>
     </div>
 
+    <!-- Not Logged -->
 
+    <ng-template #guest>
+      <div class="guest">
+        <a routerLink="/login">Login</a>
+      </div>
+    </ng-template>
 
 
 
     <!-- bottone menu -->
+    <div class="menu-container bg-white align-items-center" *ngIf="isLogged; else guest">
 
-    <div class="menu-container bg-white">
+      <div class="relative">
 
-        <div id="dropdownDefaultButton" data-dropdown-toggle="dropdown" type="button" class="menu-toggle bg-white" >
+        <ng-template #placeholder >
 
-          <div *ngIf="userData.url_Profile" class="profile-img bg-white" >
-            <img [src]="userData.url_Profile" id="img" class="bg-white">
+          <div class="menu-toggle bg-white" (click)="toggleDropdown()">
+
+            <div class="profile-img bg-white" >
+              <img src="/public/testImg/profile.jpeg" class="bg-white img" alt="alt user profile picture">
+            </div>
+
+            <span>
+              <div>
+                <p class="bg-white">Username</p>
+              </div>
+            </span>
+          </div>
+        </ng-template>
+
+        <div class="menu-toggle bg-white" (click)="toggleDropdown()" *ngIf="userData; else placeholder">
+
+          <ng-template #altImg>
+            <div class="profile-img bg-white" >
+              <img src="public/testImg/profile.jpeg" class="bg-white img" alt="user profile picture">
+            </div>
+          </ng-template>
+
+          <div *ngIf="userData.url_picture != ''; else altImg" class="profile-img bg-white" >
+            <img [src]="userData.url_picture" class="bg-white img" alt="user profile picture">
           </div>
 
           <span>
-              <div *ngIf="userData?.username" >
-                <p class="bg-white">{{userData.username}}</p>
-              </div>
-
-              <div *ngIf="!userData?.username" class="bg-white">
-                <p>Username</p>
-
-                <!-- Qui va inserita la parte dove non è autenticato l'utente -->
-
-              </div>
-
-
-            </span>
+            <p class="bg-white">{{userData.username}}</p>
+          </span>
 
         </div>
 
         <!-- Dropdown menu -->
-        <div id="dropdown" class=" z-10 hidden menu">
+        <div [ngClass]="isDropdownOpen ? 'transition ease-ot duration-300 transform opacity-100 scale-100' :
+                                     'transition ease-in duration-75 transform opacity-0 scale-95 pointer-events-none'"
+             class=" z-10 menu">
+
           <ul class="text-sm mt-2 bg-white" aria-labelledby="dropdownDefaultButton">
 
-            <li class="elements-list" >
-              <a routerLink="/homepage/user" class="primo">
+            <li class="elements-list cursor-pointer" >
+              <a (click)="goToUserPage()" class="primo">
                 <fa-icon class="icon" [icon]="faUser"></fa-icon>
                 Profile
               </a>
@@ -101,25 +117,23 @@
               </a>
             </li>
 
-
             <hr class="mt-2">
 
-            <li class="elements-list">
-              <div  class="elements-list">
-                <a href="#">
-                  <fa-icon class="icon logout" [icon]="faArrowRightFromBracket"></fa-icon>
-                  Log out
-                </a>
-              </div>
+            <li class="elements-list mb-1.5">
+              <a href="#" (click)="logout()">
+                <fa-icon class="icon logout" [icon]="faArrowRightFromBracket"></fa-icon>
+                Log out
+              </a>
             </li>
 
-
           </ul>
+
         </div>
+
+      </div>
 
     </div>
 
   </div>
-
 
 </div>

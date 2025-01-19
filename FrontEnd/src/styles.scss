@@ -2,6 +2,16 @@
 // For more information: https://material.angular.io/guide/theming
 @use '@angular/material' as mat;
 
+@font-face {
+  font-family: "Lemonada";
+  src: url("./public/font/Lemonada-VariableFont_wght.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Marhey";
+  src: url("./public/font/Marhey-VariableFont_wght.ttf") format("truetype");
+}
+
 // Include the common styles for Angular Material.
 @include mat.core();
 

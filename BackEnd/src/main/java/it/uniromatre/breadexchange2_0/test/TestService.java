@@ -118,6 +118,21 @@ public class TestService {
 
 
 
+    public void newItemAndUploadFile(MultipartFile file, Authentication connectedUser, TestRequest request) {
+
+        User user = ((User) connectedUser.getPrincipal());
+
+        TestClass test = testMapper.toTest(request);
+        test.setOwner(user);
+
+        var path = fileStorageService.saveFile(file, user.getId());
+        test.setTest_url(path);
+
+        testRepository.save(test);
+
+    }
+
+
 
 
 }

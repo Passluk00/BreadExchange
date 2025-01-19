@@ -13,9 +13,16 @@ import { StrictHttpResponse } from '../strict-http-response';
 
 import { banUser } from '../fn/admin-controller/ban-user';
 import { BanUser$Params } from '../fn/admin-controller/ban-user';
+import { enableBakery } from '../fn/admin-controller/enable-bakery';
+import { EnableBakery$Params } from '../fn/admin-controller/enable-bakery';
+import { getAllRequest } from '../fn/admin-controller/get-all-request';
+import { GetAllRequest$Params } from '../fn/admin-controller/get-all-request';
 import { getAllUsers } from '../fn/admin-controller/get-all-users';
 import { GetAllUsers$Params } from '../fn/admin-controller/get-all-users';
+import { PageResponseBakeryRegisterRequest } from '../models/page-response-bakery-register-request';
 import { PageResponseUserResponse } from '../models/page-response-user-response';
+import { rejectRequest } from '../fn/admin-controller/reject-request';
+import { RejectRequest$Params } from '../fn/admin-controller/reject-request';
 import { testSicurezza1 } from '../fn/admin-controller/test-sicurezza-1';
 import { TestSicurezza1$Params } from '../fn/admin-controller/test-sicurezza-1';
 
@@ -23,6 +30,35 @@ import { TestSicurezza1$Params } from '../fn/admin-controller/test-sicurezza-1';
 export class AdminControllerService extends BaseService {
   constructor(config: ApiConfiguration, http: HttpClient) {
     super(config, http);
+  }
+
+  /** Path part for operation `enableBakery()` */
+  static readonly EnableBakeryPath = '/admin/enableBakery';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `enableBakery()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  enableBakery$Response(params: EnableBakery$Params, context?: HttpContext): Observable<StrictHttpResponse<{
+}>> {
+    return enableBakery(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `enableBakery$Response()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  enableBakery(params: EnableBakery$Params, context?: HttpContext): Observable<{
+}> {
+    return this.enableBakery$Response(params, context).pipe(
+      map((r: StrictHttpResponse<{
+}>): {
+} => r.body)
+    );
   }
 
   /** Path part for operation `banUser()` */
@@ -98,6 +134,60 @@ export class AdminControllerService extends BaseService {
   testSicurezza1(params?: TestSicurezza1$Params, context?: HttpContext): Observable<{
 }> {
     return this.testSicurezza1$Response(params, context).pipe(
+      map((r: StrictHttpResponse<{
+}>): {
+} => r.body)
+    );
+  }
+
+  /** Path part for operation `getAllRequest()` */
+  static readonly GetAllRequestPath = '/admin/getAllRequest';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `getAllRequest()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getAllRequest$Response(params?: GetAllRequest$Params, context?: HttpContext): Observable<StrictHttpResponse<PageResponseBakeryRegisterRequest>> {
+    return getAllRequest(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `getAllRequest$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getAllRequest(params?: GetAllRequest$Params, context?: HttpContext): Observable<PageResponseBakeryRegisterRequest> {
+    return this.getAllRequest$Response(params, context).pipe(
+      map((r: StrictHttpResponse<PageResponseBakeryRegisterRequest>): PageResponseBakeryRegisterRequest => r.body)
+    );
+  }
+
+  /** Path part for operation `rejectRequest()` */
+  static readonly RejectRequestPath = '/admin/rejectRequest';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `rejectRequest()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  rejectRequest$Response(params: RejectRequest$Params, context?: HttpContext): Observable<StrictHttpResponse<{
+}>> {
+    return rejectRequest(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `rejectRequest$Response()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  rejectRequest(params: RejectRequest$Params, context?: HttpContext): Observable<{
+}> {
+    return this.rejectRequest$Response(params, context).pipe(
       map((r: StrictHttpResponse<{
 }>): {
 } => r.body)

@@ -1,0 +1,1511 @@
+
+
+<div class="container-generale">
+
+  <div class="bg-primary align-content-center imagini">
+
+    <ng-template #placeBack class="background-def">
+      <img src="/public/testImg/ceste_pane.jpeg" alt="default background pic">
+      test<!-- Background img -->
+    </ng-template>
+
+    <ng-template #placePic class="profile-img-def">
+      <img src="public/testImg/profile.jpeg" alt="default profile pic">                                                         <!-- Profile img -->
+    </ng-template>
+
+
+    <div *ngIf="userData.url_back != '' || null; else placeBack" class="background">
+      <img [src]="userData.url_back" class="background" >    <!-- background img -->
+    </div>
+
+    <div *ngIf="userData.url_picture != ''; else placePic" >
+      <img [src]="userData.url_picture" class="profile-img" >    <!-- profile img -->
+    </div>
+
+
+  </div>
+
+  <div class="buttonMod" *ngIf="!isLogged" >                         <!-- Bottone per modificare i dati dell utente -->
+
+
+    <!-- Modale Principale -->
+    <div class="modal modal-lg fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Edit Profile</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+
+          <div class="modal-body">
+
+            <div id="pofilo">
+
+              <div class="flex justify-between">
+                <h4 class="mb-8">Immagine Profilo</h4>
+                <button class="btn btn-primary h-[40px]" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">Modifica</button>
+              </div>
+
+              <img src="{{userData.url_picture}}" class="rounded-full mx-auto h-[200px]" onerror="this.src='./public/testImg/profile.jpeg'">
+
+            </div>
+
+            <hr>
+
+            <div id="copertina">
+
+              <div class="flex justify-between">
+                <h4 class="mb-8">Immagine Copertina</h4>
+                <button class="btn btn-primary h-[40px]" data-bs-target="#exampleModalToggle3" data-bs-toggle="modal">Modifica</button>
+              </div>
+
+              <img src="{{userData.url_back}}" class="rounded-md mx-auto h-[200px]" onerror="this.src='./public/testImg/ceste_pane.jpeg'">
+
+            </div>
+
+            <hr>
+
+            <div id="dati profilo">
+
+              <div class="flex">
+                <h4 class="mb-8">Modifica i Dati del Profilo</h4>
+              </div>
+
+              <div class="ml-[40px]">
+
+                <div class="elem email">
+                  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Email</label>
+                  <div class="relative">
+                    <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                      <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 16">
+                        <path d="m10.036 8.278 9.258-7.79A1.979 1.979 0 0 0 18 0H2A1.987 1.987 0 0 0 .641.541l9.395 7.737Z"/>
+                        <path d="M11.241 9.817c-.36.275-.801.425-1.255.427-.428 0-.845-.138-1.187-.395L0 2.6V14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2.5l-8.759 7.317Z"/>
+                      </svg>
+                    </div>
+                    <input type="text" aria-label="disabled input 2" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-auto ps-10 p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{userData.email}}" disabled readonly>
+                  </div>
+                </div>
+
+                <br>
+
+                <div class="elem username">
+                  <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Username</label>
+                  <div class="relative">
+                    <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                      <!-- Profile Icon SVG -->
+                      <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M10 10a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm0 2c-3.33 0-6 2.015-6 4.5V18h12v-1.5c0-2.485-2.67-4.5-6-4.5Z"/>
+                      </svg>
+                    </div>
+                    <input type="text" aria-label="disabled input 2" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-auto ps-10 p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{userData.username}}" disabled readonly>
+                  </div>
+                </div>
+
+                <br>
+
+                <div class="elem flex justify-between address-id">
+                  <div class="dato">
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Address</label>
+                    <div class="relative">
+                      <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                        <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 384 512">
+                          <path d="M168 0C75.1 0 0 75.1 0 168C0 275.1 168 512 168 512C168 512 336 275.1 336 168C336 75.1 260.9 0 168 0zM168 240C123.1 240 88 204.9 88 160C88 115.1 123.1 80 168 80C212.9 80 248 115.1 248 160C248 204.9 212.9 240 168 240z"/>
+                        </svg>
+                      </div>
+                      <input type="text" aria-label="disabled input 2" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-auto ps-10 p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{userData?.address?.name}}" placeholder="Address" disabled readonly>
+                    </div>
+                  </div>
+
+                  <button class="btn btn-primary h-[40px] mt-[29px] mr-[40px]" data-bs-target="#exampleModalToggle4" data-bs-toggle="modal">Modifica</button>
+
+
+                </div>
+
+                <br>
+
+                <div class="elem flex justify-between password">
+                  <div class="dato">
+                    <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Password</label>
+                    <div class="relative">
+                      <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                        <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 448 512">
+                          <path d="M400 192H384V144C384 64.6 319.4 0 240 0S96 64.6 96 144v48H80C35.8 192 0 227.8 0 272v192c0 44.2 35.8 80 80 80H400c44.2 0 80-35.8 80-80V272C480 227.8 444.2 192 400 192zM144 144C144 90.8 186.8 48 240 48s96 42.8 96 96v48H144V144zM240 400c-17.7 0-32-14.3-32-32s14.3-32 32-32 32 14.3 32 32S257.7 400 240 400z"/>
+                        </svg>
+                      </div>
+                      <input type="text" aria-label="disabled input 2" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-auto ps-10 p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="************" disabled readonly>
+                    </div>
+                  </div>
+
+                  <button class="btn btn-primary h-[40px] mt-[29px] mr-[40px]" data-bs-target="#exampleModalToggle5" data-bs-toggle="modal">Modifica</button>
+
+                </div>
+
+                <br>
+
+                <button class="btn btn-primary h-[40px] mt-[29px] mr-[40px]" data-bs-target="#exampleModalToggle8" data-bs-toggle="modal">Diventa Bakery</button>
+
+
+              </div>
+
+            </div>
+
+          </div>
+
+          <div class="modal-footer">
+            <!--  -->
+            <button class="btn btn-primary bg-red-500 " (click)="denyRequest()">Rifuita Richiesta</button>
+
+            <button class="btn btn-primary bg-red-500 " (click)="acceptRequest()">Accetta Richiesta</button>
+
+
+            <button class="btn btn-primary" (click)="ricaricaPagina()" >Ricarica Pagina</button>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+
+    <!-- Form per la modifica del immagine profilo -->
+    <div class="modal fade modal-xl" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+
+          <div class="modal-header flex items-center justify-between">
+            <button class="button" data-bs-target="#exampleModalToggle" data-bs-toggle="modal" (click)="removeImage()">
+              <fa-icon [icon]="faArrowLeft" class="mr-1"></fa-icon>
+            </button>
+            <h1 class="modal-title fs-5 text-center flex-1">Scegli l'immagine del Profilo</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="removeImage()" ></button>
+          </div>
+
+
+
+
+          <div class="modal-body flex justify-center items-center min-h-[500px]">
+
+            <div>
+              <!-- Drag and Drop Area -->
+
+              <div class="border-2 border-dashed border-gray-400 rounded-lg p-8 text-center h-[800px] w-[1000px]" *ngIf="!previewImage" (drop)="onFileDrop($event)" (dragover)="onDragOver($event)" (dragleave)="onDragLeave($event)" [class.bg-blue-100]="isDragging">
+                <p class="text-gray-500 mb-2">Trascina qui un'immagine o clicca per selezionarla</p>
+                <input type="file" id="fileInput" accept="image/*" (change)="onFileSelect($event)" hidden>
+                <button type="button" class="btn btn-primary" (click)="triggerFileSelect()">Scegli File</button>
+              </div>
+
+              <!-- Preview Area -->
+              <div class="mt-4 text-center" *ngIf="previewImage">
+                <img [src]="previewImage" alt="Anteprima" class="w-256 h-256 object-cover rounded-md shadow-md mx-auto">
+                <button class="btn btn-danger mt-2" (click)="removeImage()">Rimuovi Immagine</button>
+              </div>
+
+            </div>
+
+
+          </div>
+          <div class="modal-footer" *ngIf="previewImage">
+            <button class="btn btn-primary" data-bs-target="#exampleModalToggle" data-bs-toggle="modal" (click)="uploadImageProfile()">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Form per la modifica del immagine Copertina -->
+    <div class="modal fade modal-xl" id="exampleModalToggle3" aria-hidden="true" aria-labelledby="exampleModalToggleLabel3" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+
+          <div class="modal-header flex items-center justify-between">
+            <button class="button" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">
+              <fa-icon [icon]="faArrowLeft" class="mr-1"></fa-icon>
+            </button>
+            <h1 class="modal-title fs-5 text-center flex-1" id="exampleModalToggleLabel2">Aggiorna l'immagine di copertina</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+
+
+          <div class="modal-body flex justify-center items-center min-h-[500px]">
+
+            <div>
+              <!-- Drag and Drop Area -->
+
+              <div class="border-2 border-dashed border-gray-400 rounded-lg p-8 text-center h-[800px] w-[1000px]" *ngIf="!previewImage" (drop)="onFileDrop($event)" (dragover)="onDragOver($event)" (dragleave)="onDragLeave($event)" [class.bg-blue-100]="isDragging">
+                <p class="text-gray-500 mb-2">Trascina qui un'immagine o clicca per selezionarla</p>
+                <input type="file" id="fileInput" accept="image/*" (change)="onFileSelect($event)" hidden>
+                <button type="button" class="btn btn-primary" (click)="triggerFileSelect()">Scegli File</button>
+              </div>
+
+              <!-- Preview Area -->
+              <div class="mt-4 text-center" *ngIf="previewImage">
+                <img [src]="previewImage" alt="Anteprima" class="w-64 h-64 object-cover rounded-md shadow-md mx-auto">
+                <button class="btn btn-danger mt-2" (click)="removeImage()">Rimuovi Immagine</button>
+              </div>
+
+            </div>
+
+          </div>
+          <div class="modal-footer" *ngIf="previewImage">
+            <button class="btn btn-primary" data-bs-target="#exampleModalToggle" data-bs-toggle="modal" (click)="uploadImageBackground()">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Form per la modifica dei dati di spedizione -->
+    <div class="modal fade modal-xl" id="exampleModalToggle4" aria-hidden="true" aria-labelledby="exampleModalToggleLabel4" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+
+          <div class="modal-header flex items-center justify-between">
+            <button class="button" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">
+              <fa-icon [icon]="faArrowLeft" class="mr-1"></fa-icon>
+            </button>
+            <h1 class="modal-title fs-5 text-center flex-1">Aggiorna i dati di spedizioni</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+
+          <div class="modal-body flex justify-center items-center min-h-[500px]">
+
+
+            <div class="flex">
+
+              <div class="mr-[40px]">
+
+                <div class="elem">
+                  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nome</label>
+                  <div class="relative">
+                    <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+                    </div>
+                    <input  [(ngModel)]="newAddress.name" type="text" name="text" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Nome" required="">
+                  </div>
+                </div>
+
+                <br>
+
+                <div class="elem">
+                  <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Numero di Telefono</label>
+                  <div class="relative">
+                    <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                      <img src="/public/testImg/icons8-telefono-100.png" height="19" width="19" alt="icona telefono">
+                    </div>
+                    <input  [(ngModel)]="newAddress.telNumber" type="text" name="text" id="telNumber" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Numero di Telefono" required="">
+                  </div>
+                </div>
+
+                <br>
+
+                <div class="elem">
+                  <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Stato</label>
+                  <div class="relative">
+                    <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path><line x1="4" y1="22" x2="4" y2="15"></line></svg>
+                    </div>
+                    <input  [(ngModel)]="newAddress.country" type="text" name="text" id="country" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Stato" required="">
+                  </div>
+                </div>
+
+                <br>
+
+                <div class="elem">
+                  <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Regione</label>
+                  <div class="relative">
+                    <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                      <img src="/public/testImg/icons8-lazio-24.png" height="19" width="19" alt="icona regione">
+                    </div>
+                    <input  [(ngModel)]="newAddress.state" type="text" name="text" id="state" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Regione" required="">
+                  </div>
+                </div>
+
+                <br>
+
+                <div class="elem">
+                  <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Provincia</label>
+                  <div class="relative">
+                    <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="10" r="3"/><path d="M12 21.7C17.3 17 20 13 20 10a8 8 0 1 0-16 0c0 3 2.7 6.9 8 11.7z"/></svg>
+                    </div>
+                    <input  [(ngModel)]="newAddress.provincia" type="text" name="text" id="provincia" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Provincia" required="">
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="ml-[40px]">
+
+                <div class="elem">
+                  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Città</label>
+                  <div class="relative">
+                    <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                      <img src="public/testImg/icons8-città-50.png" width="19" height="19" alt="icona città">
+                    </div>
+                    <input  [(ngModel)]="newAddress.city" type="text" name="text" id="city" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Città" required="">
+                  </div>
+                </div>
+
+                <br>
+
+                <div class="elem">
+                  <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">CAP</label>
+                  <div class="relative">
+                    <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                      <img src="public/testImg/zip-code.png" width="19" height="19" alt="icona Cap">
+                    </div>
+                    <input  [(ngModel)]="newAddress.postalCode" type="text" name="text" id="cap" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="CAP" required="">
+                  </div>
+                </div>
+
+                <br>
+
+                <div class="elem">
+                  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Strada / Via / Località</label>
+                  <div class="relative">
+                    <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                      <img src="public/testImg/road.png" width="19" height="19" alt="icona strada">
+                    </div>
+                    <input  [(ngModel)]="newAddress.street" type="text" name="text" id="street" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Strada / Via / Località" required="">
+                  </div>
+                </div>
+
+                <br>
+
+                <div class="elem">
+                  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">N°</label>
+                  <div class="relative">
+                    <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                      <img src="public/testImg/letter-n.png" width="19" height="19" alt="icona numero civico">
+                    </div>
+                    <input  [(ngModel)]="newAddress.number" type="text" name="text" id="number" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Numero" required="">
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+
+
+
+
+          </div>
+
+          <div class="modal-footer">
+                                                                                                        <!-- Da modificare con save per i dati -->
+            <button class="btn btn-primary" data-bs-target="#exampleModalToggle" data-bs-toggle="modal" (click)="uploadAddress()">Save</button>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+
+    <!-- Form per la modifica della password              step-1            -->
+    <div class="modal fade modal-xl" id="exampleModalToggle5" aria-hidden="true" aria-labelledby="exampleModalToggleLabel5" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+
+          <div class="modal-header flex items-center justify-between">
+            <button class="button" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">
+              <fa-icon [icon]="faArrowLeft" class="mr-1"></fa-icon>
+            </button>
+            <h1 class="modal-title fs-5 text-center flex-1" id="exampleModalToggleLabel5">Cambia la Password</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+
+
+
+          <div class="modal-body justify-center min-h-[700px]">
+
+
+            <div class="justify-center mt-[30px]">
+
+              <ol class="flex mb-4 sm:mb-5 p-0">
+
+                <li class="flex w-full items-center after:content-[''] after:w-full after:h-1 after:border-b after:border-gray-100 after:border-4 after:inline-block dark:after:border-gray-700 pl-[100px]">
+                      <span class="flex items-center justify-center w-10 h-10 bg-gray-100 rounded-full lg:h-12 lg:w-12 dark:bg-gray-700 shrink-0">
+                        <svg class="w-4 h-4 text-green-500 lg:w-5 lg:h-5 dark:text-gray-100" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 16">
+                          <path d="M18 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2ZM6.5 3a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3.014 13.021l.157-.625A3.427 3.427 0 0 1 6.5 9.571a3.426 3.426 0 0 1 3.322 2.805l.159.622-6.967.023ZM16 12h-3a1 1 0 0 1 0-2h3a1 1 0 0 1 0 2Zm0-3h-3a1 1 0 1 1 0-2h3a1 1 0 1 1 0 2Zm0-3h-3a1 1 0 1 1 0-2h3a1 1 0 1 1 0 2Z"/>
+                        </svg>
+                      </span>
+                </li>
+                <li class="flex w-full items-center after:content-[''] after:w-full after:h-1 after:border-b after:border-gray-100 after:border-4 after:inline-block dark:after:border-gray-700">
+                  <div class="flex items-center justify-center w-10 h-10 bg-gray-100 rounded-full lg:h-12 lg:w-12 dark:bg-gray-700 shrink-0">
+                    <svg class="w-4 h-4 text-blue-600 lg:w-6 lg:h-6 dark:text-blue-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 14">
+                      <path d="M18 0H2a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2ZM2 12V6h16v6H2Z"/>
+                      <path d="M6 8H4a1 1 0 0 0 0 2h2a1 1 0 0 0 0-2Zm8 0H9a1 1 0 0 0 0 2h5a1 1 0 1 0 0-2Z"/>
+                    </svg>
+                  </div>
+                </li>
+                <li class="flex items-center w-fit pr-[100px]">
+                  <div class="flex items-center justify-center w-10 h-10 bg-gray-100 rounded-full lg:h-12 lg:w-12 dark:bg-gray-700 shrink-0">
+                    <svg class="w-4 h-4 text-blue-600 lg:w-6 lg:h-6 dark:text-blue-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                      <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2ZM7 2h4v3H7V2Zm5.7 8.289-3.975 3.857a1 1 0 0 1-1.393 0L5.3 12.182a1.002 1.002 0 1 1 1.4-1.436l1.328 1.289 3.28-3.181a1 1 0 1 1 1.392 1.435Z"/>
+                    </svg>
+                  </div>
+                </li>
+              </ol>
+
+            </div>
+
+            <br>
+
+            <div class="justify-center flex">
+
+              <div class="w-[350px] justify-center " >
+
+                <br>
+
+                <div class=" gap-4 mb-4 sm:grid-cols-2">
+
+                  <div class="alert mt-3 text-center" role="alert" *ngIf="errorMessage.length">
+                    <p class="text-danger" *ngFor="let msg of errorMessage">{{msg}}</p>
+                  </div>
+
+                  <div>
+                    <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
+                    <input  [(ngModel)]="emailVerifyRequest.email" type="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@company.com" required="">
+                  </div>
+
+                  <br>
+
+                  <div>
+                    <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Confirm Email</label>
+                    <input  [(ngModel)]="emailVerifyRequest.cemail" type="email" name="email" id="ConfirmEmail" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@company.com" required="">
+                  </div>
+
+                  <br>
+
+                  <div>
+                    <h6 align="center">Ti verrà mandata un email per verificare la tua identità</h6>
+                  </div>
+
+                </div>
+
+                <div class="justify-center flex">
+                  <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" data-bs-target="#exampleModalToggle6" data-bs-toggle="modal" (click)="verificaEmail()">
+                    Verifica
+                  </button>
+                </div>
+              </div>
+
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Form per la conferma identià                     step-2            -->
+    <div class="modal fade modal-xl" id="exampleModalToggle6" aria-hidden="true" aria-labelledby="exampleModalToggleLabel6" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+
+          <div class="modal-header flex items-center justify-between">
+            <button class="button" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">
+              <fa-icon [icon]="faArrowLeft" class="mr-1"></fa-icon>
+            </button>
+            <h1 class="modal-title fs-5 text-center flex-1" id="exampleModalToggleLabel6">Verifica Identià</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+
+          <div class="modal-body justify-center min-h-[700px]">
+
+
+
+            <div class="justify-center mt-[30px]">
+
+              <ol class="flex mb-4 sm:mb-5">
+
+                <li class="flex w-full items-center text-blue-600 dark:text-blue-500 after:content-[''] after:w-full after:h-1 after:border-b after:border-blue-100 after:border-4 after:inline-block dark:after:border-blue-800 pl-[100px] ">
+                  <span class="flex items-center justify-center w-10 h-10 bg-blue-100 rounded-full lg:h-12 lg:w-12 dark:bg-blue-800 shrink-0">
+                    <svg class="w-3.5 h-3.5 text-blue-600 lg:w-4 lg:h-4 dark:text-blue-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+                    </svg>
+                  </span>
+                </li>
+
+
+                <li class="flex w-full items-center after:content-[''] after:w-full after:h-1 after:border-b after:border-gray-100 after:border-4 after:inline-block dark:after:border-gray-700">
+                  <div class="flex items-center justify-center w-10 h-10 bg-gray-100 rounded-full lg:h-12 lg:w-12 dark:bg-gray-700 shrink-0">
+                    <svg class="w-4 h-4 text-green-500 lg:w-6 lg:h-6 dark:text-blue-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 14">
+                      <path d="M18 0H2a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2ZM2 12V6h16v6H2Z"/>
+                      <path d="M6 8H4a1 1 0 0 0 0 2h2a1 1 0 0 0 0-2Zm8 0H9a1 1 0 0 0 0 2h5a1 1 0 1 0 0-2Z"/>
+                    </svg>
+                  </div>
+                </li>
+
+                <li class="flex items-center w-fit pr-[100px]">
+                  <div class="flex items-center justify-center w-10 h-10 bg-gray-100 rounded-full lg:h-12 lg:w-12 dark:bg-gray-700 shrink-0">
+                    <svg class="w-4 h-4 text-blue-600 lg:w-6 lg:h-6 dark:text-blue-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                      <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2ZM7 2h4v3H7V2Zm5.7 8.289-3.975 3.857a1 1 0 0 1-1.393 0L5.3 12.182a1.002 1.002 0 1 1 1.4-1.436l1.328 1.289 3.28-3.181a1 1 0 1 1 1.392 1.435Z"/>
+                    </svg>
+                  </div>
+                </li>
+              </ol>
+
+            </div>
+
+            <br>
+
+            <div class="justify-center flex mt-[50px]">
+
+              <div class="gap-4 mb-4 sm:grid-cols-2">
+
+                <div class="container" *ngIf="submitted else codeForm">
+                  <div class="activation-message" *ngIf="isOkay; else activationError">
+                    <h2 class="text-center">Identità Confermata!</h2>
+                    <p class="text-center">Ora Puoi Continuare</p>
+                    <div class="justify-center flex">
+                      <button class="btn btn-primary" data-bs-target="#exampleModalToggle7" data-bs-toggle="modal">Continua</button>   <!-- va implementato il nuovo modale n7 -->
+                    </div>
+                  </div>
+                  <ng-template #activationError>
+                    <div class="activation-error">
+                      <h2 class="text-center">Autenticazione Fallita!</h2>
+                      <p class="text-center">{{ message }}</p>
+                      <div class="justify-center flex">
+                        <button class="btn btn-primary" (click)="submitted = false">Codice Errato Prova Dinuovo</button>
+                      </div>
+                    </div>
+                  </ng-template>
+                </div>
+                <ng-template #codeForm>
+                  <div class="container">
+                    <div class="text-center" style="width: 400px;">
+                      <h2>Type your activation code</h2>
+                      <code-input [isCodeHidden]="false"
+                                  [codeLength]="6"
+                                  [code]="'number'"
+                                  (codeCompleted)="onCodeCompleted($event)">
+                      </code-input>
+                    </div>
+                  </div>
+                </ng-template>
+
+
+              </div>
+
+            </div>
+
+            <button class="btn btn-primary flex z-50 absolute top-[450px] left-[20px]" data-bs-target="#exampleModalToggle7" data-bs-toggle="modal">
+              <fa-icon [icon]="faPencil" class="mr-1"></fa-icon>
+              <span> Modifica Profilo </span>
+            </button>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Form per la modifica della password              step-3            -->
+    <div class="modal fade modal-xl" id="exampleModalToggle7" aria-hidden="true" aria-labelledby="exampleModalToggleLabel7" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+
+          <div class="modal-header flex items-center justify-between">
+            <button class="button" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">
+              <fa-icon [icon]="faArrowLeft" class="mr-1"></fa-icon>
+            </button>
+            <h1 class="modal-title fs-5 text-center flex-1" id="exampleModalToggleLabel7">Cambia la Password</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+
+
+          <div class="modal-body justify-center min-h-[700px]">
+
+            <div class="justify-center mt-[30px]">
+
+              <ol class="flex mb-4 sm:mb-5">
+
+                <li class="flex w-full items-center text-blue-600 dark:text-blue-500 after:content-[''] after:w-full after:h-1 after:border-b after:border-blue-100 after:border-4 after:inline-block dark:after:border-blue-800 pl-[100px] ">
+                  <span class="flex items-center justify-center w-10 h-10 bg-blue-100 rounded-full lg:h-12 lg:w-12 dark:bg-blue-800 shrink-0">
+                    <svg class="w-3.5 h-3.5 text-blue-600 lg:w-4 lg:h-4 dark:text-blue-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+                    </svg>
+                  </span>
+                </li>
+
+                <li class="flex w-full items-center after:content-[''] after:w-full after:h-1 after:border-b after:border-gray-100 after:border-4 after:inline-block dark:after:border-gray-700">
+                  <span class="flex items-center justify-center w-10 h-10 bg-blue-100 rounded-full lg:h-12 lg:w-12 dark:bg-blue-800 shrink-0">
+                    <svg class="w-3.5 h-3.5 text-blue-600 lg:w-4 lg:h-4 dark:text-blue-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+                    </svg>
+                  </span>
+                </li>
+
+                <li class="flex items-center w-fit pr-[100px]">
+                  <div class="flex items-center justify-center w-10 h-10 bg-gray-100 rounded-full lg:h-12 lg:w-12 dark:bg-gray-700 shrink-0">
+                    <svg class="w-4 h-4 text-green-500 lg:w-6 lg:h-6 dark:text-blue-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                      <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2ZM7 2h4v3H7V2Zm5.7 8.289-3.975 3.857a1 1 0 0 1-1.393 0L5.3 12.182a1.002 1.002 0 1 1 1.4-1.436l1.328 1.289 3.28-3.181a1 1 0 1 1 1.392 1.435Z"/>
+                    </svg>
+                  </div>
+                </li>
+              </ol>
+
+            </div>
+
+            <br>
+
+            <div class="justify-center flex">
+
+              <div class="w-[350px] justify-center " >  <!-- action="" -->
+
+                <br>
+
+                <div class=" gap-4 mb-4 sm:grid-cols-2">
+
+                  <div>
+
+                    <!-- verifica password criteri speciali -->
+
+                    <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
+                    <input  [(ngModel)]="changePasswordRequest.newPwd" type="password" name="password" id="newPassword" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Nuova Password" required="">
+
+                  </div>
+
+                  <br>
+
+                  <div>
+
+                    <!-- verifica password criteri speciali -->
+
+                    <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Conferma Password</label>
+                    <input  [(ngModel)]="changePasswordRequest.confirmNewPwd" type="password" name="password" id="confirmNewPassword" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Conferma Nuova Password" required="">
+
+
+                  </div>
+
+                  <br>
+
+                  <div>
+                    <h6 class="text-center">Le Password Devono Coincidere</h6>
+                  </div>
+
+                </div>
+
+                <div class="justify-center flex">
+                  <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" data-bs-target="#exampleModalToggle" data-bs-toggle="modal" (click)="uploadNewPassword()">
+                    Conferma
+                  </button>
+                </div>
+              </div>
+
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Form per diventare un bakery                     step-1            -->
+    <div class="modal fade modal-xl" id="exampleModalToggle8" aria-hidden="true" aria-labelledby="exampleModalToggleLabel8" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+
+          <div class="modal-header justify-center">
+            <button class="button" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">
+              <fa-icon [icon]="faArrowLeft" class="mr-1"></fa-icon>
+            </button>
+            <h1 class="modal-title fs-5 text-center flex-1" id="exampleModalToggleLabel8">Richiesta per diventare un bakery</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+
+
+          <div class="modal-body justify-center min-h-[500px] ">
+
+            <div class="justify-center mt-[30px]">
+
+
+              <ol class="justify-evenly items-center w-full space-y-4 sm:flex sm:space-x-8 sm:space-y-0 rtl:space-x-reverse ml-[-10px] custom1:ml-0">
+                <li class="flex items-center text-blue-600 dark:text-blue-500 space-x-2.5 rtl:space-x-reverse ml-[-30px] custom:ml-0">
+                  <span class="flex items-center justify-center w-8 h-8 border border-blue-600 rounded-full shrink-0 dark:border-blue-500">
+                    1
+                  </span>
+                  <span>
+                    <h3 class="font-medium leading-tight">Info Azienda</h3>
+                    <p class="text-sm">Inserisci Dettagli Azienda</p>
+                  </span>
+                </li>
+                <li class="flex hidden items-center text-gray-500 dark:text-blue-500 space-x-2.5 rtl:space-x-reverse below-745:hidden xl:flex">
+                  <span class="flex items-center justify-center w-8 h-8 border border-gray-500 rounded-full shrink-0 dark:border-gray-400">
+                    2
+                  </span>
+                  <span>
+                    <h3 class="font-medium leading-tight">Dettagli Indirizzo</h3>
+                    <p class="text-sm">Inserisci Dettagli Indirizzo</p>
+                  </span>
+                </li>
+                <li class="flex hidden items-center text-gray-500 dark:text-blue-500 space-x-2.5 rtl:space-x-reverse below-745:hidden xl:flex">
+                  <span class="flex items-center justify-center w-8 h-8 border border-gray-500 rounded-full shrink-0 dark:border-gray-400">
+                    3
+                  </span>
+                  <span>
+                    <h3 class="font-medium leading-tight">Conferma Dati</h3>
+                    <p class="text-sm">Verifica Dati Inseriti</p>
+                  </span>
+                </li>
+              </ol>
+
+
+
+            </div>
+
+            <div class="justify-center min-w-[600px] mt-[60px] mb-[60px]">
+
+
+              <div class=" justify-center  ml-[120px] custom:flex custom:ml-0 ">
+
+                <div class="prima custom:mr-[40px] ">
+
+                  <div>
+                    <!-- Nome Azienda -->
+
+                    <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nome Azienda</label>
+                    <div class="relative">
+                      <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M20 9v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V9"/>
+                          <path d="M9 22V12h6v10M2 10.6L12 2l10 8.6"/>
+                        </svg>
+                      </div>
+                      <input [(ngModel)]="bakeryRegisterRequest.name" type="text" name="name" id="nameAzz" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-auto ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Nome Azienda" required="">
+                    </div>
+
+                  </div>
+
+                  <br>
+
+                  <div>
+                    <!-- Piccola Descrizione -->
+
+                    <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Descrizione</label>
+                    <div class="relative">
+                      <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                        </svg>
+                      </div>
+                      <input [(ngModel)]="bakeryRegisterRequest.description" type="text" name="description" id="descAz" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-auto ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Descrizione" required="">
+                    </div>
+
+                  </div>
+
+                  <br>
+
+                  <div>
+                    <!-- Email -->
+
+                    <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
+                    <div class="relative">
+                      <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                          <polyline points="22,6 12,13 2,6"></polyline>
+                        </svg>
+                      </div>
+                      <input [(ngModel)]="bakeryRegisterRequest.email_azz" type="email" name="email" id="emailAz" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-auto ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Email" required="">
+                    </div>
+
+                  </div>
+
+                  <br>
+
+                  <div>
+                    <!-- Numero Telefonico -->
+
+                    <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Numero Telefonico </label>
+                    <div class="relative">
+                      <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                        </svg>
+                      </div>
+                      <input [(ngModel)]="bakeryRegisterRequest.phone_azz" type="text" name="phone_az" id="phoneAz" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-auto ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Numero di Telefono" required="">
+                    </div>
+
+
+                  </div>
+
+                </div>
+
+                <div class="seconda mt-[20px]  custom:ml-[40px] custom:mt-0 ">
+
+                  <div>
+
+                    <!-- Twitter -->
+
+                    <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Twitter</label>
+                    <div class="relative">
+                      <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-twitter-x" viewBox="0 0 16 16">
+                          <path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865z"/>
+                        </svg>
+                      </div>
+                      <input [(ngModel)]="bakeryRegisterRequest.twitter" type="text" name="twitter" id="twitter" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-auto ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Link Twitter" required="">
+                    </div>
+
+
+                  </div>
+
+                  <br>
+
+                  <div>
+
+                    <!-- Facebook -->
+
+                    <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Facebook</label>
+                    <div class="relative">
+                      <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16">
+                          <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951"/>
+                        </svg>
+                      </div>
+                      <input [(ngModel)]="bakeryRegisterRequest.facebook" type="text" name="facebook" id="facebook"class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-auto ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Link Facebook" required="">
+                    </div>
+
+                  </div>
+
+                  <br>
+
+                  <div>
+
+                    <!-- Instagram -->
+
+                    <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Instagram</label>
+                    <div class="relative">
+                      <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-instagram" viewBox="0 0 16 16">
+                          <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334"/>
+                        </svg>
+                      </div>
+                      <input [(ngModel)]="bakeryRegisterRequest.instagram" type="text" name="instagram" id="instagram" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-auto ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Link Instagram" required="">
+                    </div>
+
+                  </div>
+
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+
+          <div class="modal-footer">
+
+             <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" data-bs-target="#exampleModalToggle9" data-bs-toggle="modal" [disabled]="!isFilled()">
+               Continua
+             </button>
+
+          </div>
+
+
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Form per dettagli Indirizzo                      step-2            -->
+    <div class="modal fade modal-xl" id="exampleModalToggle9" aria-hidden="true" aria-labelledby="exampleModalToggleLabel9" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+
+          <div class="modal-header flex items-center justify-between">
+            <button class="button" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">
+              <fa-icon [icon]="faArrowLeft" class="mr-1"></fa-icon>
+            </button>
+            <h1 class="modal-title fs-5 text-center flex-1">Inserisci Indirizzo Dell'Azienda</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+
+          <div class="modal-body justify-center min-h-[500px]">
+
+            <div class="justify-center mt-[30px]">
+
+
+              <ol class="justify-evenly items-center w-full space-y-4 sm:flex sm:space-x-8 sm:space-y-0 rtl:space-x-reverse  ml-[-40px] custom1:ml-0  ">
+
+                <li class="flex hidden items-center text-gray-500 dark:text-blue-500 space-x-2.5 rtl:space-x-reverse below-745:hidden xl:flex">
+                  <span class="flex items-center justify-center w-8 h-8 border border-blue-600 rounded-full shrink-0 dark:border-blue-500">
+                    1
+                  </span>
+                  <span>
+                    <h3 class="font-medium leading-tight">Info Azienda</h3>
+                    <p class="text-sm">Inserisci Dettagli Azienda</p>
+                  </span>
+                </li>
+
+                <li class="flex items-center text-blue-600 dark:text-gray-400 space-x-2.5 rtl:space-x-reverse">
+                  <span class="flex items-center justify-center w-8 h-8 border border-gray-500 rounded-full shrink-0 dark:border-gray-400">
+                    2
+                  </span>
+                  <span>
+                    <h3 class="font-medium leading-tight">Dettagli Indirizzo</h3>
+                    <p class="text-sm">Inserisci Dettagli Indirizzo</p>
+                  </span>
+                </li>
+
+                <li class="flex hidden items-center text-gray-500 dark:text-blue-500 space-x-2.5 rtl:space-x-reverse below-745:hidden xl:flex">
+                  <span class="flex items-center justify-center w-8 h-8 border border-gray-500 rounded-full shrink-0 dark:border-gray-400">
+                    3
+                  </span>
+                  <span>
+                    <h3 class="font-medium leading-tight">Conferma Dati</h3>
+                    <p class="text-sm">Verifica Dati Inseriti</p>
+                  </span>
+                </li>
+              </ol>
+
+
+
+            </div>
+
+            <div class="justify-center  ml-[0px] custom:flex custom:ml-0">
+
+              <div class="custom:mr-[40px]">
+
+                <div class="elem">
+                  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nome</label>
+                  <div class="relative">
+                    <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+                    </div>
+                    <input  [(ngModel)]="address1.name" type="text" name="text" id="nameAz" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Nome" required="">
+                  </div>
+                </div>
+
+                <br>
+
+                <div class="elem">
+                  <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Numero di Telefono</label>
+                  <div class="relative">
+                    <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                      <img src="/public/testImg/icons8-telefono-100.png" height="19" width="19" alt="icona telefono">
+                    </div>
+                    <input  [(ngModel)]="address1.telNumber" type="text" name="text" id="telNumberAz" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Numero di Telefono" required="">
+                  </div>
+                </div>
+
+                <br>
+
+                <div class="elem">
+                  <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Stato</label>
+                  <div class="relative">
+                    <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path><line x1="4" y1="22" x2="4" y2="15"></line></svg>
+                    </div>
+                    <input  [(ngModel)]="address1.country" type="text" name="text" id="countryAz" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Stato" required="">
+                  </div>
+                </div>
+
+                <br>
+
+                <div class="elem">
+                  <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Regione</label>
+                  <div class="relative">
+                    <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                      <img src="/public/testImg/icons8-lazio-24.png" height="19" width="19" alt="icona regione">
+                    </div>
+                    <input  [(ngModel)]="address1.state" type="text" name="text" id="stateAz" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Regione" required="">
+                  </div>
+                </div>
+
+                <br>
+
+                <div class="elem">
+                  <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Provincia</label>
+                  <div class="relative">
+                    <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="10" r="3"/><path d="M12 21.7C17.3 17 20 13 20 10a8 8 0 1 0-16 0c0 3 2.7 6.9 8 11.7z"/></svg>
+                    </div>
+                    <input  [(ngModel)]="address1.provincia" type="text" name="text" id="provinciaAz" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Provincia" required="">
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="mt-[20px] mb-[40px] custom:ml-[40px] custom:mt-0 custom:mb-0">
+
+                <div class="elem">
+                  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Città</label>
+                  <div class="relative">
+                    <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                      <img src="public/testImg/icons8-città-50.png" width="19" height="19" alt="icona città">
+                    </div>
+                    <input  [(ngModel)]="address1.city" type="text" name="text" id="cityAz" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Città" required="">
+                  </div>
+                </div>
+
+                <br>
+
+                <div class="elem">
+                  <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">CAP</label>
+                  <div class="relative">
+                    <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                      <img src="public/testImg/zip-code.png" width="19" height="19" alt="icona Cap">
+                    </div>
+                    <input  [(ngModel)]="address1.postalCode" type="text" name="text" id="capAz" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="CAP" required="">
+                  </div>
+                </div>
+
+                <br>
+
+                <div class="elem">
+                  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Strada / Via / Località</label>
+                  <div class="relative">
+                    <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                      <img src="public/testImg/road.png" width="19" height="19" alt="icona strada">
+                    </div>
+                    <input  [(ngModel)]="address1.street" type="text" name="text" id="streetAz" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Strada / Via / Località" required="">
+                  </div>
+                </div>
+
+                <br>
+
+                <div class="elem">
+                  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">N°</label>
+                  <div class="relative">
+                    <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                      <img src="public/testImg/letter-n.png" width="19" height="19" alt="icona numero civico">
+                    </div>
+                    <input  [(ngModel)]="address1.number" type="text" name="text" id="numberAz" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Numero" required="">
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+
+
+          </div>
+
+          <div class="modal-footer justify-end">
+            <button class="btn btn-primary" data-bs-target="#exampleModalToggle8" data-bs-toggle="modal" >Indietro</button>
+            <button class="btn btn-primary" data-bs-target="#exampleModalToggle10" data-bs-toggle="modal" [disabled]="!isFilled2()">Continua</button>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Verifica dettagli Richiesta                      step-3            -->
+    <div class="modal fade modal-xl" id="exampleModalToggle10" aria-hidden="true" aria-labelledby="exampleModalToggleLabel10" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+
+          <div class="modal-header flex items-center justify-between">
+            <button class="button" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">
+              <fa-icon [icon]="faArrowLeft" class="mr-1"></fa-icon>
+            </button>
+            <h1 class="modal-title fs-5 text-center flex-1">Verifica Informazioni inserite</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+
+          <div class="modal-body justify-center min-h-[500px]">
+
+
+            <!-- Stepper -->
+
+            <div class="justify-center mt-[30px]">
+
+              <ol class="justify-center items-center w-full space-y-4 sm:flex sm:space-x-8 sm:space-y-0 rtl:space-x-reverse sm:justify-evenly lg:pr-[32px] sm:pr-[32px] ml-[-10px] custom1:ml-0">
+
+                <li class="flex hidden items-center text-gray-500 dark:text-blue-500 space-x-2.5 rtl:space-x-reverse below-745:hidden custom:flex">
+                  <span class="flex items-center justify-center w-8 h-8 border border-blue-600 rounded-full shrink-0 dark:border-blue-500">
+                    1
+                  </span>
+                  <span>
+                    <h3 class="font-medium leading-tight">Info Azienda</h3>
+                    <p class="text-sm">Inserisci Dettagli Azienda</p>
+                  </span>
+                </li>
+
+
+                <li class="flex hidden items-center text-gray-500 dark:text-blue-500 space-x-2.5 rtl:space-x-reverse below-745:hidden custom:flex">
+                  <span class="flex items-center justify-center w-8 h-8 border border-gray-500 rounded-full shrink-0 dark:border-gray-400">
+                    2
+                  </span>
+                  <span>
+                    <h3 class="font-medium leading-tight">Dettagli Indirizzo</h3>
+                    <p class="text-sm">Inserisci Dettagli Indirizzo</p>
+                  </span>
+                </li>
+
+
+                <li class="flex items-center text-blue-600 dark:text-gray-400 space-x-2.5 rtl:space-x-reverse sm:flex sm:justify-center">
+                  <span class="flex items-center justify-center w-8 h-8 border border-gray-500 rounded-full shrink-0 dark:border-gray-400">
+                    3
+                  </span>
+                  <span>
+                    <h3 class="font-medium leading-tight">Conferma Dati</h3>
+                    <p class="text-sm">Verifica Dati Inseriti</p>
+                  </span>
+                </li>
+              </ol>
+
+            </div>
+
+
+            <!-- Campi Dati -->
+
+            <div class="container-oggetti justify-center">
+
+
+              <!-- DAti Azienda -->
+
+              <div class="Dati-Azienda justify-center">
+
+
+                <!-- Header -->
+                <div class="flex justify-center">
+                  <label class="mb-8 text-2xl font-bold text-gray-900 justify-center">Dati Azienda</label>
+                </div>
+
+
+                <!-- Body -->
+                <div class="container-elementi">
+
+                  <div class="custom:justify-evenly custom:flex ml-[120px] custom:ml-0">
+
+                    <div class="sm:mb-[20px]">
+                      <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nome Azienda</label>
+                      <div class="relative justify-center">
+                        <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20 9v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V9"/>
+                            <path d="M9 22V12h6v10M2 10.6L12 2l10 8.6"/>
+                          </svg>
+                        </div>
+                        <input type="text" aria-label="disabled input 2" class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-auto ps-10 p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{bakeryRegisterRequest.name}}" disabled readonly>
+                      </div>
+                    </div>
+
+                    <div class="sm:mb-[20px]">
+                      <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">email</label>
+                      <div class="relative">
+                        <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                            <polyline points="22,6 12,13 2,6"></polyline>
+                          </svg>
+                        </div>
+                        <input type="text" aria-label="disabled input 2" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-auto ps-10 p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{bakeryRegisterRequest.email_azz}}" disabled readonly>
+                      </div>
+                    </div>
+
+                    <div class="sm:mb-[20px]">
+                      <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Numero di Telefono Az</label>
+                      <div class="relative">
+                        <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                          </svg>
+                        </div>
+                        <input type="text" aria-label="disabled input 2" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-auto ps-10 p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{bakeryRegisterRequest.phone_azz}}" disabled readonly>
+                      </div>
+                    </div>
+
+                  </div>
+
+                  <div class="flex w-full custom:justify-center custom:">
+                    <div class="w-full xl:ml-[100px] xl:mr-[100px] lg:ml-[20px] lg:mr-[20px] custom2:ml-[100px] custom2:mr-[100px] ">
+                      <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Descrizione</label>
+                      <div class="col-span-2">
+                        <textarea id="description" rows="4" class="cursor-not-allowed block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{bakeryRegisterRequest.description}}" disabled readonly></textarea>
+                      </div>
+                    </div>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+
+              <!-- Dati Social -->
+
+              <div class="Social mt-[30px]">
+
+                <!-- Header -->
+                <div class="flex justify-center">
+                  <label class="mb-8 text-2xl font-bold text-gray-900 justify-center">Social</label>
+                </div>
+
+
+                <div class="custom:justify-evenly custom:flex ml-[120px] custom:ml-0">
+
+                  <div class="sm:mb-[20px]">
+                    <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Twitter</label>
+                    <div class="relative">
+                      <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-twitter-x" viewBox="0 0 16 16">
+                          <path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865z"/>
+                        </svg>
+                      </div>
+                      <input type="text" aria-label="disabled input 2" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-auto ps-10 p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{bakeryRegisterRequest.twitter}}" disabled readonly>
+                    </div>
+                  </div>
+
+                  <div class="sm:mb-[20px]">
+                    <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Facebook</label>
+                    <div class="relative">
+                      <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16">
+                          <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951"/>
+                        </svg>
+                      </div>
+                      <input type="text" aria-label="disabled input 2" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-auto ps-10 p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{bakeryRegisterRequest.facebook}}" disabled readonly>
+                    </div>
+                  </div>
+
+                  <div class="sm:mb-[20px]">
+                    <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Instagram</label>
+                    <div class="relative">
+                      <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-instagram" viewBox="0 0 16 16">
+                          <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334"/>
+                        </svg>
+                      </div>
+                      <input type="text" aria-label="disabled input 2" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-auto ps-10 p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{bakeryRegisterRequest.instagram}}" disabled readonly>
+                    </div>
+                  </div>
+
+                </div>
+
+
+              </div>
+
+
+
+              <!-- Dati Indirizzo -->
+              <div class="Dettagli-indirizzo mt-[30px]">
+
+                <div class="flex justify-center">
+                  <label class="mb-8 text-2xl font-bold text-gray-900 justify-center">Dettagli Indirizzo</label>
+                </div>
+
+                <div>
+                  <div id="Riga-1">
+                    <div class="custom:justify-evenly custom:flex ml-[120px] custom:ml-0">
+
+                      <div class="sm:mb-[20px]">
+                        <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nome</label>
+                        <div class="relative">
+                          <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+                          </div>
+                          <input type="text" aria-label="disabled input 2" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-auto ps-10 p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{address1.name}}" disabled readonly>
+                        </div>
+                      </div>
+
+                      <div class="sm:mb-[20px]">
+                        <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Numero di Telefono</label>
+                        <div class="relative">
+                          <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                            <img src="/public/testImg/icons8-telefono-100.png" height="19" width="19" alt="icona telefono">
+                          </div>
+                          <input type="text" aria-label="disabled input 2" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-auto ps-10 p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{address1.telNumber}}" disabled readonly>
+                        </div>
+                      </div>
+
+                      <div class="sm:mb-[20px]">
+                        <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">CAP</label>
+                        <div class="relative">
+                          <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                            <img src="public/testImg/zip-code.png" width="19" height="19" alt="icona Cap">
+                          </div>
+                          <input type="text" aria-label="disabled input 2" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-auto ps-10 p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{address1.postalCode}}" disabled readonly>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                  <div id="Riga-2">
+                    <div class="custom:justify-evenly custom:flex ml-[120px] custom:ml-0">
+
+                      <div class="sm:mb-[20px]">
+                        <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Stato</label>
+                        <div class="relative">
+                          <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path><line x1="4" y1="22" x2="4" y2="15"></line></svg>
+                          </div>
+                          <input type="text" aria-label="disabled input 2" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-auto ps-10 p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{address1.country}}" disabled readonly>
+                        </div>
+                      </div>
+
+                      <div class="sm:mb-[20px]">
+                        <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Regione</label>
+                        <div class="relative">
+                          <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                            <img src="/public/testImg/icons8-lazio-24.png" height="19" width="19" alt="icona regione">
+                          </div>
+                          <input type="text" aria-label="disabled input 2" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-auto ps-10 p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{address1.state}}" disabled readonly>
+                        </div>
+                      </div>
+
+                      <div class="sm:mb-[20px]">
+                        <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Provincia</label>
+                        <div class="relative">
+                          <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="10" r="3"/><path d="M12 21.7C17.3 17 20 13 20 10a8 8 0 1 0-16 0c0 3 2.7 6.9 8 11.7z"/></svg>
+                          </div>
+                          <input type="text" aria-label="disabled input 2" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-auto ps-10 p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{address1.provincia}}" disabled readonly>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                  <div id="Riga-3">
+                    <div class="custom:justify-evenly custom:flex ml-[120px] custom:ml-0">
+
+                      <div class="sm:mb-[20px]">
+                        <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Città</label>
+                        <div class="relative">
+                          <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                            <img src="public/testImg/icons8-città-50.png" width="19" height="19" alt="icona città">
+                          </div>
+                          <input type="text" aria-label="disabled input 2" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-auto ps-10 p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{address1.city}}" disabled readonly>
+                        </div>
+                      </div>
+
+                      <div class="sm:mb-[20px]">
+                        <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Strada / Via / Località</label>
+                        <div class="relative">
+                          <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                            <img src="public/testImg/road.png" width="19" height="19" alt="icona strada">
+                          </div>
+                          <input type="text" aria-label="disabled input 2" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-auto ps-10 p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{address1.street}}" disabled readonly>
+                        </div>
+                      </div>
+
+                      <div class="sm:mb-[20px]">
+                        <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Numero</label>
+                        <div class="relative">
+                          <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                            <img src="public/testImg/letter-n.png" width="19" height="19" alt="icona numero civico">
+                          </div>
+                          <input type="text" aria-label="disabled input 2" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-auto ps-10 p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{address1.number}}" disabled readonly>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+
+
+
+          </div>
+
+          <div class="modal-footer justify-end">
+            <button class="btn btn-primary" data-bs-target="#exampleModalToggle9" data-bs-toggle="modal" >Indietro</button>
+            <button class="btn btn-primary" (click)="requestBakery()" data-bs-target="#exampleModalToggle" data-bs-toggle="modal" >Continua</button>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+
+    <button class="btn btn-primary flex z-50 absolute top-[450px] left-[20px]" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">
+      <fa-icon [icon]="faPencil" class="mr-1"></fa-icon>
+      <span> Modifica Profilo </span>
+    </button>
+
+
+
+  </div>
+
+
+  <div class="fs-5 fw-bold d-flex justify-content-between links" >
+
+    <a href="#" (click)="showElement('element1', $event)">Informazioni</a>
+    <a href="#" (click)="showElement('element2', $event)">Ordini</a>
+    <a href="#" (click)="showElement('element3', $event)">Forni Preferiti</a>
+
+  </div>
+
+
+  <hr class="mt-5 mb-6 ">
+
+  <div class="conteiner-ogetti" >
+
+    <div class="elementi" >
+
+      <div *ngIf="visibleElement === 'element1'" class="info" >
+
+        <div *ngIf="info === null" class="container-empty">
+
+
+          <span class="empty">Non hai informazioni disponibili</span>
+
+        </div>
+
+        <app-info></app-info>
+
+
+      </div>
+
+      <div *ngIf="visibleElement === 'element2'" class="order">
+
+        <div *ngIf="orders.length === 0" class="container-empty" >
+
+          <span class="empty h-[300px]">Non hai mai fatto un ordine</span>
+
+        </div>
+
+        <div *ngFor="let order of orders">
+
+          <app-order></app-order>
+
+          <!-- [order]="order" -->
+
+        </div>
+
+      </div>
+
+      <div *ngIf="visibleElement === 'element3'" class="fav">
+
+        <div *ngIf="favBakery.length === 0" class="container-empty">
+
+          <span class="empty h-[300px]">Non Hai Salvato Nessuna Panetteria</span>
+
+        </div>
+
+        <div *ngFor="let favourite of favBakery" >
+
+          <app-favourite></app-favourite>
+
+          <!-- [fav]="favourite" -->
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+

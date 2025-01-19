@@ -1,8 +1,16 @@
 package it.uniromatre.breadexchange2_0.controller;
 
 import io.swagger.v3.oas.annotations.Parameter;
-import it.uniromatre.breadexchange2_0.auth.ChangePasswordRequest;
+import it.uniromatre.breadexchange2_0.bakery.registerRequest.BakeryRegisterRequest;
+import it.uniromatre.breadexchange2_0.token.tokenVerifyRequest;
+import it.uniromatre.breadexchange2_0.token.tokenVerifyResponse;
+import it.uniromatre.breadexchange2_0.user.UserFrontEndInfoResponse;
+import it.uniromatre.breadexchange2_0.user.UserFrontEndResponse;
 import it.uniromatre.breadexchange2_0.user.UserService;
+import it.uniromatre.breadexchange2_0.user.address.NewAddress;
+import it.uniromatre.breadexchange2_0.email.emailVerifyRequest;
+import jakarta.mail.MessagingException;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -26,28 +34,94 @@ public class UserController {
     public ResponseEntity<?> uploadProfilePicture(
             @Parameter()
             @RequestPart("file")MultipartFile file,
+            @Parameter()
+            @RequestParam("direction") int direction,
             Authentication connectedUser
             ){
-        userService.uploadProfilePicture(file,connectedUser);
+        userService.uploadProfilePicture(file,connectedUser,direction);
         return ResponseEntity.accepted().build();
-    }
-
-    @PatchMapping("/changePWD")
-    public ResponseEntity<?> changePassword(
-            @RequestBody ChangePasswordRequest request,
-            Authentication connectedUser
-    ){
-        userService.changePassword(request, connectedUser);
-        return ResponseEntity.ok("Password changed successfully!!");
     }
 
 
     @GetMapping("/test")
     public ResponseEntity<?> testSicurezza(){
-        return ResponseEntity.ok("Hai permessi admin");
+        return ResponseEntity.ok("Hai permessi user");
     }
 
 
+    // utilizzabile per cercare qualcuno direttamente con il suo id
+
+    @GetMapping("/{user-id}")
+    public ResponseEntity<?> getUser(
+            @PathVariable("user-id") Integer userId) {
+        return ResponseEntity.ok(userService.findById(userId));
+    }
+
+    // serve per prendere i dati dal suo token
+
+    @GetMapping("/me")
+    public ResponseEntity<UserFrontEndResponse> getCurrentUser(
+            Authentication connectedUser
+    ) {
+        if(connectedUser != null){
+            return ResponseEntity.ok(userService.getData(connectedUser));
+        }
+        return ResponseEntity.badRequest().build();
+    }
+
+
+    @GetMapping("/info")
+    public ResponseEntity<UserFrontEndInfoResponse> getUserInfo(
+            Authentication connectedUser
+    ){
+        return ResponseEntity.ok(userService.getInfo(connectedUser));
+    }
+
+
+    @PostMapping("/addAddress")
+    public ResponseEntity<?> addAddress(
+            Authentication connectedUser,
+            @RequestBody NewAddress address
+    ){
+        this.userService.addAddress(connectedUser, address);
+        return ResponseEntity.accepted().build();
+    }
+
+    @GetMapping("/getAddress")
+    public ResponseEntity<?> getAddress(
+            Authentication connectedUser
+    ){
+        return ResponseEntity.ok(userService.getAddress(connectedUser));
+    }
+
+
+    @PostMapping("/verificaEmail")
+        public ResponseEntity<?> verificaEmail(
+                Authentication connectedUser,
+                @RequestBody @Valid emailVerifyRequest request
+                )throws MessagingException {
+        userService.verificaEmail(request, connectedUser);
+        return ResponseEntity.ok().build();
+        };
+
+
+    @PostMapping("/verificaToken")
+    public ResponseEntity<tokenVerifyResponse> verifyToken(
+            Authentication connectedUser,
+            @RequestBody @Valid tokenVerifyRequest request
+    ){
+        return ResponseEntity.ok(userService.verifyToken(request,connectedUser));
+    }
+
+    @PostMapping("/sendRequest")
+    public ResponseEntity<?> sendRequest(
+            @RequestBody @Valid BakeryRegisterRequest request,
+            Authentication connectedUser
+            ){
+
+        userService.sendRequest(request, connectedUser);
+        return ResponseEntity.accepted().build();
+    }
 
 
 

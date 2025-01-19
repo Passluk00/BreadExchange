@@ -4,7 +4,7 @@
 
 import { HttpClient, HttpContext } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import {catchError, Observable, of} from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { BaseService } from '../base-service';
@@ -14,8 +14,12 @@ import { StrictHttpResponse } from '../strict-http-response';
 import { authenticate } from '../fn/authentication/authenticate';
 import { Authenticate$Params } from '../fn/authentication/authenticate';
 import { AuthenticationResponse } from '../models/authentication-response';
+import { check } from '../fn/authentication/check';
+import { Check$Params } from '../fn/authentication/check';
 import { confirm } from '../fn/authentication/confirm';
 import { Confirm$Params } from '../fn/authentication/confirm';
+import { forgotPwd } from '../fn/authentication/forgot-pwd';
+import { ForgotPwd$Params } from '../fn/authentication/forgot-pwd';
 import { register } from '../fn/authentication/register';
 import { Register$Params } from '../fn/authentication/register';
 
@@ -48,6 +52,64 @@ export class AuthenticationService extends BaseService {
   register(params: Register$Params, context?: HttpContext): Observable<{
 }> {
     return this.register$Response(params, context).pipe(
+      map((r: StrictHttpResponse<{
+}>): {
+} => r.body)
+    );
+  }
+
+  /** Path part for operation `forgotPwd()` */
+  static readonly ForgotPwdPath = '/auth/forgotPwd';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `forgotPwd()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  forgotPwd$Response(params: ForgotPwd$Params, context?: HttpContext): Observable<StrictHttpResponse<{
+}>> {
+    return forgotPwd(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `forgotPwd$Response()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  forgotPwd(params: ForgotPwd$Params, context?: HttpContext): Observable<{
+}> {
+    return this.forgotPwd$Response(params, context).pipe(
+      map((r: StrictHttpResponse<{
+}>): {
+} => r.body)
+    );
+  }
+
+  /** Path part for operation `check()` */
+  static readonly CheckPath = '/auth/check';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `check()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  check$Response(params: Check$Params, context?: HttpContext): Observable<StrictHttpResponse<{
+}>> {
+    return check(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `check$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  check(params: Check$Params, context?: HttpContext): Observable<{
+}> {
+    return this.check$Response(params, context).pipe(
       map((r: StrictHttpResponse<{
 }>): {
 } => r.body)
@@ -102,6 +164,21 @@ export class AuthenticationService extends BaseService {
     return this.confirm$Response(params, context).pipe(
       map((r: StrictHttpResponse<void>): void => r.body)
     );
+  }
+
+  isTokenValid(token: string | null): Observable<boolean> {
+    if(!token){
+      return of(false);
+    }
+    return this.check({token: token}).pipe(
+      map(() => true ),
+      catchError(() => of(false))
+    );
+  }
+
+
+  logout():void{
+    localStorage.removeItem("token")
   }
 
 }
