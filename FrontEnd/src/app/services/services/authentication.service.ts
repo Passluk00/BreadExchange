@@ -4,7 +4,7 @@
 
 import { HttpClient, HttpContext } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import {catchError, Observable, of} from 'rxjs';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { BaseService } from '../base-service';
@@ -96,8 +96,7 @@ export class AuthenticationService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  check$Response(params: Check$Params, context?: HttpContext): Observable<StrictHttpResponse<{
-}>> {
+  check$Response(params: Check$Params, context?: HttpContext): Observable<StrictHttpResponse<boolean>> {
     return check(this.http, this.rootUrl, params, context);
   }
 
@@ -107,12 +106,9 @@ export class AuthenticationService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  check(params: Check$Params, context?: HttpContext): Observable<{
-}> {
+  check(params: Check$Params, context?: HttpContext): Observable<boolean> {
     return this.check$Response(params, context).pipe(
-      map((r: StrictHttpResponse<{
-}>): {
-} => r.body)
+      map((r: StrictHttpResponse<boolean>): boolean => r.body)
     );
   }
 
@@ -164,21 +160,6 @@ export class AuthenticationService extends BaseService {
     return this.confirm$Response(params, context).pipe(
       map((r: StrictHttpResponse<void>): void => r.body)
     );
-  }
-
-  isTokenValid(token: string | null): Observable<boolean> {
-    if(!token){
-      return of(false);
-    }
-    return this.check({token: token}).pipe(
-      map(() => true ),
-      catchError(() => of(false))
-    );
-  }
-
-
-  logout():void{
-    localStorage.removeItem("token")
   }
 
 }

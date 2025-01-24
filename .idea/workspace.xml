@@ -5,56 +5,41 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="def00291-6796-4523-8aed-85c7574e50f3" name="Changes" comment="Commit iniziale Base BackEnd + Impostaioni cartelle">
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FrontEnd/src/public/font/Lemonada-VariableFont_wght.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FrontEnd/src/public/font/Marhey-VariableFont_wght.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FrontEnd/src/public/testImg/address.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FrontEnd/src/public/testImg/baget.JPG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FrontEnd/src/public/testImg/casareccio.JPG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FrontEnd/src/public/testImg/icons8-città-50.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FrontEnd/src/public/testImg/icons8-lazio-24.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FrontEnd/src/public/testImg/icons8-telefono-100.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FrontEnd/src/public/testImg/letter-n.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FrontEnd/src/public/testImg/misto_su_tavolo.JPG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FrontEnd/src/public/testImg/road.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FrontEnd/src/public/testImg/vetrina_pane.JPG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FrontEnd/src/public/testImg/zip-code.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/icon.svg" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/icon.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontEnd/src/public/404.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontEnd/src/public/stay-bread-Photoroom.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/0c8bb871-c311-4f15-8d46-26cf6eae043a.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/0c8bb871-c311-4f15-8d46-26cf6eae043a.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/0c8bb871-c311-4f15-8d46-26cf6eae043a/storage_v2/_src_/database/BreadExchange2.d2D_JQ/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/0c8bb871-c311-4f15-8d46-26cf6eae043a/storage_v2/_src_/database/BreadExchange2.d2D_JQ/schema/public.abK9xQ.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/angular.json" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/angular.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/app.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/app.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/app.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/app.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/app.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/app.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/app.config.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/app.module.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/app.routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/app.routes.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/pages/login/login.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/pages/login/login.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/pages/login/login.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/pages/login/login.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/pages/register/register.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/pages/register/register.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/services/fn/user-controller/change-password.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/services/fn/user-controller/upload-profile-picture.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/services/fn/user-controller/upload-profile-picture.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/services/api.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/services/api.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/services/fn/admin-controller/ban-user.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/services/fn/admin-controller/ban-user.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/services/fn/admin-controller/enable-bakery.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/services/fn/admin-controller/enable-bakery.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/services/fn/admin-controller/reject-request.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/services/fn/admin-controller/reject-request.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/services/fn/authentication/check.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/services/fn/authentication/check.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/services/interceptor/http-interceptor.interceptor.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/services/interceptor/http-interceptor.interceptor.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/services/models.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/services/models.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/services/models/change-password-request.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/services/models/change-password-request.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/services/models/test-request.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/services/models/test-request.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/services/models/bakery-register-request.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/services/models/bakery-register-request.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/services/services.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/services/services.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/services/services/admin-controller.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/services/services/admin-controller.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/services/services/authentication.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/services/services/authentication.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/services/services/test.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/services/services/test.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/services/services/user-controller.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/services/services/user-controller.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/shared/components/footer/footer.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/shared/components/footer/footer.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/shared/components/footer/footer.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/shared/components/footer/footer.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/shared/components/footer/footer.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/shared/components/footer/footer.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/shared/components/info/info.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/shared/components/info/info.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/shared/components/navbar/navbar.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/shared/components/navbar/navbar.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/shared/components/navbar/navbar.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/shared/components/navbar/navbar.component.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/shared/components/navbar/navbar.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/shared/components/navbar/navbar.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/shared/homepage/homepage.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/shared/homepage/pages/home/homepage.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/shared/homepage/homepage.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/shared/homepage/pages/home/homepage.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/shared/homepage/homepage.component.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/shared/homepage/pages/home/homepage.component.spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/shared/homepage/homepage.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/shared/homepage/pages/home/homepage.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/shared/homepage/homepage-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/shared/homepage/homepage-routing.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/shared/homepage/pages/backery/backery.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/shared/homepage/pages/backery/backery.component.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/shared/homepage/pages/backery/backery.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/shared/homepage/pages/backery/backery.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/shared/homepage/pages/user/user.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/shared/homepage/pages/user/user.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/shared/homepage/pages/user/user.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/shared/homepage/pages/user/user.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FrontEnd/src/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/src/main.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/main.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FrontEnd/src/openapi/openapi.json" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/openapi/openapi.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/src/styles.scss" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/styles.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/tailwind.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/tailwind.config.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -137,11 +122,11 @@
       <recent name="$PROJECT_DIR$/FrontEnd/public" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/FrontEnd/src/public" />
+      <recent name="$PROJECT_DIR$/FrontEnd/src/app/shared/bakery/components" />
       <recent name="$PROJECT_DIR$/FrontEnd/src/public/testImg" />
       <recent name="$PROJECT_DIR$/FrontEnd/src/app/services/directive" />
       <recent name="$PROJECT_DIR$/FrontEnd/src/app/shared/homepage/pages" />
-      <recent name="$PROJECT_DIR$/FrontEnd/src" />
-      <recent name="$PROJECT_DIR$/FrontEnd/src/app/shared" />
     </key>
   </component>
   <component name="RunManager">
@@ -197,7 +182,7 @@
       <workItem from="1736799942228" duration="30014000" />
       <workItem from="1736935965601" duration="58651000" />
       <workItem from="1737108204294" duration="29813000" />
-      <workItem from="1737294567519" duration="5273000" />
+      <workItem from="1737294567519" duration="130761000" />
     </task>
     <servers />
   </component>

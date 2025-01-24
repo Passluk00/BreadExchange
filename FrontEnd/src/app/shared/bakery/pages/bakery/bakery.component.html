@@ -1,0 +1,51 @@
+
+<app-navbar></app-navbar>
+
+<div class="sfondo">
+
+  <div class=" flex justify-center pt-20">
+    <img src="public/stay-bread-Photoroom.png" class="items-center w-[300px] h-[300px] rounded-full">
+
+    <div class="relative w-[300px]">
+      <p class="text-center text-5xl absolute top-20">Benvenuto in</p>
+      <h4 class="text-center text-6xl absolute font-bold top-36 left-44">{{data.name}}</h4>
+    </div>
+  </div>
+
+  <section>
+    <div class="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
+      <div class="mr-auto place-self-center lg:col-span-7">
+        <h1 class="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl dark:text-white fo">Addolcisci La Tua Giornata Con Le Nostre Delizie </h1>
+        <p class="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">{{data.desc}}</p>
+        <a href="#" class="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-3xl hover:text-gray-500 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800 no-underline">
+          Ordina Online
+        </a>
+      </div>
+      <div class="hidden lg:mt-0 lg:col-span-5 lg:flex">
+        <img src="public/testImg/bread.jpeg" alt="mockup" class="rounded-2xl">
+      </div>
+    </div>
+  </section>
+
+
+  <div class="centrale max-w-screen-xl px-4 py-4 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
+
+    <div class="place-self-center lg:col-span-7">
+      <p class="text-center text-black lg:text-lg font-semibold tracking-tight leading-tight fo">Trova i tuoi Prodotti Preferiti</p>
+    </div>
+    <div>
+      <h3 class="text-center text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl dark:text-white fo">Il nostro menù</h3>
+    </div>
+
+    <app-carosello-infinito [id]="userId"></app-carosello-infinito>
+
+    <app-address [data]="data?.address"></app-address>
+
+
+
+
+  </div>
+
+</div>
+
+<app-footer></app-footer>

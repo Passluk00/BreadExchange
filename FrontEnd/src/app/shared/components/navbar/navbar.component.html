@@ -110,10 +110,10 @@
               </a>
             </li>
 
-            <li class="elements-list">
-              <a href="#">
-                <fa-icon class="icon" [icon]="faCircleQuestion"></fa-icon>
-                Help & Support
+            <li class="elements-list cursor-pointer" *ngIf="isAdmin">
+              <a (click)="goToAdminPage()">
+                <fa-icon class="icon admin" [icon]="faTriangleExclamation"></fa-icon>
+                Admin Panel
               </a>
             </li>
 

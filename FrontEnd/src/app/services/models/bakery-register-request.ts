@@ -8,6 +8,7 @@ export interface BakeryRegisterRequest {
   address?: Address;
   description?: string;
   email_azz?: string;
+  enable?: boolean;
   facebook?: string;
   id?: number;
   instagram?: string;

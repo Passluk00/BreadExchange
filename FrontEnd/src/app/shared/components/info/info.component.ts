@@ -42,7 +42,6 @@ export class InfoComponent implements OnInit{
           if (res) {
             this.data = res;
             this.add = res.address
-            console.log("Fetch dati eseguito: ", this.data)
           }
         },
         error: () => {

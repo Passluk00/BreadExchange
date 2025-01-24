@@ -2,8 +2,8 @@ package it.uniromatre.breadexchange2_0.bakery;
 
 import it.uniromatre.breadexchange2_0.bakery.contact.ContactInfo;
 import it.uniromatre.breadexchange2_0.bakery.contact.ContactInfoRepository;
-import it.uniromatre.breadexchange2_0.bakery.registerRequest.BRRService;
-import it.uniromatre.breadexchange2_0.bakery.registerRequest.BakeryRegisterRequest;
+import it.uniromatre.breadexchange2_0.bakery.registerRequest.BRRRepository;
+import it.uniromatre.breadexchange2_0.common.PageResponse;
 import it.uniromatre.breadexchange2_0.email.EmailService;
 import it.uniromatre.breadexchange2_0.email.EmailTemplateName;
 import it.uniromatre.breadexchange2_0.role.Role;
@@ -14,31 +14,39 @@ import it.uniromatre.breadexchange2_0.user.address.AddressRepository;
 import jakarta.mail.MessagingException;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class BakeryService {
 
 
+    private static final Logger log = LoggerFactory.getLogger(BakeryService.class);
     private final BakeryRepository bakeryRepository;
     private final AddressRepository addressRepository;
     private final UserRepository userRepository;
     private final EmailService emailService;
     private final ContactInfoRepository contactInfoRepository;
-    private final BRRService brrService;
+    private final BRRRepository brrRepository;
+    private final BakeryMapper bakeryMapper;
 
 
+    // errore devo cercare se l'utente passato è valido
 
+    public void acceptRequest(Authentication connectedUser, Integer id) throws MessagingException{
 
-                              // sostituibile con id-request
-    public void registerBakery(BakeryRegisterRequest request, Authentication connectedUser) throws MessagingException {
-
-        if(request == null){                                                                        // controllo che il file della richiesta sia valido
-            throw new RuntimeException("Richiesta invalida dati mancanti");
+        if(id == null){
+            throw new RuntimeException("id nullo");
         }
 
         User user = ((User) connectedUser.getPrincipal());
@@ -52,39 +60,50 @@ public class BakeryService {
             throw new SecurityException("User does not have admin permission");
         }
 
+        User toSave = userRepository.findUserById(id);
+        if(toSave==null){                                                                          // controlloche l'utente esista
+            throw new EntityNotFoundException("User not Found with id: "+ id);
+        }
+
+
+
+        var req = brrRepository.findById(id).orElseThrow(() -> new RuntimeException("Request non esistente con id: "+ id));
+
 
         var bakery = Bakery.builder()
 
-                .name(request.getName())
-                .description(request.getDescription())
-                .owner(toCheck)
+                .name(req.getName())
+                .description(req.getDescription())
+                .owner(toSave)
                 .registrationDate(LocalDateTime.now())
                 .abilitato(true)
                 .build();
 
         var add = Address.builder()
 
-                .name(request.getAddress().getName())
-                .telNumber(request.getAddress().getTelNumber())
-                .country(request.getAddress().getCountry())
-                .state(request.getAddress().getState())
-                .provincia(request.getAddress().getProvincia())
-                .city(request.getAddress().getCity())
-                .postalCode(request.getAddress().getPostalCode())
-                .street(request.getAddress().getStreet())
-                .number(request.getAddress().getNumber())
+                .name(req.getAddress().getName())
+                .telNumber(req.getAddress().getTelNumber())
+                .country(req.getAddress().getCountry())
+                .state(req.getAddress().getState())
+                .provincia(req.getAddress().getProvincia())
+                .city(req.getAddress().getCity())
+                .postalCode(req.getAddress().getPostalCode())
+                .street(req.getAddress().getStreet())
+                .number(req.getAddress().getNumber())
                 .build();
 
         var co = ContactInfo.builder()
 
-                .email(request.getEmail_azz())
-                .phone(request.getPhone_azz())
-                .twitter(request.getTwitter())
-                .facebook(request.getFacebook())
-                .instagram(request.getInstagram())
+                .email(req.getEmail_azz())
+                .phone(req.getPhone_azz())
+                .twitter(req.getTwitter())
+                .facebook(req.getFacebook())
+                .instagram(req.getInstagram())
                 .build();
 
 
+        req.setEnable(true);
+        brrRepository.save(req);
 
         bakery.setAddress(add);
         bakery.setContactInfo(co);
@@ -98,17 +117,20 @@ public class BakeryService {
                 "Richesta Accettata"
         );
 
+
+
+
     }
 
-    public void rejectRequest(Authentication connectedUser, BakeryRegisterRequest request) throws MessagingException {
+    public void rejectRequestNew(Authentication connectedUser, Integer id) throws MessagingException {
 
-
-        if(request == null){                                                                        // controllo che il file della richiesta sia valido
-            throw new RuntimeException("Richiesta invalida dati mancanti");
+        if(id == null){
+            throw new RuntimeException("id nullo");
         }
 
         User user = ((User) connectedUser.getPrincipal());
         User toCheck = userRepository.findUserById(user.getId());
+
 
         if(toCheck==null){                                                                          // controlloche l'utente esista
             throw new EntityNotFoundException("User not Found with id: "+ user.getId());
@@ -118,10 +140,7 @@ public class BakeryService {
             throw new SecurityException("User does not have admin permission");
         }
 
-        request.setUser(toCheck);
-        brrService.rimuoviRequest(request);
-
-
+        brrRepository.deleteById(id);
         emailService.sendEmailRejectRequest(
                 toCheck.getEmail(),
                 toCheck.getUserName(),
@@ -130,22 +149,51 @@ public class BakeryService {
         );
 
 
+
     }
 
 
+    public PageResponse<BakeryResponse> getAllBakery(int page, int size) {
+
+        Pageable pageable = PageRequest.of(page,size, Sort.by("id").descending());
+        Page<Bakery> pag = (bakeryRepository.getAll(pageable));
+        List<BakeryResponse> bakeryResponses = pag.stream()
+                .map(bakeryMapper::fromBakery)
+                .toList();
+
+        return new PageResponse<>(
+                bakeryResponses,
+                pag.getNumber(),
+                pag.getSize(),
+                pag.getTotalElements(),
+                pag.getTotalPages(),
+                pag.isFirst(),
+                pag.isLast()
+        );
+    }
+
+    public List<RandomDataBakeryResponse> getRandomData(Integer id) {
+
+        // get Bakery tramite id
+
+        Bakery bac = bakeryRepository.findById(id).orElseThrow(() -> new RuntimeException("Bakery Non Trovato"));
+
+
+        // get 8 random object      Custom Query
+//        List<ItemDesc> obj = itemRepository.findByOwner(bac);
+
+        // map  RanObj  -->  RandomDataBakeryResponse       in una lista
 
 
 
+        return null;         // della lista
 
 
+    }
 
-
-
-
-
-
-
-
-
-
+    public BakeryfrontEndResponse getData(Integer id) {
+        Bakery bac = bakeryRepository.findById(id).orElseThrow(() -> new RuntimeException("bakery not found with id: "+id));
+        BakeryfrontEndResponse res = bakeryMapper.fromBakeryToFrontEnd(bac);
+        return res;
+    }
 }

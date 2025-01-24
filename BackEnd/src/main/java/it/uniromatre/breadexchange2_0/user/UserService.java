@@ -1,12 +1,12 @@
 package it.uniromatre.breadexchange2_0.user;
 
 import it.uniromatre.breadexchange2_0.auth.ChangePasswordRequest;
-import it.uniromatre.breadexchange2_0.bakery.registerRequest.BRRRepository;
 import it.uniromatre.breadexchange2_0.bakery.registerRequest.BRRService;
 import it.uniromatre.breadexchange2_0.bakery.registerRequest.BakeryRegisterRequest;
 import it.uniromatre.breadexchange2_0.common.PageResponse;
 import it.uniromatre.breadexchange2_0.email.emailVerifyRequest;
 import it.uniromatre.breadexchange2_0.file.FileStorageService;
+import it.uniromatre.breadexchange2_0.role.Role;
 import it.uniromatre.breadexchange2_0.token.TokenRepository;
 import it.uniromatre.breadexchange2_0.token.TokenService;
 import it.uniromatre.breadexchange2_0.token.tokenVerifyRequest;
@@ -62,7 +62,7 @@ public class UserService {
 
     public PageResponse<UserResponse> findAllUsers(int page, int size) {
 
-        Pageable pageable = PageRequest.of(page, size, Sort.by("username").descending());
+        Pageable pageable = PageRequest.of(page, size, Sort.by("username").ascending());
         Page<User> users = (userRepository.findAll(pageable));
 
         List<UserResponse> userResponses = users.stream()
@@ -80,7 +80,7 @@ public class UserService {
         );
     }
 
-    public Void banUser(Integer id) {
+    public void banUser(Integer id) {
         User user = userRepository.findUserById(id);
 
         if (user == null) {
@@ -89,8 +89,10 @@ public class UserService {
 
         user.setAccountLocked(!user.isAccountLocked());
         userRepository.save(user);
-        return null;
+
     }
+
+
 
 
 
@@ -243,7 +245,7 @@ public class UserService {
         if(currentUser.getAddress() == null) {
             throw new RuntimeException("Address not found in user: "+ currentUser.getId());
         }
-        log.error("Current user: "+ currentUser);
+
         return addressMapper.fromAddress(currentUser);
     }
 
@@ -266,6 +268,37 @@ public class UserService {
         brrService.salvaRequest(request);
     }
 
+
+    public boolean isAdmin(Authentication connectedUser) {
+
+        User user = ((User) connectedUser.getPrincipal());
+        User currentUser = userRepository.findUserById(user.getId());
+        if (currentUser == null) {
+            throw new UsernameNotFoundException("User not found with username: " + user.getId());
+        }
+
+        return currentUser.getRoles().equals(Role.ADMIN);
+    }
+
+
+
+    public PageResponse<UserResponse> searchUserByName(int page, int size, String username) {
+
+        Pageable pageable = PageRequest.of(page,size, Sort.by("username").ascending());
+        Page<User> us = (userRepository.findAllByUsername(pageable, username));
+        Page<UserResponse> requests = userMapper.toUserResponsList(us);
+        List<UserResponse> requestsResponse = requests.stream().toList();
+
+        return new PageResponse<>(
+                requestsResponse,
+                requests.getNumber(),
+                requests.getSize(),
+                requests.getTotalElements(),
+                requests.getTotalPages(),
+                requests.isFirst(),
+                requests.isLast()
+        );
+    }
 
 
 }

@@ -10,6 +10,7 @@ import { UserControllerService } from './services/user-controller.service';
 import { TestService } from './services/test.service';
 import { AuthenticationService } from './services/authentication.service';
 import { AdminControllerService } from './services/admin-controller.service';
+import { FrontEndControllerService } from './services/front-end-controller.service';
 
 /**
  * Module that provides all services and configuration.
@@ -23,6 +24,7 @@ import { AdminControllerService } from './services/admin-controller.service';
     TestService,
     AuthenticationService,
     AdminControllerService,
+    FrontEndControllerService,
     ApiConfiguration
   ],
 })

@@ -8,17 +8,16 @@ import { filter, map } from 'rxjs/operators';
 import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
-import { BakeryRegisterRequest } from '../../models/bakery-register-request';
 
 export interface EnableBakery$Params {
-      body: BakeryRegisterRequest
+  id: number;
 }
 
 export function enableBakery(http: HttpClient, rootUrl: string, params: EnableBakery$Params, context?: HttpContext): Observable<StrictHttpResponse<{
 }>> {
   const rb = new RequestBuilder(rootUrl, enableBakery.PATH, 'post');
   if (params) {
-    rb.body(params.body, 'application/json');
+    rb.query('id', params.id, {});
   }
 
   return http.request(

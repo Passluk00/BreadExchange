@@ -10,13 +10,13 @@ import { RequestBuilder } from '../../request-builder';
 
 
 export interface BanUser$Params {
-  'user-id': number;
+  id: number;
 }
 
 export function banUser(http: HttpClient, rootUrl: string, params: BanUser$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
   const rb = new RequestBuilder(rootUrl, banUser.PATH, 'patch');
   if (params) {
-    rb.path('user-id', params['user-id'], {});
+    rb.query('id', params.id, {});
   }
 
   return http.request(
@@ -29,4 +29,4 @@ export function banUser(http: HttpClient, rootUrl: string, params: BanUser$Param
   );
 }
 
-banUser.PATH = '/admin/ban/{user-id}';
+banUser.PATH = '/admin/ban';

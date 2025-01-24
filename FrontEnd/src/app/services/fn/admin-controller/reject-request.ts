@@ -8,17 +8,16 @@ import { filter, map } from 'rxjs/operators';
 import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
-import { BakeryRegisterRequest } from '../../models/bakery-register-request';
 
 export interface RejectRequest$Params {
-      body: BakeryRegisterRequest
+  id: number;
 }
 
 export function rejectRequest(http: HttpClient, rootUrl: string, params: RejectRequest$Params, context?: HttpContext): Observable<StrictHttpResponse<{
 }>> {
   const rb = new RequestBuilder(rootUrl, rejectRequest.PATH, 'delete');
   if (params) {
-    rb.body(params.body, 'application/json');
+    rb.query('id', params.id, {});
   }
 
   return http.request(

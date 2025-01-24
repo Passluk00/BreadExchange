@@ -15,14 +15,19 @@ import { banUser } from '../fn/admin-controller/ban-user';
 import { BanUser$Params } from '../fn/admin-controller/ban-user';
 import { enableBakery } from '../fn/admin-controller/enable-bakery';
 import { EnableBakery$Params } from '../fn/admin-controller/enable-bakery';
+import { getAllBakery } from '../fn/admin-controller/get-all-bakery';
+import { GetAllBakery$Params } from '../fn/admin-controller/get-all-bakery';
 import { getAllRequest } from '../fn/admin-controller/get-all-request';
 import { GetAllRequest$Params } from '../fn/admin-controller/get-all-request';
 import { getAllUsers } from '../fn/admin-controller/get-all-users';
 import { GetAllUsers$Params } from '../fn/admin-controller/get-all-users';
 import { PageResponseBakeryRegisterRequest } from '../models/page-response-bakery-register-request';
+import { PageResponseBakeryResponse } from '../models/page-response-bakery-response';
 import { PageResponseUserResponse } from '../models/page-response-user-response';
 import { rejectRequest } from '../fn/admin-controller/reject-request';
 import { RejectRequest$Params } from '../fn/admin-controller/reject-request';
+import { searchByName } from '../fn/admin-controller/search-by-name';
+import { SearchByName$Params } from '../fn/admin-controller/search-by-name';
 import { testSicurezza1 } from '../fn/admin-controller/test-sicurezza-1';
 import { TestSicurezza1$Params } from '../fn/admin-controller/test-sicurezza-1';
 
@@ -39,7 +44,7 @@ export class AdminControllerService extends BaseService {
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
    * To access only the response body, use `enableBakery()` instead.
    *
-   * This method sends `application/json` and handles request body of type `application/json`.
+   * This method doesn't expect any request body.
    */
   enableBakery$Response(params: EnableBakery$Params, context?: HttpContext): Observable<StrictHttpResponse<{
 }>> {
@@ -50,7 +55,7 @@ export class AdminControllerService extends BaseService {
    * This method provides access only to the response body.
    * To access the full response (for headers, for example), `enableBakery$Response()` instead.
    *
-   * This method sends `application/json` and handles request body of type `application/json`.
+   * This method doesn't expect any request body.
    */
   enableBakery(params: EnableBakery$Params, context?: HttpContext): Observable<{
 }> {
@@ -62,7 +67,7 @@ export class AdminControllerService extends BaseService {
   }
 
   /** Path part for operation `banUser()` */
-  static readonly BanUserPath = '/admin/ban/{user-id}';
+  static readonly BanUserPath = '/admin/ban';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
@@ -140,6 +145,31 @@ export class AdminControllerService extends BaseService {
     );
   }
 
+  /** Path part for operation `searchByName()` */
+  static readonly SearchByNamePath = '/admin/searchByName';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `searchByName()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  searchByName$Response(params: SearchByName$Params, context?: HttpContext): Observable<StrictHttpResponse<PageResponseBakeryRegisterRequest>> {
+    return searchByName(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `searchByName$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  searchByName(params: SearchByName$Params, context?: HttpContext): Observable<PageResponseBakeryRegisterRequest> {
+    return this.searchByName$Response(params, context).pipe(
+      map((r: StrictHttpResponse<PageResponseBakeryRegisterRequest>): PageResponseBakeryRegisterRequest => r.body)
+    );
+  }
+
   /** Path part for operation `getAllRequest()` */
   static readonly GetAllRequestPath = '/admin/getAllRequest';
 
@@ -165,6 +195,31 @@ export class AdminControllerService extends BaseService {
     );
   }
 
+  /** Path part for operation `getAllBakery()` */
+  static readonly GetAllBakeryPath = '/admin/getAllBakery';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `getAllBakery()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getAllBakery$Response(params?: GetAllBakery$Params, context?: HttpContext): Observable<StrictHttpResponse<PageResponseBakeryResponse>> {
+    return getAllBakery(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `getAllBakery$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getAllBakery(params?: GetAllBakery$Params, context?: HttpContext): Observable<PageResponseBakeryResponse> {
+    return this.getAllBakery$Response(params, context).pipe(
+      map((r: StrictHttpResponse<PageResponseBakeryResponse>): PageResponseBakeryResponse => r.body)
+    );
+  }
+
   /** Path part for operation `rejectRequest()` */
   static readonly RejectRequestPath = '/admin/rejectRequest';
 
@@ -172,7 +227,7 @@ export class AdminControllerService extends BaseService {
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
    * To access only the response body, use `rejectRequest()` instead.
    *
-   * This method sends `application/json` and handles request body of type `application/json`.
+   * This method doesn't expect any request body.
    */
   rejectRequest$Response(params: RejectRequest$Params, context?: HttpContext): Observable<StrictHttpResponse<{
 }>> {
@@ -183,7 +238,7 @@ export class AdminControllerService extends BaseService {
    * This method provides access only to the response body.
    * To access the full response (for headers, for example), `rejectRequest$Response()` instead.
    *
-   * This method sends `application/json` and handles request body of type `application/json`.
+   * This method doesn't expect any request body.
    */
   rejectRequest(params: RejectRequest$Params, context?: HttpContext): Observable<{
 }> {

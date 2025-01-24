@@ -6,3 +6,4 @@ export { UserControllerService } from './services/user-controller.service';
 export { TestService } from './services/test.service';
 export { AuthenticationService } from './services/authentication.service';
 export { AdminControllerService } from './services/admin-controller.service';
+export { FrontEndControllerService } from './services/front-end-controller.service';

@@ -1,6 +1,9 @@
 package it.uniromatre.breadexchange2_0.user;
 
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class UserMapper {
@@ -12,7 +15,7 @@ public class UserMapper {
         }
         return new UserResponse(
                 user.getId(),
-                user.getUsername(),
+                user.getUserName(),
                 user.getEmail(),
                 user.getUrl_picture(),
                 user.isAccountLocked(),
@@ -46,7 +49,10 @@ public class UserMapper {
                 .build();
 
         // aggiungere altre cose nel caso servono tipo ordini
+    }
 
+    public Page<UserResponse> toUserResponsList(Page<User> users){
+        return users.map(this::fromUser);
     }
 
 

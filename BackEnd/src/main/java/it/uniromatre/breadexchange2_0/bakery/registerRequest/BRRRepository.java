@@ -12,18 +12,20 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface BRRRepository extends JpaRepository<BakeryRegisterRequest,Integer> {
 
-    Page<BakeryRegisterRequest> findAll(Pageable pageable);
 
+    Page<BakeryRegisterRequest> getAllByEnable(Pageable pageable, boolean enable);
 
-    void deleteByUser(User user);
-
-    @Modifying
     @Query("""
-            delete
-            from BakeryRegisterRequest
-            where user = :id
+            select b
+            from BakeryRegisterRequest as b
+            where b.enable = false
     """)
-    @Transactional
-    void delUser(User id);
+    Page<BakeryRegisterRequest> findByEnable(Pageable pageable);
 
+    @Query("""
+        SELECT b
+        FROM BakeryRegisterRequest b
+        WHERE LOWER(b.name) LIKE LOWER(CONCAT('%', :name, '%')) and b.enable = false
+    """)
+    Page<BakeryRegisterRequest> findByName(Pageable pageable, String name);
 }

@@ -48,7 +48,7 @@ export class UserComponent implements OnInit{
   }
 
 
-  isLogged: boolean = false;
+  isLogged: boolean = true;
   userData:any = {}
   visibleElement: string | null = 'element1';
 
@@ -63,8 +63,6 @@ export class UserComponent implements OnInit{
     this.userService.getCurrentUser().subscribe({
       next: (data) => {
         this.userData = data;
-        console.log("UserData: "+ JSON.stringify(this.userData, null ,2));
-        console.log("Data: "+ JSON.stringify(data, null ,2));
       },
       error: (err) =>{
         console.log("errore: " + err);
@@ -75,21 +73,34 @@ export class UserComponent implements OnInit{
   checkLoginStatus(): void{
     if(isPlatformBrowser(this.platformId)) {
       const toc = this.getToken()
-      this.authService.isTokenValid(toc)
-        .subscribe((isValid) => {
-          this.isLogged = isValid
-          this.fetchMod()
-          this.cdr.detectChanges();
-        });
 
+      if(toc) {
+
+        this.authService.check({
+          token: toc
+        }).subscribe({
+          next: (res) => {
+            this.isLogged = res;
+            this.fetchMod()
+            this.cdr.detectChanges();
+
+          },
+          error: (err) => {
+            console.error("Errore nel verificare se sei loggato: "+ err)
+          }
+        })
+      }
     }
   }
 
+
+
+
   getToken(): string | null{
     if(typeof localStorage.getItem('token') !== 'undefined' && typeof window !=='undefined'){
-      return null;
+      return localStorage.getItem("token");
     }
-    return localStorage.getItem("token")
+    return null
   }
 
   showElement(element: string, event:Event){
@@ -436,7 +447,7 @@ export class UserComponent implements OnInit{
       body: this.changePasswordRequest
     }).subscribe({
       next:(res) => {
-        this.authService.logout()
+        localStorage.removeItem("token")
         this.router.navigate(["/"])
       },
       error: () => {
@@ -515,32 +526,10 @@ export class UserComponent implements OnInit{
   }
 
 
-  denyRequest(){
-    this.adminService.rejectRequest({
-      body:this.bakeryRegisterRequest
-    }).subscribe({
-      next: (res) => {
-        console.log("Richesta Rifiutata Con successo")
-      },
-      error: (err) => {
-        console.log("Richesta fallita: " + err.toString())
-      }
-    })
-  }
 
 
-  acceptRequest(){
-    this.adminService.enableBakery({
-      body:this.bakeryRegisterRequest
-    }).subscribe({
-      next: (res) => {
-        console.log("Richesta Accettata Con successo")
-      },
-      error: (err) => {
-        console.log("Richesta fallita")
-      }
-    })
-  }
+
+
 
 
 
@@ -610,6 +599,27 @@ export class UserComponent implements OnInit{
     this.previewImage = null;
   }
 
+
+
+
+  id1:number = 1;
+  id2:number = 2;
+
+
+
+  navigateToUser(id: number) {
+    this.router.navigate(['/bakery', id])
+      .then(success => {
+        if (!success) {
+          // Navigazione fallita
+          this.router.navigate(['/404']);
+        }
+      })
+      .catch(error => {
+        console.error('Errore durante la navigazione:', error);
+        this.router.navigate(['/404']);
+      });
+  }
 
 
 }

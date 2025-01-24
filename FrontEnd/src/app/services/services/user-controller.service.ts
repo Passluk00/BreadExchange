@@ -21,6 +21,11 @@ import { getUser } from '../fn/user-controller/get-user';
 import { GetUser$Params } from '../fn/user-controller/get-user';
 import { getUserInfo } from '../fn/user-controller/get-user-info';
 import { GetUserInfo$Params } from '../fn/user-controller/get-user-info';
+import { isAdmin } from '../fn/user-controller/is-admin';
+import { IsAdmin$Params } from '../fn/user-controller/is-admin';
+import { PageResponseUserResponse } from '../models/page-response-user-response';
+import { searchUserByName } from '../fn/user-controller/search-user-by-name';
+import { SearchUserByName$Params } from '../fn/user-controller/search-user-by-name';
 import { sendRequest } from '../fn/user-controller/send-request';
 import { SendRequest$Params } from '../fn/user-controller/send-request';
 import { testSicurezza } from '../fn/user-controller/test-sicurezza';
@@ -240,6 +245,31 @@ export class UserControllerService extends BaseService {
     );
   }
 
+  /** Path part for operation `searchUserByName()` */
+  static readonly SearchUserByNamePath = '/user/searchUserByName';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `searchUserByName()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  searchUserByName$Response(params: SearchUserByName$Params, context?: HttpContext): Observable<StrictHttpResponse<PageResponseUserResponse>> {
+    return searchUserByName(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `searchUserByName$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  searchUserByName(params: SearchUserByName$Params, context?: HttpContext): Observable<PageResponseUserResponse> {
+    return this.searchUserByName$Response(params, context).pipe(
+      map((r: StrictHttpResponse<PageResponseUserResponse>): PageResponseUserResponse => r.body)
+    );
+  }
+
   /** Path part for operation `getCurrentUser()` */
   static readonly GetCurrentUserPath = '/user/me';
 
@@ -262,6 +292,31 @@ export class UserControllerService extends BaseService {
   getCurrentUser(params?: GetCurrentUser$Params, context?: HttpContext): Observable<UserFrontEndResponse> {
     return this.getCurrentUser$Response(params, context).pipe(
       map((r: StrictHttpResponse<UserFrontEndResponse>): UserFrontEndResponse => r.body)
+    );
+  }
+
+  /** Path part for operation `isAdmin()` */
+  static readonly IsAdminPath = '/user/isAdmin';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `isAdmin()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  isAdmin$Response(params?: IsAdmin$Params, context?: HttpContext): Observable<StrictHttpResponse<boolean>> {
+    return isAdmin(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `isAdmin$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  isAdmin(params?: IsAdmin$Params, context?: HttpContext): Observable<boolean> {
+    return this.isAdmin$Response(params, context).pipe(
+      map((r: StrictHttpResponse<boolean>): boolean => r.body)
     );
   }
 

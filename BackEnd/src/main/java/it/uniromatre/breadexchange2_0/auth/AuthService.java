@@ -13,6 +13,8 @@ import it.uniromatre.breadexchange2_0.user.address.Address;
 import it.uniromatre.breadexchange2_0.user.address.AddressRepository;
 import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -28,6 +30,7 @@ import java.util.HashMap;
 @RequiredArgsConstructor
 public class AuthService {
 
+    private static final Logger log = LoggerFactory.getLogger(AuthService.class);
     private final UserRepository userRepository;
     private final TokenRepository tokenRepository;
     private final PasswordEncoder passwordEncoder;
@@ -74,6 +77,8 @@ public class AuthService {
                 .build();
 
         user.setAddress(add);
+        user.setUrl_BackImg("./public/testImg/ceste_pane.jpeg");
+        user.setUrl_picture("./public/testImg/profile.jpeg");
         addressRepository.save(add);
         userRepository.save(user);
         sendValidationEmail(user);
@@ -137,8 +142,12 @@ public class AuthService {
 
     // controllo se il token è valido
 
-    public Boolean authWithToken(String token){
-        return jwtService.isTokenStillValid(token);
+    public boolean authWithToken(String token){
+        var to = jwtService.isTokenStillValid(token);
+        if(!to){
+            throw new RuntimeException("Token Not valid");
+        }
+        return true;
     }
 
 
@@ -215,12 +224,6 @@ public class AuthService {
         }
         return codeBuilder.toString();
     }
-
-
-
-    /*
-    *       Revoca Validita Token
-    */
 
 
 

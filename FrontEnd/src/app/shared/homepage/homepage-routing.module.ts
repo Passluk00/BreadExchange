@@ -3,6 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import {HomepageComponent} from "./pages/home/homepage.component";
 import {UserComponent} from "./pages/user/user.component";
 import {MainComponent} from "./pages/main/main.component";
+import {AdminComponent} from "./pages/admin/admin.component";
+
 
 const routes: Routes = [
   {
@@ -19,8 +21,12 @@ const routes: Routes = [
         path:'user',
         component:UserComponent,
         title:"User"
-      }
-
+      },
+      {
+        path:'admin',
+        component: AdminComponent,
+        title: "Admin-Panel"
+      },
 
     ]
   }

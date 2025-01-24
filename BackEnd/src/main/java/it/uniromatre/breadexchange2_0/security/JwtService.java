@@ -104,7 +104,7 @@ public class JwtService {
         return (username.equals(userDetails.getUsername())) && !isTokenExpired(token);
     }
 
-    public Boolean isTokenStillValid(String token){
+    public boolean isTokenStillValid(String token){
 
         var toc = this.jwtTokenRepository.findByToken(token)
                 .orElseThrow(() -> new RuntimeException("Token not found"));

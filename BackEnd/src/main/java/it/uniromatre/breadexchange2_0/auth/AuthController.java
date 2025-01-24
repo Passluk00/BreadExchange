@@ -45,10 +45,10 @@ public class AuthController {
 
 
     @PostMapping("/check")
-    public ResponseEntity<?> check(
-            @RequestParam String token
+    public boolean check(
+            @RequestParam(name = "token") String token
     ){
-        return ResponseEntity.ok().body(service.authWithToken(token));
+        return service.authWithToken(token);
     }
 
     @PostMapping("/forgotPwd")

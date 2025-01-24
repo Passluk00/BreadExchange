@@ -13,8 +13,7 @@ export interface Check$Params {
   token: string;
 }
 
-export function check(http: HttpClient, rootUrl: string, params: Check$Params, context?: HttpContext): Observable<StrictHttpResponse<{
-}>> {
+export function check(http: HttpClient, rootUrl: string, params: Check$Params, context?: HttpContext): Observable<StrictHttpResponse<boolean>> {
   const rb = new RequestBuilder(rootUrl, check.PATH, 'post');
   if (params) {
     rb.query('token', params.token, {});
@@ -25,8 +24,7 @@ export function check(http: HttpClient, rootUrl: string, params: Check$Params, c
   ).pipe(
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
-      return r as StrictHttpResponse<{
-      }>;
+      return (r as HttpResponse<any>).clone({ body: String((r as HttpResponse<any>).body) === 'true' }) as StrictHttpResponse<boolean>;
     })
   );
 }

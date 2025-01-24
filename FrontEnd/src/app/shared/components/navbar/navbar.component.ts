@@ -5,13 +5,13 @@ import {
   faArrowRightFromBracket,
   faCartShopping,
   faChartLine,
-  faCircleQuestion, faMagnifyingGlass,
-  faSliders, faUser
+  faMagnifyingGlass,
+  faSliders, faTriangleExclamation, faUser
 } from "@fortawesome/free-solid-svg-icons";
 import {isPlatformBrowser, NgClass, NgIf} from "@angular/common";
 import {AuthenticationService} from "../../../services/services/authentication.service";
 import {UserControllerService} from "../../../services/services/user-controller.service";
-import {data} from "autoprefixer";
+import {isAdmin} from "../../../services/fn/user-controller/is-admin";
 
 
 
@@ -41,7 +41,6 @@ export class NavbarComponent implements OnInit{
 
 
   protected readonly faArrowRightFromBracket = faArrowRightFromBracket;
-  protected readonly faCircleQuestion = faCircleQuestion;
   protected readonly faSliders = faSliders;
   protected readonly faChartLine = faChartLine;
   protected readonly faCartShopping = faCartShopping;
@@ -51,6 +50,7 @@ export class NavbarComponent implements OnInit{
   isLogged: boolean = false;
   userData:any;
   isDropdownOpen = false;
+  isAdmin: boolean = false;
 
 
   toggleDropdown(){
@@ -73,17 +73,21 @@ export class NavbarComponent implements OnInit{
   }
 
 
-
-
-
-
+  controllo(){
+    this.userService.isAdmin().subscribe({
+      next:(res) => {
+        this.isAdmin = res
+      },
+      error:() => {
+        console.error("fallito")
+      }
+    })
+  }
 
   fetchMod(){
     this.userService.getCurrentUser().subscribe({
       next: (data) => {
         this.userData = data;
-        console.log("UserData: "+ JSON.stringify(this.userData, null ,2));
-        console.log("Data: "+ JSON.stringify(data, null ,2));
       },
       error: (err) =>{
         console.log("errore: " + err);
@@ -91,32 +95,42 @@ export class NavbarComponent implements OnInit{
     })
   }
 
-
-
   checkLoginStatus(): void{
     if(isPlatformBrowser(this.platformId)) {
       const toc = this.getToken()
-      this.authService.isTokenValid(toc)
-        .subscribe((isValid) => {
-          this.isLogged = isValid
-          this.cdr.detectChanges();
-          this.fetchMod()
-        });
+
+      if(toc) {
+        this.authService.check({
+          token: toc
+        }).subscribe({
+          next: (res) => {
+            this.isLogged = res;
+            this.fetchMod()
+            this.controllo()
+            this.cdr.detectChanges();
+
+          },
+          error: (err) => {
+            console.error("Errore nel verificare se sei loggato: " + err)
+          }
+        })
+      }
     }
   }
 
-
-
-
   getToken(): string | null{
-    if(typeof localStorage.getItem('token') !== 'undefined' && typeof window !=='undefined'){}
-    return localStorage.getItem("token")
+    if(typeof localStorage.getItem('token') !== 'undefined' && typeof window !=='undefined'){
+      return localStorage.getItem("token")
+    }
+    return null
   }
 
 
   logout():void {
-    this.authService.logout();
-    window.location.reload()
+    if(typeof localStorage.getItem('token') !== 'undefined'&& typeof window !=='undefined'){
+      localStorage.removeItem("token")
+      window.location.reload()
+    }
   }
 
 
@@ -124,7 +138,9 @@ export class NavbarComponent implements OnInit{
     this.router.navigate(['user']);
   }
 
+  goToAdminPage(){
+    this.router.navigate(['admin'])
+  }
 
-
-
+  protected readonly faTriangleExclamation = faTriangleExclamation;
 }

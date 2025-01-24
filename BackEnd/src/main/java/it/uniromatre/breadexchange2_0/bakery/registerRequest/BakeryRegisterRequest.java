@@ -30,6 +30,8 @@ public class BakeryRegisterRequest {
     private String facebook;
     private String Instagram;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REMOVE)
     private Address address;
+
+    private boolean enable = false;
 }

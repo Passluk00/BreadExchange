@@ -2,6 +2,8 @@ package it.uniromatre.breadexchange2_0.bakery.registerRequest;
 
 import it.uniromatre.breadexchange2_0.common.PageResponse;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -15,6 +17,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class BRRService {
 
+    private static final Logger log = LoggerFactory.getLogger(BRRService.class);
     private final BRRRepository brrRepository;
 
 
@@ -25,11 +28,29 @@ public class BRRService {
 
     // Pageable
 
-    public PageResponse<BakeryRegisterRequest> getAllRequest(int size, int page){
+    public PageResponse<BakeryRegisterRequest> getAllRequest(int page, int size){
 
         Pageable pageable = PageRequest.of(page,size, Sort.by("id").descending());
-        Page<BakeryRegisterRequest> requests = (brrRepository.findAll(pageable));
+        Page<BakeryRegisterRequest> requests = (brrRepository.findByEnable(pageable));
+        List<BakeryRegisterRequest> requestsResponse = requests.stream().toList();
 
+
+        return new PageResponse<>(
+                requestsResponse,
+                requests.getNumber(),
+                requests.getSize(),
+                requests.getTotalElements(),
+                requests.getTotalPages(),
+                requests.isFirst(),
+                requests.isLast()
+        );
+    }
+
+
+    public PageResponse<BakeryRegisterRequest> search(int page, int size, String name) {
+
+        Pageable pageable = PageRequest.of(page,size, Sort.by("name").descending());
+        Page<BakeryRegisterRequest> requests = (brrRepository.findByName(pageable, name));
         List<BakeryRegisterRequest> requestsResponse = requests.stream().toList();
 
         return new PageResponse<>(
@@ -41,18 +62,5 @@ public class BRRService {
                 requests.isFirst(),
                 requests.isLast()
         );
-
     }
-
-
-    public void rimuoviRequest(BakeryRegisterRequest request){
-        brrRepository.delUser(request.getUser());
-    }
-
-
-
-
-
-
-
 }

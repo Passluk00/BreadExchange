@@ -1,5 +1,6 @@
 package it.uniromatre.breadexchange2_0.controller;
 
+import it.uniromatre.breadexchange2_0.bakery.BakeryResponse;
 import it.uniromatre.breadexchange2_0.bakery.registerRequest.BRRService;
 import it.uniromatre.breadexchange2_0.bakery.registerRequest.BakeryRegisterRequest;
 import it.uniromatre.breadexchange2_0.bakery.BakeryService;
@@ -35,11 +36,12 @@ public class AdminController {
     }
 
 
-    @PatchMapping("/ban/{user-id}")
+    @PatchMapping("/ban")
     @PreAuthorize("hasAuthority('admin:update')")
     public ResponseEntity<Void> banUser(                                                                                // Ban & UnBan User
-        @PathVariable("user-id") Integer id){
-        return ResponseEntity.ok(userService.banUser(id));
+        @RequestParam (name = "id") Integer id){
+        userService.banUser(id);
+        return ResponseEntity.accepted().build();
     }
 
 
@@ -53,10 +55,10 @@ public class AdminController {
     @PostMapping("/enableBakery")
     @PreAuthorize("hasAuthority('admin:create')")
     public ResponseEntity<?> enableBakery(
-            @RequestBody @Valid BakeryRegisterRequest request,
+            @RequestParam (name = "id") Integer id,
             Authentication connectedUser
             ) throws MessagingException {
-        this.bakeryService.registerBakery(request,connectedUser);
+        this.bakeryService.acceptRequest(connectedUser, id);
         return ResponseEntity.accepted().build();
     }
 
@@ -64,21 +66,43 @@ public class AdminController {
     @DeleteMapping("/rejectRequest")
     @PreAuthorize("hasAuthority('admin:delete')")
     public ResponseEntity<?> rejectRequest(
-            @RequestBody @Valid BakeryRegisterRequest request,
+            @RequestParam (name = "id") Integer id,
             Authentication connectedUser
     ) throws MessagingException {
-        bakeryService.rejectRequest(connectedUser,request);
+        bakeryService.rejectRequestNew(connectedUser,id);
         return ResponseEntity.ok().build();
     }
+
 
     @GetMapping("/getAllRequest")
     @PreAuthorize("hasAuthority('admin:read')")
     public ResponseEntity<PageResponse<BakeryRegisterRequest>> getAllRequest(
-            @RequestParam(name = "page", defaultValue = "1", required = false) int page,
+            @RequestParam(name = "page", defaultValue = "0", required = false) int page,
             @RequestParam(name = "size", defaultValue = "10", required = false) int size
     ){
         return ResponseEntity.ok(brrService.getAllRequest(page,size));
     }
+
+
+    @GetMapping("/searchByName")
+    @PreAuthorize("hasAuthority('admin:read')")
+    public ResponseEntity<PageResponse<BakeryRegisterRequest>> searchByName(
+            @RequestParam(name = "name") String name,
+            @RequestParam(name = "page", defaultValue = "0", required = false) int page,
+            @RequestParam(name = "size", defaultValue = "10", required = false) int size
+    ){
+        return ResponseEntity.ok(brrService.search(page,size,name));
+    }
+
+    @GetMapping("/getAllBakery")
+    @PreAuthorize("hasAuthority('admin:read')")
+    public ResponseEntity<PageResponse<BakeryResponse>> getAllBakery(
+            @RequestParam(name = "page", defaultValue = "0", required = false) int page,
+            @RequestParam(name = "size", defaultValue = "10", required = false) int size
+    ){
+        return ResponseEntity.ok(bakeryService.getAllBakery(page,size));
+    }
+
 
 
 }

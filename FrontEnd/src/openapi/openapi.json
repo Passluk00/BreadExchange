@@ -439,7 +439,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object"
+                  "type": "boolean"
                 }
               }
             }
@@ -483,16 +483,17 @@
           "admin-controller"
         ],
         "operationId": "enableBakery",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/BakeryRegisterRequest"
-              }
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
             }
-          },
-          "required": true
-        },
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -539,7 +540,7 @@
         }
       }
     },
-    "/admin/ban/{user-id}": {
+    "/admin/ban": {
       "patch": {
         "tags": [
           "admin-controller"
@@ -547,8 +548,8 @@
         "operationId": "banUser",
         "parameters": [
           {
-            "name": "user-id",
-            "in": "path",
+            "name": "id",
+            "in": "query",
             "required": true,
             "schema": {
               "type": "integer",
@@ -614,6 +615,56 @@
         }
       }
     },
+    "/user/searchUserByName": {
+      "get": {
+        "tags": [
+          "user-controller"
+        ],
+        "operationId": "searchUserByName",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 10
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageResponseUserResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/user/me": {
       "get": {
         "tags": [
@@ -627,6 +678,26 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/UserFrontEndResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/isAdmin": {
+      "get": {
+        "tags": [
+          "user-controller"
+        ],
+        "operationId": "isAdmin",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
                 }
               }
             }
@@ -747,6 +818,71 @@
         }
       }
     },
+    "/frontEnd/getRandomData": {
+      "get": {
+        "tags": [
+          "front-end-controller"
+        ],
+        "operationId": "getRandomData",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RandomDataBakeryResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/frontEnd/bakery/{id}": {
+      "get": {
+        "tags": [
+          "front-end-controller"
+        ],
+        "operationId": "bakeryDetail",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BakeryfrontEndResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/auth/activate-account": {
       "get": {
         "tags": [
@@ -832,13 +968,21 @@
         }
       }
     },
-    "/admin/getAllRequest": {
+    "/admin/searchByName": {
       "get": {
         "tags": [
           "admin-controller"
         ],
-        "operationId": "getAllRequest",
+        "operationId": "searchByName",
         "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
           {
             "name": "page",
             "in": "query",
@@ -846,7 +990,7 @@
             "schema": {
               "type": "integer",
               "format": "int32",
-              "default": 1
+              "default": 0
             }
           },
           {
@@ -874,22 +1018,107 @@
         }
       }
     },
+    "/admin/getAllRequest": {
+      "get": {
+        "tags": [
+          "admin-controller"
+        ],
+        "operationId": "getAllRequest",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 10
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageResponseBakeryRegisterRequest"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/admin/getAllBakery": {
+      "get": {
+        "tags": [
+          "admin-controller"
+        ],
+        "operationId": "getAllBakery",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 10
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageResponseBakeryResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/admin/rejectRequest": {
       "delete": {
         "tags": [
           "admin-controller"
         ],
         "operationId": "rejectRequest",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/BakeryRegisterRequest"
-              }
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
             }
-          },
-          "required": true
-        },
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -1008,6 +1237,9 @@
           "address": {
             "$ref": "#/components/schemas/Address"
           },
+          "enable": {
+            "type": "boolean"
+          },
           "instagram": {
             "type": "string"
           }
@@ -1102,8 +1334,9 @@
           "name": {
             "type": "string"
           },
-          "credentialsNonExpired": {
-            "type": "boolean"
+          "enable": {
+            "type": "boolean",
+            "writeOnly": true
           },
           "authorities": {
             "type": "array",
@@ -1111,14 +1344,13 @@
               "$ref": "#/components/schemas/GrantedAuthority"
             }
           },
-          "enable": {
-            "type": "boolean",
-            "writeOnly": true
-          },
           "accountNonExpired": {
             "type": "boolean"
           },
           "accountNonLocked": {
+            "type": "boolean"
+          },
+          "credentialsNonExpired": {
             "type": "boolean"
           }
         }
@@ -1255,6 +1487,63 @@
           }
         }
       },
+      "PageResponseUserResponse": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UserResponse"
+            }
+          },
+          "number": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "size": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalElements": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "totalPages": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "first": {
+            "type": "boolean"
+          },
+          "last": {
+            "type": "boolean"
+          }
+        }
+      },
+      "UserResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "username": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "url_picture": {
+            "type": "string"
+          },
+          "accountLocked": {
+            "type": "boolean"
+          },
+          "enable": {
+            "type": "boolean"
+          }
+        }
+      },
       "UserFrontEndResponse": {
         "type": "object",
         "properties": {
@@ -1361,13 +1650,83 @@
           }
         }
       },
-      "PageResponseUserResponse": {
+      "RandomDataBakeryResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "url": {
+            "type": "string"
+          }
+        }
+      },
+      "BakeryfrontEndResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string"
+          },
+          "desc": {
+            "type": "string"
+          },
+          "owner": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "address": {
+            "$ref": "#/components/schemas/Address"
+          },
+          "Logo": {
+            "type": "string"
+          },
+          "info": {
+            "$ref": "#/components/schemas/ContactInfo"
+          },
+          "openInHours": {
+            "type": "string"
+          },
+          "logo": {
+            "type": "string"
+          }
+        }
+      },
+      "ContactInfo": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "email": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "twitter": {
+            "type": "string"
+          },
+          "facebook": {
+            "type": "string"
+          },
+          "instagram": {
+            "type": "string"
+          }
+        }
+      },
+      "PageResponseBakeryRegisterRequest": {
         "type": "object",
         "properties": {
           "content": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/UserResponse"
+              "$ref": "#/components/schemas/BakeryRegisterRequest"
             }
           },
           "number": {
@@ -1394,37 +1753,37 @@
           }
         }
       },
-      "UserResponse": {
+      "BakeryResponse": {
         "type": "object",
         "properties": {
           "id": {
             "type": "integer",
             "format": "int32"
           },
-          "username": {
+          "name": {
             "type": "string"
           },
-          "email": {
-            "type": "string"
+          "owner": {
+            "$ref": "#/components/schemas/User"
           },
           "url_picture": {
             "type": "string"
           },
-          "accountLocked": {
-            "type": "boolean"
-          },
           "enable": {
             "type": "boolean"
+          },
+          "address": {
+            "$ref": "#/components/schemas/Address"
           }
         }
       },
-      "PageResponseBakeryRegisterRequest": {
+      "PageResponseBakeryResponse": {
         "type": "object",
         "properties": {
           "content": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/BakeryRegisterRequest"
+              "$ref": "#/components/schemas/BakeryResponse"
             }
           },
           "number": {

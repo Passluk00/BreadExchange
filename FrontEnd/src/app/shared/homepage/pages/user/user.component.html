@@ -25,7 +25,8 @@
 
   </div>
 
-  <div class="buttonMod" *ngIf="!isLogged" >                         <!-- Bottone per modificare i dati dell utente -->
+  <!-- Bottone per modificare i dati dell utente -->
+  <div class="buttonMod" *ngIf="isLogged" >          <!-- TODO fare funzione per mostrare bottone soltanto se isLogged && user == owner_account -->
 
 
     <!-- Modale Principale -->
@@ -153,13 +154,10 @@
           </div>
 
           <div class="modal-footer">
-            <!--  -->
-            <button class="btn btn-primary bg-red-500 " (click)="denyRequest()">Rifuita Richiesta</button>
-
-            <button class="btn btn-primary bg-red-500 " (click)="acceptRequest()">Accetta Richiesta</button>
-
 
             <button class="btn btn-primary" (click)="ricaricaPagina()" >Ricarica Pagina</button>
+            <button class="btn btn-primary" (click)="navigateToUser(1)" >vai a bakery 1</button>
+
 
           </div>
 
