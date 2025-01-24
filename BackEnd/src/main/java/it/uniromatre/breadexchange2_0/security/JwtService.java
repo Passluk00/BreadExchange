@@ -5,6 +5,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import it.uniromatre.breadexchange2_0.user.User;
+import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,19 +19,27 @@ import java.util.Date;
 import java.util.Map;
 import java.util.function.Function;
 
+
 @Service
+@AllArgsConstructor
+
 public class JwtService {
 
+    JwtService(){
+        this.secretKey = "404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970";
+        this.jwtExpiration = 86400000;
+    }
+
     private static final Logger log = LoggerFactory.getLogger(JwtService.class);
-    @Value("${application.security.jwt.secret-key}")
     private String secretKey;
-    @Value("${application.security.jwt.jwtExpiration}")            // tempo di vita token
     private long jwtExpiration;
+
+
     @Value("${application.security.jwt.refreshExpiration}")          // tempo di vita token riscritto   uso per test
     private long refreshExpiration;
 
     @Autowired
-    private JwtTokenRepository jwtTokenRepository;
+    private  JwtTokenRepository jwtTokenRepository;
 
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);

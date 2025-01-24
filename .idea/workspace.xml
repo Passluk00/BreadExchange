@@ -5,41 +5,34 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="def00291-6796-4523-8aed-85c7574e50f3" name="Changes" comment="Commit iniziale Base BackEnd + Impostaioni cartelle">
-      <change afterPath="$PROJECT_DIR$/FrontEnd/src/public/404.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FrontEnd/src/public/stay-bread-Photoroom.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/0c8bb871-c311-4f15-8d46-26cf6eae043a.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/0c8bb871-c311-4f15-8d46-26cf6eae043a.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/0c8bb871-c311-4f15-8d46-26cf6eae043a/storage_v2/_src_/database/BreadExchange2.d2D_JQ/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/0c8bb871-c311-4f15-8d46-26cf6eae043a/storage_v2/_src_/database/BreadExchange2.d2D_JQ/schema/public.abK9xQ.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backupFile/angularCopy.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backupFile/mainCopy.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backupFile/packageCopy.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/BreadExchange.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/0c8bb871-c311-4f15-8d46-26cf6eae043a.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/0c8bb871-c311-4f15-8d46-26cf6eae043a/storage_v2/_src_/database/BreadExchange2.d2D_JQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/0c8bb871-c311-4f15-8d46-26cf6eae043a/storage_v2/_src_/database/BreadExchange2.d2D_JQ/schema/public.abK9xQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/icon.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/angular.json" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/angular.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FrontEnd/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FrontEnd/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/app.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/app.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/app.routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/app.routes.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/services/api.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/services/api.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/services/fn/admin-controller/ban-user.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/services/fn/admin-controller/ban-user.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/services/fn/admin-controller/enable-bakery.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/services/fn/admin-controller/enable-bakery.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/services/fn/admin-controller/reject-request.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/services/fn/admin-controller/reject-request.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/services/fn/authentication/check.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/services/fn/authentication/check.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/services/interceptor/http-interceptor.interceptor.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/services/interceptor/http-interceptor.interceptor.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/services/models.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/services/models.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/services/models/bakery-register-request.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/services/models/bakery-register-request.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/services/services.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/services/services.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/services/services/admin-controller.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/services/services/admin-controller.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/services/services/authentication.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/services/services/authentication.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/services/services/user-controller.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/services/services/user-controller.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/shared/components/footer/footer.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/shared/components/footer/footer.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/shared/components/info/info.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/shared/components/info/info.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/shared/components/navbar/navbar.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/shared/components/navbar/navbar.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/shared/components/navbar/navbar.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/shared/components/navbar/navbar.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/shared/components/navbar/navbar.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/shared/components/navbar/navbar.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/shared/homepage/homepage-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/shared/homepage/homepage-routing.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/shared/homepage/pages/backery/backery.component.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/shared/homepage/pages/backery/backery.component.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/shared/homepage/pages/backery/backery.component.spec.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/shared/homepage/pages/backery/backery.component.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/shared/homepage/pages/user/user.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/shared/homepage/pages/user/user.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/shared/homepage/pages/user/user.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/shared/homepage/pages/user/user.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/shared/bakery/components/address/address.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/shared/bakery/components/address/address.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/shared/bakery/components/address/address.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/shared/bakery/components/address/address.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/shared/bakery/pages/bakery/bakery.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/shared/bakery/pages/bakery/bakery.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FrontEnd/src/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/src/openapi/openapi.json" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/openapi/openapi.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/tsconfig.app.json" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/tsconfig.app.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,37 +69,37 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;Spring Boot.Application.executor&quot;: &quot;Run&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/passluk/Desktop/BreadExchange/FrontEnd/src/public/font&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.19609508&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/Users/passluk/Desktop/BreadExchange/FrontEnd/node_modules/typescript/lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Spring Boot.Application.executor": "Run",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/Users/passluk/Desktop/BreadExchange/FrontEnd/src/public/font",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Facets",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.19609508",
+    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices",
+    "ts.external.directory.path": "/Users/passluk/Desktop/BreadExchange/FrontEnd/node_modules/typescript/lib",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;postgresql&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "postgresql"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="it.uniromatre.breadexchange2_0.bakery" />
@@ -146,14 +139,14 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-  </component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.15989.150" />
-        <option value="bundled-js-predefined-1d06a55b98c1-91d5c284f522-JavaScript-IU-241.15989.150" />
-      </set>
-    </attachedChunks>
+    <configuration name="Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <module name="BackEnd" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="it.uniromatre.breadexchange2_0.Application" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -183,6 +176,7 @@
       <workItem from="1736935965601" duration="58651000" />
       <workItem from="1737108204294" duration="29813000" />
       <workItem from="1737294567519" duration="130761000" />
+      <workItem from="1737728989923" duration="784000" />
     </task>
     <servers />
   </component>
