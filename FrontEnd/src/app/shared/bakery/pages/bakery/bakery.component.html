@@ -8,7 +8,7 @@
 
     <div class="relative w-[300px]">
       <p class="text-center text-5xl absolute top-20">Benvenuto in</p>
-      <h4 class="text-center text-6xl absolute font-bold top-36 left-44">{{data.name}}</h4>
+      <h4 class="text-center text-6xl absolute font-bold top-36 left-20 w-[200px] xl:w-[600px]">{{data.name}}</h4>
     </div>
   </div>
 
@@ -27,7 +27,6 @@
     </div>
   </section>
 
-
   <div class="centrale max-w-screen-xl px-4 py-4 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
 
     <div class="place-self-center lg:col-span-7">
@@ -37,12 +36,34 @@
       <h3 class="text-center text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl dark:text-white fo">Il nostro menù</h3>
     </div>
 
-    <app-carosello-infinito [id]="userId"></app-carosello-infinito>
+    <app-carosello-infinito [id]="userId" class="mb-[20px]" ></app-carosello-infinito>
 
-    <app-address [data]="data.address"></app-address>
+  </div>
 
+  <div class="mt-[90px] flex flex-col items-center xl:justify-end xl:flex-row">
 
+    <div class="w-full xl:w-1/2 justify-center xl:justify-end">
+      <app-address [id]="userId"></app-address>
+    </div>
 
+    <div class="info w-full xl:w-1/2 text-center justify-center mt-10">
+
+      <h5 class="fo ">Visita il nostro negozio in</h5>
+      <h3 class="fo-p mb-[30px] ">{{data.address?.city}}</h3>
+      <h6 class="fo-p font-light">{{data.address?.street}} {{data.address?.number}}</h6>
+      <h6 class="fo-p font-light">{{data.address?.city}} {{data.address?.provincia}}</h6>
+
+      <div class="mt-[50px]">
+        <h3 class="fo-p">Orari</h3>
+      </div>
+
+      <div class="justify-center ml-20  xl:ml-0">
+
+        <app-orari [id]="userId"></app-orari>
+
+      </div>
+
+    </div>
 
   </div>
 

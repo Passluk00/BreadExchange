@@ -14,14 +14,45 @@ import { StrictHttpResponse } from '../strict-http-response';
 import { bakeryDetail } from '../fn/front-end-controller/bakery-detail';
 import { BakeryDetail$Params } from '../fn/front-end-controller/bakery-detail';
 import { BakeryfrontEndResponse } from '../models/bakeryfront-end-response';
+import { getPlaneAdd } from '../fn/front-end-controller/get-plane-add';
+import { GetPlaneAdd$Params } from '../fn/front-end-controller/get-plane-add';
 import { getRandomData } from '../fn/front-end-controller/get-random-data';
 import { GetRandomData$Params } from '../fn/front-end-controller/get-random-data';
+import { getWeek } from '../fn/front-end-controller/get-week';
+import { GetWeek$Params } from '../fn/front-end-controller/get-week';
+import { PlanAddBkery } from '../models/plan-add-bkery';
 import { RandomDataBakeryResponse } from '../models/random-data-bakery-response';
+import { Week } from '../models/week';
 
 @Injectable({ providedIn: 'root' })
 export class FrontEndControllerService extends BaseService {
   constructor(config: ApiConfiguration, http: HttpClient) {
     super(config, http);
+  }
+
+  /** Path part for operation `getWeek()` */
+  static readonly GetWeekPath = '/frontEnd/getWeek';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `getWeek()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getWeek$Response(params: GetWeek$Params, context?: HttpContext): Observable<StrictHttpResponse<Week>> {
+    return getWeek(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `getWeek$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getWeek(params: GetWeek$Params, context?: HttpContext): Observable<Week> {
+    return this.getWeek$Response(params, context).pipe(
+      map((r: StrictHttpResponse<Week>): Week => r.body)
+    );
   }
 
   /** Path part for operation `getRandomData()` */
@@ -46,6 +77,31 @@ export class FrontEndControllerService extends BaseService {
   getRandomData(params: GetRandomData$Params, context?: HttpContext): Observable<Array<RandomDataBakeryResponse>> {
     return this.getRandomData$Response(params, context).pipe(
       map((r: StrictHttpResponse<Array<RandomDataBakeryResponse>>): Array<RandomDataBakeryResponse> => r.body)
+    );
+  }
+
+  /** Path part for operation `getPlaneAdd()` */
+  static readonly GetPlaneAddPath = '/frontEnd/getPlaneAddress';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `getPlaneAdd()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getPlaneAdd$Response(params: GetPlaneAdd$Params, context?: HttpContext): Observable<StrictHttpResponse<PlanAddBkery>> {
+    return getPlaneAdd(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `getPlaneAdd$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getPlaneAdd(params: GetPlaneAdd$Params, context?: HttpContext): Observable<PlanAddBkery> {
+    return this.getPlaneAdd$Response(params, context).pipe(
+      map((r: StrictHttpResponse<PlanAddBkery>): PlanAddBkery => r.body)
     );
   }
 

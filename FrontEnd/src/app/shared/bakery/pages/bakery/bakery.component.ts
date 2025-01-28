@@ -6,6 +6,9 @@ import {BakeryfrontEndResponse} from "../../../../services/models/bakeryfront-en
 import {NavbarComponent} from "../../../components/navbar/navbar.component";
 import {FooterComponent} from "../../../components/footer/footer.component";
 import {AddressComponent} from "../../components/address/address.component";
+import {Address} from "../../../../services/models/address";
+import {Week} from "../../../../services/models/week";
+import {OrariComponent} from "../../components/orari/orari.component";
 
 @Component({
   selector: 'app-bakery',
@@ -13,7 +16,8 @@ import {AddressComponent} from "../../components/address/address.component";
     CaroselloInfinitoComponent,
     NavbarComponent,
     FooterComponent,
-    AddressComponent
+    AddressComponent,
+    OrariComponent
   ],
   templateUrl: './bakery.component.html',
   standalone: true,
@@ -23,6 +27,8 @@ export class BakeryComponent implements OnInit{
 
   userId: number | undefined;
   data: BakeryfrontEndResponse = {}
+  toPass: Address = {}
+
 
   constructor(
     private route: ActivatedRoute,
@@ -35,8 +41,6 @@ export class BakeryComponent implements OnInit{
       this.userId = +params['id']
       this.getData()
     })
-
-
   }
 
   getData(){
@@ -46,7 +50,9 @@ export class BakeryComponent implements OnInit{
       }).subscribe({
         next: (res) => {
           this.data = res;
-          console.error("dati: "+this.data.address?.name)
+          if(this.data.address) {
+            this.toPass = this.data.address;
+          }
         },
         error: (err) => {
           console.error("Errore nel Fetch Dati: " + err)
@@ -54,7 +60,5 @@ export class BakeryComponent implements OnInit{
       })
     }
   }
-
-
 
 }

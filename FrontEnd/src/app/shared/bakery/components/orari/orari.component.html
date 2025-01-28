@@ -1,0 +1,319 @@
+<div class="mt-[30px] ml-[80px]">
+
+  <div class="grid grid-cols-3 mx-2">
+
+    <!-- Lunedi -->
+    <div class=" mb-3 flex items-center">
+      <h4 class="font-medium fo">{{week.lun?.dayOfWeek}}</h4>
+    </div>
+    <div class="col-span-2 mb-3">
+
+      <div class="">
+
+        <ng-template #closed class="closed">
+          <h4 class="font-semibold">Chiuso</h4>
+        </ng-template>
+
+        <div *ngIf="week.lun?.closed === false; else closed">
+
+          <ng-template #allDay class="AllDay items-center">
+
+            <div class="flex justify-center">
+              <h4 class="fo text-sm md:text-xl">{{week.lun?.morningOpening}} - </h4>
+              <h4 class="fo text-sm md:text-xl ml-1">{{week.lun?.eveningClosing}}</h4>
+            </div>
+
+          </ng-template>
+
+
+          <div *ngIf="week.lun?.allDayOpen === false; else allDay" class="flex justify-center">
+
+            <div class="mattina flex justify-center mr-5">
+              <h4 class="fo text-sm md:text-xl">{{week.lun?.morningOpening}} - </h4>
+              <h4 class="fo text-sm md:text-xl ml-1">{{week.lun?.morningClosing}}</h4>
+            </div>
+
+            <div class="pomeriggio flex justify-center ml-5">
+              <h4 class="fo text-sm md:text-xl">{{week.lun?.eveningOpening}} - </h4>
+              <h4 class="fo text-sm md:text-xl ml-1">{{week.lun?.eveningClosing}}</h4>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+
+    <!-- Martedì -->
+    <div class=" mb-3 flex items-center">
+      <h4 class="font-medium fo">{{week.mar?.dayOfWeek}}</h4>
+    </div>
+    <div class="col-span-2 mb-3  ">
+
+      <div class="">
+
+        <ng-template #closed class="closed">
+          <h4 class="font-semibold">Chiuso</h4>
+        </ng-template>
+
+        <div *ngIf="week.lun?.closed === false; else closed">
+
+          <ng-template #allDay class="AllDay items-center">
+
+            <div class="flex justify-center">
+              <h4 class="fo text-sm md:text-xl">{{week.mar?.morningOpening}} - </h4>
+              <h4 class="fo text-sm md:text-xl ml-1">{{week.mar?.eveningClosing}}</h4>
+            </div>
+
+          </ng-template>
+
+
+          <div *ngIf="week.mar?.allDayOpen === false; else allDay" class="flex justify-center">
+
+            <div class="mattina flex justify-center mr-5">
+              <h4 class="fo text-sm md:text-xl">{{week.mar?.morningOpening}} - </h4>
+              <h4 class="fo text-sm md:text-xl ml-1">{{week.mar?.morningClosing}}</h4>
+            </div>
+
+
+
+            <div class="pomeriggio flex justify-center ml-5">
+              <h4 class="fo text-sm md:text-xl">{{week.mar?.eveningOpening}} - </h4>
+              <h4 class="fo text-sm md:text-xl ml-1">{{week.mar?.eveningClosing}}</h4>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+
+    <!-- Mercoledì -->
+    <div class="mb-3 flex items-center">
+      <h4 class="font-medium fo">{{week.mer?.dayOfWeek}}</h4>
+    </div>
+    <div class="col-span-2 mb-3  ">
+
+      <div class="">
+
+        <ng-template #closed class="closed">
+          <h4 class="font-semibold">Chiuso</h4>
+        </ng-template>
+
+        <div *ngIf="week.mer?.closed === false; else closed">
+
+          <ng-template #allDay class="AllDay items-center">
+
+            <div class="flex justify-center">
+              <h4 class="fo text-sm md:text-xl">{{week.mer?.morningOpening}} - </h4>
+              <h4 class="fo text-sm md:text-xl ml-1">{{week.mer?.eveningClosing}}</h4>
+            </div>
+
+          </ng-template>
+
+
+          <div *ngIf="week.mer?.allDayOpen === false; else allDay" class="flex justify-center">
+
+            <div class="mattina flex justify-center mr-5">
+              <h4 class="fo text-sm md:text-xl">{{week.mer?.morningOpening}} - </h4>
+              <h4 class="fo text-sm md:text-xl ml-1">{{week.mer?.morningClosing}}</h4>
+            </div>
+
+            <div class="pomeriggio flex justify-center ml-5">
+              <h4 class="fo text-sm md:text-xl">{{week.mer?.eveningOpening}} - </h4>
+              <h4 class="fo text-sm md:text-xl ml-1">{{week.mer?.eveningClosing}}</h4>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+
+    <!-- Giovedì -->
+    <div class="mb-3 flex items-center">
+      <h4 class="font-medium fo">{{week.gio?.dayOfWeek}}</h4>
+    </div>
+    <div class="col-span-2 mb-3  ">
+
+      <div class="">
+
+        <ng-template #closed class="closed">
+          <h4 class="font-semibold">Chiuso</h4>
+        </ng-template>
+
+        <div *ngIf="week.gio?.closed === false; else closed">
+
+          <ng-template #allDay class="AllDay items-center">
+
+            <div class="flex justify-center">
+              <h4 class="fo text-sm md:text-xl">{{week.gio?.morningOpening}} - </h4>
+              <h4 class="fo text-sm md:text-xl ml-1">{{week.gio?.eveningClosing}}</h4>
+            </div>
+
+          </ng-template>
+
+
+          <div *ngIf="week.gio?.allDayOpen === false; else allDay" class="flex justify-center">
+
+            <div class="mattina flex justify-center mr-5">
+              <h4 class="fo text-sm md:text-xl">{{week.gio?.morningOpening}} - </h4>
+              <h4 class="fo text-sm md:text-xl ml-1">{{week.gio?.morningClosing}}</h4>
+            </div>
+
+            <div class="pomeriggio flex justify-center ml-5">
+              <h4 class="fo text-sm md:text-xl">{{week.gio?.eveningOpening}} - </h4>
+              <h4 class="fo text-sm md:text-xl ml-1">{{week.gio?.eveningClosing}}</h4>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+
+    <!-- Venerdì -->
+    <div class="mb-3 flex items-center">
+      <h4 class="font-medium fo">{{week.ven?.dayOfWeek}}</h4>
+    </div>
+    <div class="col-span-2 mb-3  ">
+
+      <div class="">
+
+        <ng-template #closed class="closed">
+          <h4 class="font-semibold">Chiuso</h4>
+        </ng-template>
+
+        <div *ngIf="week.ven?.closed === false; else closed">
+
+          <ng-template #allDay class="AllDay items-center">
+
+            <div class="flex justify-center">
+              <h4 class="fo text-sm md:text-xl">{{week.ven?.morningOpening}} - </h4>
+              <h4 class="fo text-sm md:text-xl ml-1">{{week.ven?.eveningClosing}}</h4>
+            </div>
+
+          </ng-template>
+
+
+          <div *ngIf="week.ven?.allDayOpen === false; else allDay" class="flex justify-center">
+
+            <div class="mattina flex justify-center mr-5">
+              <h4 class="fo text-sm md:text-xl">{{week.ven?.morningOpening}} - </h4>
+              <h4 class="fo text-sm md:text-xl ml-1">{{week.ven?.morningClosing}}</h4>
+            </div>
+
+            <div class="pomeriggio flex justify-center ml-5">
+              <h4 class="fo text-sm md:text-xl">{{week.ven?.eveningOpening}} - </h4>
+              <h4 class="fo text-sm md:text-xl ml-1">{{week.ven?.eveningClosing}}</h4>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+
+    <!-- Sabato -->
+    <div class="mb-3 flex items-center">
+      <h4 class="font-medium fo">{{week.sab?.dayOfWeek}}</h4>
+    </div>
+    <div class="col-span-2 mb-3  ">
+
+      <div class="">
+
+        <ng-template #closed class="closed">
+          <h4 class="font-semibold">Chiuso</h4>
+        </ng-template>
+
+        <div *ngIf="week.sab?.closed === false; else closed">
+
+          <ng-template #allDay class="AllDay items-center">
+
+            <div class="flex justify-center">
+              <h4 class="fo text-sm md:text-xl">{{week.sab?.morningOpening}} - </h4>
+              <h4 class="fo text-sm md:text-xl ml-1">{{week.sab?.eveningClosing}}</h4>
+            </div>
+
+          </ng-template>
+
+
+          <div *ngIf="week.sab?.allDayOpen === false; else allDay" class="flex justify-center">
+
+            <div class="mattina flex justify-center mr-5">
+              <h4 class="fo text-sm md:text-xl">{{week.sab?.morningOpening}} - </h4>
+              <h4 class="fo text-sm md:text-xl ml-1">{{week.sab?.morningClosing}}</h4>
+            </div>
+
+            <div class="pomeriggio flex justify-center ml-5">
+              <h4 class="fo text-sm md:text-xl">{{week.sab?.eveningOpening}} - </h4>
+              <h4 class="fo text-sm md:text-xl ml-1">{{week.sab?.eveningClosing}}</h4>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+
+    <!-- Domenica -->
+    <div class="mb-3 flex items-center">
+      <h4 class="font-medium fo">{{week.dom?.dayOfWeek}}</h4>
+    </div>
+    <div class="col-span-2 mb-3  ">
+
+      <div class="">
+
+        <ng-template #closed class="closed">
+          <h4 class="font-semibold">Chiuso</h4>
+        </ng-template>
+
+        <div *ngIf="week.dom?.closed === false; else closed">
+
+          <ng-template #allDay class="AllDay items-center">
+
+            <div class="flex justify-center">
+              <h4 class="fo text-sm md:text-xl">{{week.dom?.morningOpening}} - </h4>
+              <h4 class="fo text-sm md:text-xl ml-1">{{week.dom?.eveningClosing}}</h4>
+            </div>
+
+          </ng-template>
+
+
+          <div *ngIf="week.dom?.allDayOpen === false; else allDay" class="flex justify-center">
+
+            <div class="mattina flex justify-center mr-5">
+              <h4 class="fo text-sm md:text-xl">{{week.dom?.morningOpening}} - </h4>
+              <h4 class="fo text-sm md:text-xl ml-1">{{week.dom?.morningClosing}}</h4>
+            </div>
+
+            <div class="pomeriggio flex justify-center ml-5">
+              <h4 class="fo text-sm md:text-xl">{{week.dom?.eveningOpening}} - </h4>
+              <h4 class="fo text-sm md:text-xl ml-1">{{week.dom?.eveningClosing}}</h4>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+
+  </div>
+
+
+
+</div>

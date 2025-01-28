@@ -1,5 +1,7 @@
 package it.uniromatre.breadexchange2_0.bakery;
 
+import it.uniromatre.breadexchange2_0.bakery.Week.Week;
+import it.uniromatre.breadexchange2_0.bakery.Week.WeekService;
 import it.uniromatre.breadexchange2_0.bakery.contact.ContactInfo;
 import it.uniromatre.breadexchange2_0.bakery.contact.ContactInfoRepository;
 import it.uniromatre.breadexchange2_0.bakery.registerRequest.BRRRepository;
@@ -39,6 +41,7 @@ public class BakeryService {
     private final ContactInfoRepository contactInfoRepository;
     private final BRRRepository brrRepository;
     private final BakeryMapper bakeryMapper;
+    private final WeekService weekService;
 
 
     // errore devo cercare se l'utente passato è valido
@@ -64,8 +67,6 @@ public class BakeryService {
         if(toSave==null){                                                                          // controlloche l'utente esista
             throw new EntityNotFoundException("User not Found with id: "+ id);
         }
-
-
 
         var req = brrRepository.findById(id).orElseThrow(() -> new RuntimeException("Request non esistente con id: "+ id));
 
@@ -101,12 +102,16 @@ public class BakeryService {
                 .instagram(req.getInstagram())
                 .build();
 
+        var week = weekService.saveAllClosed();
+
+
 
         req.setEnable(true);
         brrRepository.save(req);
 
         bakery.setAddress(add);
         bakery.setContactInfo(co);
+        bakery.setWeek(week);
         addressRepository.save(add);
         contactInfoRepository.save(co);
         bakeryRepository.save(bakery);
@@ -172,6 +177,8 @@ public class BakeryService {
         );
     }
 
+    //TODO finire get random data
+
     public List<RandomDataBakeryResponse> getRandomData(Integer id) {
 
         // get Bakery tramite id
@@ -195,5 +202,32 @@ public class BakeryService {
         Bakery bac = bakeryRepository.findById(id).orElseThrow(() -> new RuntimeException("bakery not found with id: "+id));
         BakeryfrontEndResponse res = bakeryMapper.fromBakeryToFrontEnd(bac);
         return res;
+    }
+
+    public PlanAddBkery getPlaneAdd(int id) {
+
+        var ad = bakeryRepository.findById(id).orElseThrow(() -> new RuntimeException("bakery not found with id: "+id));
+        var add = ad.getAddress();
+
+        if(add == null ){
+            return null;
+        }
+
+        String res = add.getStreet() +' '+ add.getNumber() +' '+ add.getCity() +' '+ add.getProvincia() +' '+ add.getState() +' '+ add.getCountry();
+        log.error("dati dal server:"+ res);
+
+        return PlanAddBkery.builder().address(res).build();
+
+    }
+
+
+    public Week getWeek(Integer idBakery) {
+        if(idBakery == null){
+            throw new RuntimeException("Id bakery null");
+        }
+
+        Bakery bac = bakeryRepository.findById(idBakery).orElseThrow(() -> new RuntimeException("Bakery not found with id: "+ idBakery));
+
+        return bac.getWeek();
     }
 }
