@@ -2,10 +2,13 @@ package it.uniromatre.breadexchange2_0.bakery;
 
 
 import it.uniromatre.breadexchange2_0.bakery.contact.ContactInfo;
+import it.uniromatre.breadexchange2_0.items.category.Category;
 import it.uniromatre.breadexchange2_0.user.address.Address;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -18,10 +21,9 @@ public class BakeryfrontEndResponse {
     public Integer owner;
     public Address address;
     public String Logo;
+    public String Back_img;
     public ContactInfo info;
-    public String openInHours;
+    public List<Category> categorys;
 
 }
 
-// TODO aggiungere liste di categorie
-// TODO Aggiungere Tutti gli oggetti in vendita

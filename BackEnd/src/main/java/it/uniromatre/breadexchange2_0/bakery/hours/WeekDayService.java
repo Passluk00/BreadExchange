@@ -5,6 +5,7 @@ import it.uniromatre.breadexchange2_0.bakery.BakeryRepository;
 import it.uniromatre.breadexchange2_0.bakery.Week.Week;
 import it.uniromatre.breadexchange2_0.bakery.Week.WeekRepository;
 import it.uniromatre.breadexchange2_0.user.User;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
@@ -41,7 +42,7 @@ public class WeekDayService {
 
 
 
-
+    @Transactional
     public void updateWeekIfChanged(Week oldWeek, Week newWeek , Bakery bac) {
 
         boolean isChanged = false;
@@ -63,6 +64,7 @@ public class WeekDayService {
             bakeryRepository.save(bac);
         }
     }
+
 
     private boolean compareAndUpdateWeekDay(WeekDay oldDay, WeekDay newDay) {
         boolean isChanged = false;

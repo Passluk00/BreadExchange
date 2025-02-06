@@ -120,9 +120,6 @@ public class JwtService {
 
         return !toc.isExpired() && !toc.isRevoked();
 
-
-        // cerca nel database se il token eseste
-        // se esiste controlla se è ancara valido
     }
 
     private boolean isTokenExpired(String token) {

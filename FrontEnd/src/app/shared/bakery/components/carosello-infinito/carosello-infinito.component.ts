@@ -1,6 +1,9 @@
 import {ChangeDetectorRef, Component, Inject, Input, OnInit, PLATFORM_ID} from '@angular/core';
 import {AdminControllerService} from "../../../../services/services/admin-controller.service";
-import {isPlatformBrowser} from "@angular/common";
+import {FrontEndControllerService} from "../../../../services/services/front-end-controller.service";
+import {RandomDataBakeryResponse} from "../../../../services/models/random-data-bakery-response";
+import {NgIf} from "@angular/common";
+
 
 @Component({
   selector: 'app-carosello-infinito',
@@ -13,41 +16,42 @@ export class CaroselloInfinitoComponent implements OnInit{
 
 
   constructor(
-    private adminService: AdminControllerService,
+    private frontEndService: FrontEndControllerService,
     private cdr: ChangeDetectorRef,
     @Inject(PLATFORM_ID) private platformId: Object
   ) {}
 
 
 
-  // TODO DA FINIRE implementazione get dati random photo
 
 
-  dati:any = []
+  dati:RandomDataBakeryResponse[] = []
   @Input() id!: number | undefined;
 
 
 
 
   ngOnInit() {
-    //this.getData()
+    this.getData()
     this.cdr.detectChanges()
   }
 
 
+  async getData(){
+    if( this.id != undefined ) {
+      this.frontEndService.getRandomData({
+        idBac: this.id
+      }).subscribe({
+        next: (res) => {
+          this.dati = res;
+        },
+        error: (err) => {
+          console.error("Errore nel fetch dati dati: "+err);
+        }
+      })
 
-
-  getData(){
-
-    // check id
-
-    //getData from back-end
-
+    }
 
   }
-
-
-
-
 
 }

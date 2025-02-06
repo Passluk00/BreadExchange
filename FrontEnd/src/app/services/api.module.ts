@@ -8,10 +8,10 @@ import { ApiConfiguration, ApiConfigurationParams } from './api-configuration';
 
 import { UserControllerService } from './services/user-controller.service';
 import { TestService } from './services/test.service';
+import { FrontEndControllerService } from './services/front-end-controller.service';
 import { BakeryControllerService } from './services/bakery-controller.service';
 import { AuthenticationService } from './services/authentication.service';
 import { AdminControllerService } from './services/admin-controller.service';
-import { FrontEndControllerService } from './services/front-end-controller.service';
 
 /**
  * Module that provides all services and configuration.
@@ -23,10 +23,10 @@ import { FrontEndControllerService } from './services/front-end-controller.servi
   providers: [
     UserControllerService,
     TestService,
+    FrontEndControllerService,
     BakeryControllerService,
     AuthenticationService,
     AdminControllerService,
-    FrontEndControllerService,
     ApiConfiguration
   ],
 })

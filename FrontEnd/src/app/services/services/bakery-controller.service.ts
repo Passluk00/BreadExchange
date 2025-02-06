@@ -11,13 +11,87 @@ import { BaseService } from '../base-service';
 import { ApiConfiguration } from '../api-configuration';
 import { StrictHttpResponse } from '../strict-http-response';
 
+import { addAddress1 } from '../fn/bakery-controller/add-address-1';
+import { AddAddress1$Params } from '../fn/bakery-controller/add-address-1';
+import { delCategory } from '../fn/bakery-controller/del-category';
+import { DelCategory$Params } from '../fn/bakery-controller/del-category';
+import { delItem } from '../fn/bakery-controller/del-item';
+import { DelItem$Params } from '../fn/bakery-controller/del-item';
+import { newCategory } from '../fn/bakery-controller/new-category';
+import { NewCategory$Params } from '../fn/bakery-controller/new-category';
+import { newItem } from '../fn/bakery-controller/new-item';
+import { NewItem$Params } from '../fn/bakery-controller/new-item';
+import { updateItem } from '../fn/bakery-controller/update-item';
+import { UpdateItem$Params } from '../fn/bakery-controller/update-item';
 import { updateWeek } from '../fn/bakery-controller/update-week';
 import { UpdateWeek$Params } from '../fn/bakery-controller/update-week';
+import { uploadBackPicture } from '../fn/bakery-controller/upload-back-picture';
+import { UploadBackPicture$Params } from '../fn/bakery-controller/upload-back-picture';
+import { uploadProfilePicture1 } from '../fn/bakery-controller/upload-profile-picture-1';
+import { UploadProfilePicture1$Params } from '../fn/bakery-controller/upload-profile-picture-1';
 
 @Injectable({ providedIn: 'root' })
 export class BakeryControllerService extends BaseService {
   constructor(config: ApiConfiguration, http: HttpClient) {
     super(config, http);
+  }
+
+  /** Path part for operation `uploadProfilePicture1()` */
+  static readonly UploadProfilePicture1Path = '/bakery/upload-profile-picture';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `uploadProfilePicture1()` instead.
+   *
+   * This method sends `multipart/form-data` and handles request body of type `multipart/form-data`.
+   */
+  uploadProfilePicture1$Response(params: UploadProfilePicture1$Params, context?: HttpContext): Observable<StrictHttpResponse<{
+}>> {
+    return uploadProfilePicture1(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `uploadProfilePicture1$Response()` instead.
+   *
+   * This method sends `multipart/form-data` and handles request body of type `multipart/form-data`.
+   */
+  uploadProfilePicture1(params: UploadProfilePicture1$Params, context?: HttpContext): Observable<{
+}> {
+    return this.uploadProfilePicture1$Response(params, context).pipe(
+      map((r: StrictHttpResponse<{
+}>): {
+} => r.body)
+    );
+  }
+
+  /** Path part for operation `uploadBackPicture()` */
+  static readonly UploadBackPicturePath = '/bakery/upload-back-picture';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `uploadBackPicture()` instead.
+   *
+   * This method sends `multipart/form-data` and handles request body of type `multipart/form-data`.
+   */
+  uploadBackPicture$Response(params: UploadBackPicture$Params, context?: HttpContext): Observable<StrictHttpResponse<{
+}>> {
+    return uploadBackPicture(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `uploadBackPicture$Response()` instead.
+   *
+   * This method sends `multipart/form-data` and handles request body of type `multipart/form-data`.
+   */
+  uploadBackPicture(params: UploadBackPicture$Params, context?: HttpContext): Observable<{
+}> {
+    return this.uploadBackPicture$Response(params, context).pipe(
+      map((r: StrictHttpResponse<{
+}>): {
+} => r.body)
+    );
   }
 
   /** Path part for operation `updateWeek()` */
@@ -43,6 +117,180 @@ export class BakeryControllerService extends BaseService {
   updateWeek(params: UpdateWeek$Params, context?: HttpContext): Observable<{
 }> {
     return this.updateWeek$Response(params, context).pipe(
+      map((r: StrictHttpResponse<{
+}>): {
+} => r.body)
+    );
+  }
+
+  /** Path part for operation `newItem()` */
+  static readonly NewItemPath = '/bakery/newItem';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `newItem()` instead.
+   *
+   * This method sends `multipart/form-data` and handles request body of type `multipart/form-data`.
+   */
+  newItem$Response(params: NewItem$Params, context?: HttpContext): Observable<StrictHttpResponse<{
+}>> {
+    return newItem(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `newItem$Response()` instead.
+   *
+   * This method sends `multipart/form-data` and handles request body of type `multipart/form-data`.
+   */
+  newItem(params: NewItem$Params, context?: HttpContext): Observable<{
+}> {
+    return this.newItem$Response(params, context).pipe(
+      map((r: StrictHttpResponse<{
+}>): {
+} => r.body)
+    );
+  }
+
+  /** Path part for operation `newCategory()` */
+  static readonly NewCategoryPath = '/bakery/newCategory';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `newCategory()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  newCategory$Response(params: NewCategory$Params, context?: HttpContext): Observable<StrictHttpResponse<{
+}>> {
+    return newCategory(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `newCategory$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  newCategory(params: NewCategory$Params, context?: HttpContext): Observable<{
+}> {
+    return this.newCategory$Response(params, context).pipe(
+      map((r: StrictHttpResponse<{
+}>): {
+} => r.body)
+    );
+  }
+
+  /** Path part for operation `updateItem()` */
+  static readonly UpdateItemPath = '/bakery/modItem';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `updateItem()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  updateItem$Response(params: UpdateItem$Params, context?: HttpContext): Observable<StrictHttpResponse<{
+}>> {
+    return updateItem(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `updateItem$Response()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  updateItem(params: UpdateItem$Params, context?: HttpContext): Observable<{
+}> {
+    return this.updateItem$Response(params, context).pipe(
+      map((r: StrictHttpResponse<{
+}>): {
+} => r.body)
+    );
+  }
+
+  /** Path part for operation `addAddress1()` */
+  static readonly AddAddress1Path = '/bakery/addAddress';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `addAddress1()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  addAddress1$Response(params: AddAddress1$Params, context?: HttpContext): Observable<StrictHttpResponse<{
+}>> {
+    return addAddress1(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `addAddress1$Response()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  addAddress1(params: AddAddress1$Params, context?: HttpContext): Observable<{
+}> {
+    return this.addAddress1$Response(params, context).pipe(
+      map((r: StrictHttpResponse<{
+}>): {
+} => r.body)
+    );
+  }
+
+  /** Path part for operation `delItem()` */
+  static readonly DelItemPath = '/bakery/delItem';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `delItem()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  delItem$Response(params: DelItem$Params, context?: HttpContext): Observable<StrictHttpResponse<{
+}>> {
+    return delItem(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `delItem$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  delItem(params: DelItem$Params, context?: HttpContext): Observable<{
+}> {
+    return this.delItem$Response(params, context).pipe(
+      map((r: StrictHttpResponse<{
+}>): {
+} => r.body)
+    );
+  }
+
+  /** Path part for operation `delCategory()` */
+  static readonly DelCategoryPath = '/bakery/delCategory';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `delCategory()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  delCategory$Response(params: DelCategory$Params, context?: HttpContext): Observable<StrictHttpResponse<{
+}>> {
+    return delCategory(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `delCategory$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  delCategory(params: DelCategory$Params, context?: HttpContext): Observable<{
+}> {
+    return this.delCategory$Response(params, context).pipe(
       map((r: StrictHttpResponse<{
 }>): {
 } => r.body)

@@ -11,13 +11,13 @@ import { RequestBuilder } from '../../request-builder';
 import { RandomDataBakeryResponse } from '../../models/random-data-bakery-response';
 
 export interface GetRandomData$Params {
-  id: number;
+  idBac: number;
 }
 
 export function getRandomData(http: HttpClient, rootUrl: string, params: GetRandomData$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<RandomDataBakeryResponse>>> {
   const rb = new RequestBuilder(rootUrl, getRandomData.PATH, 'get');
   if (params) {
-    rb.query('id', params.id, {});
+    rb.query('idBac', params.idBac, {});
   }
 
   return http.request(

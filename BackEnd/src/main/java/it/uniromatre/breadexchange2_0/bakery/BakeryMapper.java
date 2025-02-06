@@ -1,6 +1,9 @@
 package it.uniromatre.breadexchange2_0.bakery;
 
+import it.uniromatre.breadexchange2_0.items.item.Item;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class BakeryMapper {
@@ -16,24 +19,15 @@ public class BakeryMapper {
                 bak.getOwner(),
                 bak.getUrl_picture(),
                 bak.getAbilitato(),
-                bak.getAddress()
+                bak.getAddress(),
+                bak.getCategories()
         );
     }
 
-    //TODO Cambiare valore con imagini oggetti
 
-    public RandomDataBakeryResponse fromRandom(Bakery bac){
-        return new RandomDataBakeryResponse(
-                bac.getId(),
-                bac.getUrl_picture()
-        );
-    }
 
-/*      TODO Finire funzione elementi random
-    public RandomDataBakeryResponse toRandomData(List<Bakery> bac){
-        return bac.stream(this::fromRandom);
-    }
-*/
+
+
 
     public BakeryfrontEndResponse fromBakeryToFrontEnd(Bakery bac){
         return new BakeryfrontEndResponse(
@@ -43,8 +37,9 @@ public class BakeryMapper {
                 bac.getOwner().getId(),
                 bac.getAddress(),
                 bac.getUrl_picture(),
+                bac.getUrl_backImg(),
                 bac.getContactInfo(),
-                bac.getOpenIngHours()
+                bac.getCategories()
         );
     }
 

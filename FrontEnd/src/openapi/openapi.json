@@ -357,6 +357,124 @@
         }
       }
     },
+    "/frontEnd/testCategory": {
+      "post": {
+        "tags": [
+          "front-end-controller"
+        ],
+        "operationId": "testCategory",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/bakery/upload-profile-picture": {
+      "post": {
+        "tags": [
+          "bakery-controller"
+        ],
+        "operationId": "uploadProfilePicture_1",
+        "parameters": [
+          {
+            "name": "idBac",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "required": [
+                  "file"
+                ],
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/bakery/upload-back-picture": {
+      "post": {
+        "tags": [
+          "bakery-controller"
+        ],
+        "operationId": "uploadBackPicture",
+        "parameters": [
+          {
+            "name": "idBac",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "required": [
+                  "file"
+                ],
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/bakery/updateWeek": {
       "post": {
         "tags": [
@@ -379,6 +497,197 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/ModifyWeekRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/bakery/newItem": {
+      "post": {
+        "tags": [
+          "bakery-controller"
+        ],
+        "operationId": "newItem",
+        "parameters": [
+          {
+            "name": "idBac",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "idCat",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "required": [
+                  "request"
+                ],
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "request": {
+                    "$ref": "#/components/schemas/ItemRequest"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/bakery/newCategory": {
+      "post": {
+        "tags": [
+          "bakery-controller"
+        ],
+        "operationId": "newCategory",
+        "parameters": [
+          {
+            "name": "bakeryId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "nomeCat",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/bakery/modItem": {
+      "post": {
+        "tags": [
+          "bakery-controller"
+        ],
+        "operationId": "updateItem",
+        "parameters": [
+          {
+            "name": "idItem",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "idBac",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ItemRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/bakery/addAddress": {
+      "post": {
+        "tags": [
+          "bakery-controller"
+        ],
+        "operationId": "addAddress_1",
+        "parameters": [
+          {
+            "name": "idBac",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewAddress"
               }
             }
           },
@@ -898,7 +1207,7 @@
         "operationId": "getRandomData",
         "parameters": [
           {
-            "name": "id",
+            "name": "idBac",
             "in": "query",
             "required": true,
             "schema": {
@@ -948,6 +1257,99 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/PlanAddBkery"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/frontEnd/getCategory": {
+      "get": {
+        "tags": [
+          "front-end-controller"
+        ],
+        "operationId": "getCategory",
+        "parameters": [
+          {
+            "name": "owner",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/frontEnd/getAllCategory": {
+      "get": {
+        "tags": [
+          "front-end-controller"
+        ],
+        "operationId": "getAllCategory",
+        "parameters": [
+          {
+            "name": "owner",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListCategoryFrontEnd"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/frontEnd/checkOwner": {
+      "get": {
+        "tags": [
+          "front-end-controller"
+        ],
+        "operationId": "checkOwner",
+        "parameters": [
+          {
+            "name": "idBack",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
                 }
               }
             }
@@ -1205,6 +1607,86 @@
         }
       }
     },
+    "/bakery/delItem": {
+      "delete": {
+        "tags": [
+          "bakery-controller"
+        ],
+        "operationId": "delItem",
+        "parameters": [
+          {
+            "name": "idItem",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "idCat",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "idBac",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/bakery/delCategory": {
+      "delete": {
+        "tags": [
+          "bakery-controller"
+        ],
+        "operationId": "delCategory",
+        "parameters": [
+          {
+            "name": "idCat",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/admin/rejectRequest": {
       "delete": {
         "tags": [
@@ -1431,8 +1913,14 @@
               "ADMIN"
             ]
           },
+          "userName": {
+            "type": "string"
+          },
           "name": {
             "type": "string"
+          },
+          "credentialsNonExpired": {
+            "type": "boolean"
           },
           "authorities": {
             "type": "array",
@@ -1440,21 +1928,15 @@
               "$ref": "#/components/schemas/GrantedAuthority"
             }
           },
+          "enable": {
+            "type": "boolean",
+            "writeOnly": true
+          },
           "accountNonExpired": {
             "type": "boolean"
           },
           "accountNonLocked": {
             "type": "boolean"
-          },
-          "credentialsNonExpired": {
-            "type": "boolean"
-          },
-          "enable": {
-            "type": "boolean",
-            "writeOnly": true
-          },
-          "userName": {
-            "type": "string"
           }
         }
       },
@@ -1593,11 +2075,30 @@
           "eveningClosing": {
             "$ref": "#/components/schemas/LocalTime"
           },
-          "allDayOpen": {
-            "type": "boolean"
-          },
           "closed": {
             "type": "boolean"
+          },
+          "allDayOpen": {
+            "type": "boolean"
+          }
+        }
+      },
+      "ItemRequest": {
+        "required": [
+          "description",
+          "name",
+          "price"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "price": {
+            "type": "number"
           }
         }
       },
@@ -1880,6 +2381,70 @@
           }
         }
       },
+      "Category": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "owner": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string"
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Item"
+            }
+          }
+        }
+      },
+      "Item": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "img": {
+            "type": "string"
+          },
+          "price": {
+            "type": "number"
+          }
+        }
+      },
+      "ListCategoryFrontEnd": {
+        "type": "object",
+        "properties": {
+          "name_azz": {
+            "type": "string"
+          },
+          "id_azz": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "img_azz": {
+            "type": "string"
+          },
+          "categorys": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Category"
+            }
+          }
+        }
+      },
       "BakeryfrontEndResponse": {
         "type": "object",
         "properties": {
@@ -1903,13 +2468,22 @@
           "Logo": {
             "type": "string"
           },
+          "Back_img": {
+            "type": "string"
+          },
           "info": {
             "$ref": "#/components/schemas/ContactInfo"
           },
-          "openInHours": {
-            "type": "string"
+          "categorys": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Category"
+            }
           },
           "logo": {
+            "type": "string"
+          },
+          "back_img": {
             "type": "string"
           }
         }
@@ -1992,6 +2566,12 @@
           },
           "address": {
             "$ref": "#/components/schemas/Address"
+          },
+          "categorys": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Category"
+            }
           }
         }
       },

@@ -34,7 +34,6 @@
 .item {
   width: 350px; /* Aggiornato a 350px */
   height: 250px;
-  background-color: red;
   border-radius: 24px;
   position: absolute;
   left: max(calc(350px * 7), 100%); /* Calcolo per 7 elementi */

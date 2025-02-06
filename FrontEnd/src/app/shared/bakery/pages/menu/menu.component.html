@@ -1,0 +1,291 @@
+<app-navbar></app-navbar>
+
+<div class="w-full sfondo">
+
+  <div class="icon justify-center flex pt-5">
+
+    <a [routerLink]="['/bakery/', userId]" class="text-3xl no-underline text-black font-bold">
+      <img [src]="data.img_azz" class="items-center w-[300px] h-[300px] rounded-full">       <!-- da cambaire con img del azz -->
+    </a>
+    <h1 class="fo-p mt-32">{{data.name_azz}}</h1>
+
+  </div>
+
+  <br>
+  <br>
+
+  <div>
+
+    <div class="flex justify-evenly mt-3 mb-3">
+
+      <div *ngFor="let category of data.categorys">
+
+        <a class="fo-p px-5 text-4xl font-semibold text-center rounded-3xl hover:text-black focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800 no-underline cursor-pointer mr-[20px] ml-[20px] sfondo"
+          (click)="scrollToSection(category.name)">
+          {{category.name}}
+        </a>
+
+      </div>
+
+      <a *ngIf="isOwner" data-bs-target="#manageCat" data-bs-toggle="modal"
+         class="fo-p px-5 text-4xl font-semibold text-center rounded-3xl hover:text-black focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800 no-underline cursor-pointer mr-[20px] ml-[20px] sfondo">
+        Gestisci Categorie
+      </a>
+
+    </div>
+
+  </div>
+
+
+  <div class="ml-32 mr-32 mt-4 mb-24 h-[5px] w-[calc(100%-2rem)]] colore rounded-lg"></div>
+
+
+  <ng-template #placeholder class="mx-auto h-56 rounded-lg w-full">
+    <img src="public/testImg/profile.jpeg" alt="default profile pic">     <!-- TODO replace con default img for item -->                                                       <!-- Profile img -->
+  </ng-template>
+
+  <div class="mt-5 pb-5 ml-10 mr-10 min-h-64">
+
+    <div *ngFor="let cat of data.categorys">
+
+
+      <h1 [id]="'section-' + cat.name" class="mb-11 fo-p">{{cat.name}}</h1>
+
+
+      <div class="flex flex-wrap mb-20 justify-evenly">
+
+        <div *ngFor="let item of cat.items">
+
+          <div class="rounded-lg border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800 ml-4 mr-4 w-[400px] mb-8">
+
+            <div class="h-56 w-full">
+
+              <div *ngIf="item.img; else placeholder">
+                <img class="mx-auto h-56 rounded-lg" [src]="item.img" alt="" />      <!-- Img dell oggetto -->
+              </div>
+
+            </div>
+
+            <div class="pt-6">
+
+              <h2 class="text-xl font-bold leading-tight text-gray-900 hover:underline">{{item.name}}</h2>        <!--  Titolo oggetto -->
+              <h6 class="mt-2">{{item.description}}</h6>
+
+              <div class="mt-4 flex items-center justify-between gap-4">
+                <p class="text-2xl font-extrabold leading-tight text-gray-900 dark:text-white">{{item.price}} €</p>   <!-- Qui va inserito il prezzo -->
+                <button *ngIf="isOwner" data-bs-target="#modItem" data-bs-toggle="modal" class="btn btn-primary" (click)="caricaDati(item, cat)" >Modifica</button>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <div *ngIf="isOwner" class="rounded-lg border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800 ml-4 mr-4 w-[400px] mb-8">
+
+          <div class="h-56 w-full">
+
+            <div class="flex justify-center">
+              <img class="mx-auto h-56 rounded-lg" [src]="data.img_azz" alt="" onerror="this.src='./public/imgTest/profile.jpeg'" >      <!-- Img dell oggetto -->
+            </div>
+
+          </div>
+
+          <div class="pt-6">
+
+            <h2 class="text-xl font-bold leading-tight text-gray-900 hover:underline">Inserisci Nuovo Oggetto</h2>        <!--  Titolo oggetto -->
+            <h6 class="mt-2">Descrizione Oggetto</h6>
+
+            <div class="mt-4 flex items-center justify-between gap-4">
+              <p class="text-2xl font-extrabold leading-tight text-gray-900 dark:text-white">Prezzo €</p>   <!-- Qui va inserito il prezzo -->
+              <button (click)="fillDataCat(cat.id)" data-bs-target="#nuovoItem" data-bs-toggle="modal" class="btn btn-primary">Nuovo Oggetto</button>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- Form per la Creazione di un nuovo Oggetto -->
+<div class="modal fade modal-xl" id="nuovoItem" aria-hidden="true" aria-labelledby="nuovoItem" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+      <div class="modal-header flex items-center justify-between">
+        <button class="button" data-bs-target="#exampleModalToggle" data-bs-toggle="modal" (click)="removeImage()">
+          <fa-icon [icon]="faArrowLeft" class="mr-1"></fa-icon>
+        </button>
+        <h1 class="modal-title fs-5 text-center flex-1">Creazione Nuovo Oggetto</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="removeImage()" ></button>
+      </div>
+
+      <div class="modal-body min-h-[500px] md:flex md:justify-evenly items-center">
+
+        <div class="flex justify-center">
+
+          <!-- Drag and Drop Area -->
+
+          <div class="border-2 border-dashed border-gray-400 rounded-lg p-8 text-center h-[500px] w-[450px]" *ngIf="!previewImage" (drop)="onFileDrop($event)" (dragover)="onDragOver($event)" (dragleave)="onDragLeave($event)" [class.bg-blue-100]="isDragging">
+            <div class="flex justify-center">
+              <svg class="mt-3 mb-32" xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M21.2 15c.7-1.2 1-2.5.7-3.9-.6-2-2.4-3.5-4.4-3.5h-1.2c-.7-3-3.2-5.2-6.2-5.6-3-.3-5.9 1.3-7.3 4-1.2 2.5-1 6.5.5 8.8m8.7-1.6V21"/><path d="M16 16l-4-4-4 4"/></svg>
+            </div>
+            <p class="text-gray-500 mb-2">Trascina qui un'immagine o clicca per selezionarla</p>
+            <input type="file" id="fileInput" accept="image/*" (change)="onFileSelect($event)" hidden>
+            <button type="button" class="btn btn-primary" (click)="triggerFileSelect()">Scegli File</button>
+          </div>
+
+          <!-- Preview Area -->
+          <div class="mt-4 text-center" *ngIf="previewImage">
+            <img [src]="previewImage" alt="Anteprima" class="w-[500px] h-[500px]  object-cover rounded-md shadow-md mx-auto">
+            <button class="btn btn-danger mt-5" (click)="removeImage()">Rimuovi Immagine</button>
+          </div>
+
+        </div>
+
+        <div class="flex justify-center">
+
+          <div id="Item" class="mx-auto">
+
+            <div class="mt-4">
+              <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nome Nuovo Item</label>
+              <input [(ngModel)]="itemreq.name"  type="text" placeholder="nome item" class="rounded-md">
+            </div>
+
+            <div class="mt-4">
+              <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Desc Nuovo Item</label>
+              <input [(ngModel)]="itemreq.description"  type="text" placeholder="desc item" class="rounded-md">
+            </div>
+
+            <div class="mt-4">
+              <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Price Nuovo Item</label>
+              <input [(ngModel)]="itemreq.price"  type="text" placeholder="price item" class="rounded-md">
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="modal-footer">
+        <button (click)="sendReq()" class="btn btn-primary" type="button" data-bs-dismiss="modal" aria-label="Close">Salva</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Form per la Modifica di un Oggetto -->
+<div class="modal fade modal-xl" id="modItem" aria-hidden="true" aria-labelledby="modItem" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+      <div class="modal-header flex items-center justify-between">
+        <button class="button" data-bs-target="#exampleModalToggle" data-bs-toggle="modal" (click)="removeImage()">
+          <fa-icon [icon]="faArrowLeft" class="mr-1"></fa-icon>
+        </button>
+        <h1 class="modal-title fs-5 text-center flex-1">Modifica Oggetto</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="removeImage()" ></button>
+      </div>
+
+      <div class="modal-body min-h-[500px] md:flex md:justify-evenly items-center">
+
+        <div class="flex justify-center">
+
+          <!-- Preview Area -->
+
+          <div class="mt-4 text-center" *ngIf="!previewImage && toShow">
+            <img [src]="toShow" alt="Anteprima" class="w-[500px] h-[500px]  object-cover rounded-md shadow-md mx-auto">
+          </div>
+
+
+        </div>
+
+        <div class="flex justify-center">
+
+          <div id="ItemMod" class="mx-auto">
+
+            <div class="mt-4">
+              <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nome Nuovo Item</label>
+              <input [(ngModel)]="itemMod.name" type="text" [placeholder]="itemMod.name" class="rounded-md">
+            </div>
+
+            <div class="mt-4">
+              <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Desc Nuovo Item</label>
+              <input [(ngModel)]="itemMod.description" type="text"  [placeholder]="itemMod.description" class="rounded-md">
+            </div>
+
+            <div class="mt-4">
+              <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Price Nuovo Item</label>
+              <input [(ngModel)]="itemMod.price"  type="text" [placeholder]="itemMod.price" class="rounded-md">
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="modal-footer">
+        <button (click)="delItem()" class="btn btn-danger" type="button" data-bs-dismiss="modal" aria-label="Close">Elimina</button>
+        <button (click)="modItem()" class="btn btn-primary" type="button" data-bs-dismiss="modal" aria-label="Close">Salva</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Form per la Gestione delle Categorie -->
+<div class="modal fade modal-xl" id="manageCat" aria-hidden="true" aria-labelledby="manageCat" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+      <div class="modal-header flex items-center justify-between">
+        <button class="button" data-bs-target="#exampleModalToggle" data-bs-toggle="modal" (click)="removeImage()">
+          <fa-icon [icon]="faArrowLeft" class="mr-1"></fa-icon>
+        </button>
+        <h1 class="modal-title fs-5 text-center flex-1">Gestisci Categorie</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="removeImage()" ></button>
+      </div>
+
+      <div class="modal-body min-h-[500px] flex justify-center items-center">
+
+        <div class="mx-auto">
+          <div class="">
+            <input [(ngModel)]="catName" type="text" placeholder="Nome Nuova Categoria" class="rounded-md mx-auto">
+            <button (click)="newCategory()" class="btn btn-primary">Nuova Categoria</button>
+          </div>
+
+          <div class="del mt-4">
+            <div class="max-w-sm mx-auto">
+              <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Seleziona Categoria Da Eliminare</label>
+              <select [(ngModel)]="currentCat" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <option *ngFor="let cat of data.categorys" [value]="cat.id">{{cat.name}}</option>
+              </select>
+            </div>
+            <button (click)="delCat()" class="btn btn-danger mt-4">Elimina Categoria</button>
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="modal-footer">
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>
+
+
+

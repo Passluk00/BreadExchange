@@ -29,11 +29,7 @@ export const routes: Routes = [
   },
   {
     path:"bakery",
-    loadChildren: () => import('./shared/bakery/bakery.module').then(m=>m.BakeryModule)
-  },
-  {
-    path: '**',
-    redirectTo: ""
+    loadChildren: () => import('./shared/bakery/bakery.module').then(m => m.BakeryModule)
   },
   {
     path:"404",

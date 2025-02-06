@@ -3,6 +3,7 @@ package it.uniromatre.breadexchange2_0.bakery;
 import it.uniromatre.breadexchange2_0.bakery.Week.Week;
 import it.uniromatre.breadexchange2_0.bakery.contact.ContactInfo;
 import it.uniromatre.breadexchange2_0.bakery.hours.WeekDay;
+import it.uniromatre.breadexchange2_0.items.category.Category;
 import it.uniromatre.breadexchange2_0.user.User;
 import it.uniromatre.breadexchange2_0.user.address.Address;
 import jakarta.persistence.*;
@@ -41,7 +42,6 @@ public class Bakery {
     @OneToOne
     private ContactInfo contactInfo;                // Dati di contatto
 
-    private String openIngHours;
 
     /*
 
@@ -49,6 +49,10 @@ public class Bakery {
     private List<Order> orders
 
      */
+
+    @OneToMany
+    private List<Category> categories;
+
 
     @OneToOne
     private Week week;

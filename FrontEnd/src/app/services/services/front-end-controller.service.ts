@@ -14,20 +14,58 @@ import { StrictHttpResponse } from '../strict-http-response';
 import { bakeryDetail } from '../fn/front-end-controller/bakery-detail';
 import { BakeryDetail$Params } from '../fn/front-end-controller/bakery-detail';
 import { BakeryfrontEndResponse } from '../models/bakeryfront-end-response';
+import { checkOwner } from '../fn/front-end-controller/check-owner';
+import { CheckOwner$Params } from '../fn/front-end-controller/check-owner';
+import { getAllCategory } from '../fn/front-end-controller/get-all-category';
+import { GetAllCategory$Params } from '../fn/front-end-controller/get-all-category';
+import { getCategory } from '../fn/front-end-controller/get-category';
+import { GetCategory$Params } from '../fn/front-end-controller/get-category';
 import { getPlaneAdd } from '../fn/front-end-controller/get-plane-add';
 import { GetPlaneAdd$Params } from '../fn/front-end-controller/get-plane-add';
 import { getRandomData } from '../fn/front-end-controller/get-random-data';
 import { GetRandomData$Params } from '../fn/front-end-controller/get-random-data';
 import { getWeek } from '../fn/front-end-controller/get-week';
 import { GetWeek$Params } from '../fn/front-end-controller/get-week';
+import { ListCategoryFrontEnd } from '../models/list-category-front-end';
 import { PlanAddBkery } from '../models/plan-add-bkery';
 import { RandomDataBakeryResponse } from '../models/random-data-bakery-response';
+import { testCategory } from '../fn/front-end-controller/test-category';
+import { TestCategory$Params } from '../fn/front-end-controller/test-category';
 import { Week } from '../models/week';
 
 @Injectable({ providedIn: 'root' })
 export class FrontEndControllerService extends BaseService {
   constructor(config: ApiConfiguration, http: HttpClient) {
     super(config, http);
+  }
+
+  /** Path part for operation `testCategory()` */
+  static readonly TestCategoryPath = '/frontEnd/testCategory';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `testCategory()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  testCategory$Response(params?: TestCategory$Params, context?: HttpContext): Observable<StrictHttpResponse<{
+}>> {
+    return testCategory(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `testCategory$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  testCategory(params?: TestCategory$Params, context?: HttpContext): Observable<{
+}> {
+    return this.testCategory$Response(params, context).pipe(
+      map((r: StrictHttpResponse<{
+}>): {
+} => r.body)
+    );
   }
 
   /** Path part for operation `getWeek()` */
@@ -102,6 +140,85 @@ export class FrontEndControllerService extends BaseService {
   getPlaneAdd(params: GetPlaneAdd$Params, context?: HttpContext): Observable<PlanAddBkery> {
     return this.getPlaneAdd$Response(params, context).pipe(
       map((r: StrictHttpResponse<PlanAddBkery>): PlanAddBkery => r.body)
+    );
+  }
+
+  /** Path part for operation `getCategory()` */
+  static readonly GetCategoryPath = '/frontEnd/getCategory';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `getCategory()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getCategory$Response(params: GetCategory$Params, context?: HttpContext): Observable<StrictHttpResponse<{
+}>> {
+    return getCategory(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `getCategory$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getCategory(params: GetCategory$Params, context?: HttpContext): Observable<{
+}> {
+    return this.getCategory$Response(params, context).pipe(
+      map((r: StrictHttpResponse<{
+}>): {
+} => r.body)
+    );
+  }
+
+  /** Path part for operation `getAllCategory()` */
+  static readonly GetAllCategoryPath = '/frontEnd/getAllCategory';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `getAllCategory()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getAllCategory$Response(params: GetAllCategory$Params, context?: HttpContext): Observable<StrictHttpResponse<ListCategoryFrontEnd>> {
+    return getAllCategory(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `getAllCategory$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getAllCategory(params: GetAllCategory$Params, context?: HttpContext): Observable<ListCategoryFrontEnd> {
+    return this.getAllCategory$Response(params, context).pipe(
+      map((r: StrictHttpResponse<ListCategoryFrontEnd>): ListCategoryFrontEnd => r.body)
+    );
+  }
+
+  /** Path part for operation `checkOwner()` */
+  static readonly CheckOwnerPath = '/frontEnd/checkOwner';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `checkOwner()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  checkOwner$Response(params: CheckOwner$Params, context?: HttpContext): Observable<StrictHttpResponse<boolean>> {
+    return checkOwner(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `checkOwner$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  checkOwner(params: CheckOwner$Params, context?: HttpContext): Observable<boolean> {
+    return this.checkOwner$Response(params, context).pipe(
+      map((r: StrictHttpResponse<boolean>): boolean => r.body)
     );
   }
 

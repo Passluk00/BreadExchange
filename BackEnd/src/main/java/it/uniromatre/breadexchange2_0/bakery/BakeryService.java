@@ -8,11 +8,17 @@ import it.uniromatre.breadexchange2_0.bakery.registerRequest.BRRRepository;
 import it.uniromatre.breadexchange2_0.common.PageResponse;
 import it.uniromatre.breadexchange2_0.email.EmailService;
 import it.uniromatre.breadexchange2_0.email.EmailTemplateName;
+import it.uniromatre.breadexchange2_0.file.FileStorageService;
+import it.uniromatre.breadexchange2_0.items.category.Category;
+import it.uniromatre.breadexchange2_0.items.item.Item;
+import it.uniromatre.breadexchange2_0.items.item.ItemMapper;
 import it.uniromatre.breadexchange2_0.role.Role;
 import it.uniromatre.breadexchange2_0.user.User;
 import it.uniromatre.breadexchange2_0.user.UserRepository;
 import it.uniromatre.breadexchange2_0.user.address.Address;
+import it.uniromatre.breadexchange2_0.user.address.AddressMapper;
 import it.uniromatre.breadexchange2_0.user.address.AddressRepository;
+import it.uniromatre.breadexchange2_0.user.address.NewAddress;
 import jakarta.mail.MessagingException;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -24,9 +30,13 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.Random;
 
 @Service
 @RequiredArgsConstructor
@@ -42,6 +52,9 @@ public class BakeryService {
     private final BRRRepository brrRepository;
     private final BakeryMapper bakeryMapper;
     private final WeekService weekService;
+    private final ItemMapper itemMapper;
+    private final FileStorageService fileStorageService;
+    private final AddressMapper addressMapper;
 
 
     // errore devo cercare se l'utente passato è valido
@@ -78,6 +91,8 @@ public class BakeryService {
                 .owner(toSave)
                 .registrationDate(LocalDateTime.now())
                 .abilitato(true)
+                .url_picture("./public/testImg/profile.jpeg")
+                .url_backImg("./public/testImg/misto_su_tavolo.JPG")
                 .build();
 
         var add = Address.builder()
@@ -185,17 +200,26 @@ public class BakeryService {
 
         Bakery bac = bakeryRepository.findById(id).orElseThrow(() -> new RuntimeException("Bakery Non Trovato"));
 
+        List<Category> categorys = bac.getCategories();
 
-        // get 8 random object      Custom Query
-//        List<ItemDesc> obj = itemRepository.findByOwner(bac);
+        List<Item> items = new ArrayList<>();
 
-        // map  RanObj  -->  RandomDataBakeryResponse       in una lista
+        for(Category category : categorys){
+            items.addAll(category.getItems());
+        }
 
+        Random rand = new Random();
 
+        List<Item> randomItems = new ArrayList<>();
 
-        return null;         // della lista
+        while(randomItems.size() < 8 && randomItems.size() < items.size()){
+            Item randomItem = items.get(rand.nextInt(items.size()));
+            if(!randomItems.contains(randomItem)){
+                randomItems.add(randomItem);
+            }
+        }
 
-
+        return randomItems.stream().map(itemMapper::fromRandom).toList();
     }
 
     public BakeryfrontEndResponse getData(Integer id) {
@@ -230,4 +254,115 @@ public class BakeryService {
 
         return bac.getWeek();
     }
+
+
+    public boolean checkOwner(Integer idBakery, Authentication cu) {
+        if (cu == null || !(cu.getPrincipal() instanceof User)) {
+            return false;
+        }
+
+        User user = (User) cu.getPrincipal();
+        User toCheck = userRepository.findUserById(user.getId());
+
+        if (toCheck == null) {
+            throw new EntityNotFoundException("User not found with ID: " + user.getId());
+        }
+
+        Bakery bakery = bakeryRepository.findById(idBakery)
+                .orElseThrow(() -> new EntityNotFoundException("Bakery not found with ID: " + idBakery));
+
+        // Controllo tramite ID per evitare problemi con equals()
+        boolean isOwner = bakery.getOwner().getId().equals(toCheck.getId());
+
+        // Controllo se l'utente ha il ruolo ADMIN
+        boolean isAdmin = toCheck.getRoles().equals(Role.ADMIN);
+
+        return isOwner || isAdmin;
+    }
+
+
+    public void uploadProfilePicture(MultipartFile file, Authentication connectedUser, Integer idBac) {
+
+        User user = (User)connectedUser.getPrincipal();
+        User toCheck = userRepository.findUserById(user.getId());
+
+        if(toCheck == null){
+            throw new EntityNotFoundException("User not found with id: "+ user.getId());
+        }
+
+        if(idBac == null){
+            throw new RuntimeException("BakeryId is empty");
+        }
+
+        if(file == null){
+            throw new RuntimeException("file is empty");
+        }
+
+        Bakery bac = bakeryRepository.getBakeryById(idBac);
+
+        bac.setUrl_picture(fileStorageService.saveFile(file,toCheck.getId()));
+
+        bakeryRepository.save(bac);
+
+    }
+
+
+    public void addAddress(Authentication connectedUser, NewAddress address, Integer idBac) {
+
+        User user = ((User) connectedUser.getPrincipal());
+        User toCheck = userRepository.findUserById(user.getId());
+
+        if(toCheck == null){
+            throw new EntityNotFoundException("User not found with id: " + user.getId());
+        }
+
+        Bakery bac = bakeryRepository.getBakeryById(idBac);
+
+        if(bac == null){
+            throw new EntityNotFoundException("bakery not found with id: "+ idBac);
+        }
+
+        if(!toCheck.getId().equals(bac.getOwner().getId())){
+            throw new RuntimeException("non sei Il propietario");
+        }
+
+        Address add = addressMapper.toAddress(address);
+        bac.setAddress(add);
+        addressRepository.save(add);
+        bakeryRepository.save(bac);
+    }
+
+
+    public void uploadBackPicture(MultipartFile file, Authentication connectedUser, Integer idBac) {
+
+        User user = (User)connectedUser.getPrincipal();
+        User toCheck = userRepository.findUserById(user.getId());
+
+        if(toCheck == null){
+            throw new EntityNotFoundException("User not found with id: "+ user.getId());
+        }
+
+        if(idBac == null){
+            throw new RuntimeException("BakeryId is empty");
+        }
+
+        if(file == null){
+            throw new RuntimeException("file is empty");
+        }
+
+        Bakery bac = bakeryRepository.getBakeryById(idBac);
+
+        bac.setUrl_backImg(fileStorageService.saveFile(file,toCheck.getId()));
+
+        bakeryRepository.save(bac);
+
+    }
 }
+
+
+
+
+
+
+
+

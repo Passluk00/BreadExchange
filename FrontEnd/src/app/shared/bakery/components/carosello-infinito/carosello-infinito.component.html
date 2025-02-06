@@ -1,26 +1,46 @@
 <div>
-
-  <div class="h-80 max-w-screen-xl">
+  <div class="h-80 max-w-screen-xl" >
     <div class="wrapper">
-      <div class="item item1 flex" >
-        <img src="./public/testImg/bread.jpeg" class="rounded-3xl">
+      <div class="item item1 flex justify-center" >
+        <img [src]="dati[0]?.url" class="rounded-3xl">
       </div>
-      <div class="item item2"></div>
-      <div class="item item3"></div>
-      <div class="item item4"></div>
-      <div class="item item5"></div>
-      <div class="item item6"></div>
-      <div class="item item7"></div>
-      <div class="item item8"></div>
+      <div class="item item2 flex justify-center">
+        <img [src]="dati[1]?.url" class="rounded-3xl">
+      </div>
+
+      <div class="item item3 flex justify-center">
+        <img [src]="dati[3]?.url" class="rounded-3xl">
+      </div>
+
+      <div class="item item4 flex justify-center">
+        <img [src]="dati[4]?.url" class="rounded-3xl">
+      </div>
+
+      <div class="item item5 flex justify-center">
+        <img [src]="dati[5]?.url" class="rounded-3xl">
+      </div>
+
+      <div class="item item6 flex justify-center">
+        <img [src]="dati[6]?.url" class="rounded-3xl">
+      </div>
+
+      <div class="item item7 flex justify-center">
+        <img [src]="dati[7]?.url" class="rounded-3xl">
+      </div>
+
+      <div class="item item8 flex justify-center">
+        <img [src]="dati[8]?.url" class="rounded-3xl">
+      </div>
     </div>
   </div>
+
 
   <div class="flex justify-evenly items-center max-w-[1000]">
 
     <div class="color h-[4px] w-[200px] rounded-3xl" ></div>
 
     <!-- fare routing a menu -->
-    <a href="#" class="inline-flex items-center bottone justify-center px-5 py-3 text-base font-semibold text-center bg-white border-2 rounded-3xl hover:text-gray-500 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800 no-underline testi mr-[20px] ml-[20px]">
+    <a href="/bakery/menu/1" class="inline-flex items-center bottone justify-center px-5 py-3 text-base font-semibold text-center bg-white border-2 rounded-3xl hover:text-gray-500 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800 no-underline testi mr-[20px] ml-[20px]">
       Esplora Menù
     </a>
 

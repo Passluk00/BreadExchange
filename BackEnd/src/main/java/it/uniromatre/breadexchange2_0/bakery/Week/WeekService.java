@@ -23,7 +23,7 @@ public class WeekService {
     private final WeekDayService weekDayService;
     private final WeekRepository weekRepository;
     private final WeekMapper weekMapper;
-
+    private final WeekDayRepository weekDayRepository;
 
 
     // Utilizzata in creazione bakery
@@ -79,7 +79,7 @@ public class WeekService {
 
 
         // controllo se utente è owner
-        if(!bac.getOwner().equals(user)){
+        if(!bac.getOwner().getId().equals(user.getId())){
             throw new RuntimeException("Non sei il propietario azione negata");
         }
 
@@ -88,16 +88,34 @@ public class WeekService {
         Week nuova = weekMapper.toWeek(newWeek);
 
 
-        // prendo la vecchia week
-        Week vecchia = bac.getWeek();
+        // weekDayService.updateWeekIfChanged(vecchia,nuova,bac);
+
+        this.updateAllWeek(nuova, bac);
 
 
-        // comparo ogni giorno se sono state fatte delle modifiche
-        // se sono state fatte salvo il giorno e metto a true isChangeed
-        // fine ciclo se isChanged è true salvo la modifica
-        // altrimenti non faccio nulla
-        weekDayService.updateWeekIfChanged(vecchia,nuova,bac);
+
 
     }
+
+
+    private void updateAllWeek(Week nuova, Bakery bac){
+
+        weekDayRepository.save(nuova.getLun());
+        weekDayRepository.save(nuova.getMar());
+        weekDayRepository.save(nuova.getMer());
+        weekDayRepository.save(nuova.getGio());
+        weekDayRepository.save(nuova.getVen());
+        weekDayRepository.save(nuova.getSab());
+        weekDayRepository.save(nuova.getDom());
+
+        weekRepository.save(nuova);
+
+        bac.setWeek(nuova);
+        bakeryRepository.save(bac);
+
+    }
+
+
+
 
 }

@@ -34,7 +34,6 @@ export class OrariComponent implements OnInit{
       }).subscribe({
         next: (res) => {
           this.week = res;
-          console.error("get dati week: "+ this.week)
           JSON.stringify(this.week, null)
         },
         error: (err) => {
