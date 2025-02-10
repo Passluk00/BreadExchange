@@ -67,14 +67,14 @@ git clone https://github.com/tuo-username/BreadExchange.git
 cd BreadExchange
 ```
 
-### **2️⃣ Configurare Il Database
+### **2️⃣ Configurare Il Database**
 > Nota, prima di digitare il comando verifica di avere installato PostgresSql sul tuo dispositivo
 ```bash
 CREATE DATABASE BreadExchange
 ```
 - Dopodiche verifica e aggiora il file **application.properies** con le credenziali corrette del database
 
-### **3️⃣ Configurare Docker
+### **3️⃣ Configurare Docker**
 > Nota, Verificare di aver installato docker e dopodiche installa MailDev dal DokerHub o manualmente dalla sua repo
 > https://github.com/maildev/maildev
 
@@ -83,14 +83,14 @@ CREATE DATABASE BreadExchange
 
 - Aggiornare il file **application.properties** inserendo ip del container e la porta di ascolto
 
-### **4️⃣ Avviare Il Back-End
+### **4️⃣ Avviare Il Back-End**
 
 ```bash
 cd backend
 ./mwn spring-boot:run
 ```
 
-### **5️⃣ Installare e Avviare Angular 
+### **5️⃣ Installare e Avviare Angular**
 
 ```bash
 cd frontend
