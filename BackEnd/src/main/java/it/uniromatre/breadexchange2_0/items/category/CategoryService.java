@@ -66,7 +66,7 @@ public class CategoryService {
             throw new RuntimeException("Bakery not found with id: "+idBac);
         }
 
-        if(!bac.getOwner().equals(toCheck)){
+        if(!bac.getOwner().getId().equals(toCheck.getId())){
             throw new RuntimeException("Non sei il propietario di questa bakery");
         }
 
@@ -102,6 +102,9 @@ public class CategoryService {
         return categoryMapper.toListcat(c,b);
 
     }
+
+
+
 
 
     @Transactional

@@ -1,1 +1,43 @@
-<p>favourite works!</p>
+<div class="pb-10 h-min-[800px]">
+
+  <div *ngIf="favs.length === 0" class="container-empty flex justify-center mt-32">
+
+    <span class="empty min-h-[300px] text-6xl">Non Hai Salvato Nessuna Panetteria</span>
+
+  </div>
+
+  <div *ngFor="let ele of favs">
+
+    <div class="elemento mt-8 mb-8 bg-white rounded-3xl ml-40 mr-40 flex justify-between shadow-2xl" >
+
+      <div class="flex">
+
+        <div class="pl-5 pt-4 mb-4">
+          <img [src]="ele.pictures" width="90px" height="90px" alt="Profile pictures" class="rounded-full border-5 object-cover shadow-2xl">
+        </div>
+
+        <div class=" ml-10 flex items-center">
+          <span class="text">{{ele.name}}</span>
+        </div>
+
+      </div>
+
+      <div class="bottoni flex justify-evenly items-center">
+
+        <button type="button" class="btn btn-danger btn-lg mr-10 shadow-2xl" (click)="removeToFav(ele.id)">
+          <fa-icon class="fa-solid fa-trash-can"></fa-icon>
+        </button>
+
+        <button type="button" class="btn btn-success btn-lg mr-10 shadow-2xl" (click)="newOrder(ele.id)">
+          <fa-icon class="fa-solid fa-cart-shopping"></fa-icon>
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+</div>
+

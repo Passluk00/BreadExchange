@@ -1,9 +1,6 @@
 package it.uniromatre.breadexchange2_0.controller;
 
-import it.uniromatre.breadexchange2_0.bakery.BakeryService;
-import it.uniromatre.breadexchange2_0.bakery.BakeryfrontEndResponse;
-import it.uniromatre.breadexchange2_0.bakery.PlanAddBkery;
-import it.uniromatre.breadexchange2_0.bakery.RandomDataBakeryResponse;
+import it.uniromatre.breadexchange2_0.bakery.*;
 import it.uniromatre.breadexchange2_0.bakery.Week.Week;
 import it.uniromatre.breadexchange2_0.items.category.CategoryService;
 import it.uniromatre.breadexchange2_0.items.category.ListCategoryFrontEnd;
@@ -92,6 +89,39 @@ public class FrontEndController {
         }
     }
 
+
+    @GetMapping("/getBAkeryById")
+    public ResponseEntity<BakeryNavBarResponse> getBAkeryById(
+            @RequestParam(name = "idBac") Integer idBac
+    ){
+        return ResponseEntity.ok(this.bakeryService.getBakeryById(idBac));
+    }
+
+    @GetMapping("/searchBakery")
+    public ResponseEntity<List<BakeryNavBarResponse>> searchBakery(
+            @RequestParam(name = "name") String req
+    ){
+        return ResponseEntity.ok(this.bakeryService.searchByName(req));
+    }
+
+    @GetMapping("/getInfo")
+    public ResponseEntity<?> getInfo(
+            @RequestParam(name = "idBac") Integer idBac
+    ){
+        return ResponseEntity.ok(this.bakeryService.getInfo(idBac));
+    }
+
+    @GetMapping("/isOpen")
+    public ResponseEntity<Boolean> isOpen(
+            @RequestParam(name = "idBac") Integer idBac
+    ){
+        return ResponseEntity.ok(this.bakeryService.checkOpen(idBac));
+    }
+
+    @GetMapping("/getRandomForCarosello")
+    public ResponseEntity<List<RandomDataBakeryCarosello>> getRandomForCarosello(){
+        return ResponseEntity.ok(this.bakeryService.getRandomForCarosello());
+    }
 
 }
 

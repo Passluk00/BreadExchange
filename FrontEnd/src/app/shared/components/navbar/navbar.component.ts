@@ -3,15 +3,17 @@ import {Router, RouterLink} from "@angular/router";
 import {FaIconComponent} from "@fortawesome/angular-fontawesome";
 import {
   faArrowRightFromBracket,
-  faCartShopping,
-  faChartLine,
   faMagnifyingGlass,
-  faSliders, faTriangleExclamation, faUser
+  faShop,
+  faTriangleExclamation,
+  faUser
 } from "@fortawesome/free-solid-svg-icons";
-import {isPlatformBrowser, NgClass, NgIf} from "@angular/common";
+import {isPlatformBrowser, NgClass, NgForOf, NgIf} from "@angular/common";
 import {AuthenticationService} from "../../../services/services/authentication.service";
 import {UserControllerService} from "../../../services/services/user-controller.service";
-import {isAdmin} from "../../../services/fn/user-controller/is-admin";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {FrontEndControllerService} from "../../../services/services/front-end-controller.service";
+import {BakeryNavBarResponse} from "../../../services/models/bakery-nav-bar-response";
 
 
 
@@ -21,7 +23,10 @@ import {isAdmin} from "../../../services/fn/user-controller/is-admin";
     FaIconComponent,
     RouterLink,
     NgIf,
-    NgClass
+    NgClass,
+    NgForOf,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   templateUrl: './navbar.component.html',
   standalone: true,
@@ -35,27 +40,33 @@ export class NavbarComponent implements OnInit{
     private authService: AuthenticationService,
     private userService: UserControllerService,
     private cdr: ChangeDetectorRef,
+    private frontEndService: FrontEndControllerService,
+
   @Inject(PLATFORM_ID) private platformId: Object
   ) {
   }
 
 
-  protected readonly faArrowRightFromBracket = faArrowRightFromBracket;
-  protected readonly faSliders = faSliders;
-  protected readonly faChartLine = faChartLine;
-  protected readonly faCartShopping = faCartShopping;
   protected readonly faUser = faUser;
+  protected readonly faShop = faShop;
   protected readonly faMagnifyingGlass = faMagnifyingGlass;
+  protected readonly faTriangleExclamation = faTriangleExclamation;
+  protected readonly faArrowRightFromBracket = faArrowRightFromBracket;
 
   isLogged: boolean = false;
   userData:any;
   isDropdownOpen = false;
   isAdmin: boolean = false;
+  results: BakeryNavBarResponse[] = []
+  searchValue: string = ""
+  isOwner: boolean = false
+  idBacOwner: number = 0
 
 
   toggleDropdown(){
     this.isDropdownOpen = !this.isDropdownOpen;
   }
+
 
   @HostListener('document:click', ['$event'])
   onClick(event: MouseEvent){
@@ -69,9 +80,28 @@ export class NavbarComponent implements OnInit{
 
   ngOnInit() {
     this.checkLoginStatus();
+    this.checkOwner()
     this.cdr.detectChanges();
   }
 
+
+  onSearch(){
+
+    if(this.searchValue != ""){
+
+      this.frontEndService.searchBakery({
+        name: this.searchValue
+      }).subscribe({
+        next: (res) => {
+          this.results = res
+        },
+        error: (err) => {
+          console.error("Errore Search Bakery "+ err)
+        }
+      })
+
+    }
+  }
 
   controllo(){
     this.userService.isAdmin().subscribe({
@@ -125,14 +155,12 @@ export class NavbarComponent implements OnInit{
     return null
   }
 
-
   logout():void {
     if(typeof localStorage.getItem('token') !== 'undefined'&& typeof window !=='undefined'){
       localStorage.removeItem("token")
       window.location.reload()
     }
   }
-
 
   goToUserPage() {
     this.router.navigate(['user']);
@@ -142,5 +170,24 @@ export class NavbarComponent implements OnInit{
     this.router.navigate(['admin'])
   }
 
-  protected readonly faTriangleExclamation = faTriangleExclamation;
+  goToManage(){
+    this.router.navigate([`bakery/manage/${this.idBacOwner}`])
+  }
+
+  checkOwner(){
+    this.userService.checkOwnerOfBakery().subscribe({
+      next: (res) => {
+        if(res.status != undefined && res.id != undefined){
+          this.isOwner = res.status
+          this.idBacOwner = res.id
+        }
+      },
+      error: (err) => {
+        console.error("non sei un owner id una bakery")
+      }
+    })
+  }
+
+
+
 }

@@ -5,6 +5,7 @@ import {AdminControllerService} from "../../../../../../services/services/admin-
 import {UserControllerService} from "../../../../../../services/services/user-controller.service";
 import {PageResponseBakeryResponse} from "../../../../../../services/models/page-response-bakery-response";
 import {RouterLink} from "@angular/router";
+import {BakeryResponse} from "../../../../../../services/models/bakery-response";
 
 @Component({
   selector: 'app-list-bakery',
@@ -34,6 +35,10 @@ export class ListBakeryComponent implements OnInit{
   bakerys: PageResponseBakeryResponse = {};
   test = this.bakerys.content
   pages: any =[]
+  toSearch: string = "";
+  isEmpty = true;
+
+
 
 
   ngOnInit(): void {
@@ -41,6 +46,23 @@ export class ListBakeryComponent implements OnInit{
     this.cdr.detectChanges()
   }
 
+
+
+  banUnbanBakery(req: BakeryResponse){
+    if(req.id != undefined) {
+      this.adminService.banBakery({
+        idBac: req.id
+      }).subscribe({
+        next: () => {
+          window.location.reload();
+        console.info("Ban avvenuto")
+          },
+        error: (err) => {
+          console.error("Errore ban bakery")
+        }
+      })
+    }
+  }
 
 
   // TODO cambaire funzione get data con bakery
@@ -74,8 +96,6 @@ export class ListBakeryComponent implements OnInit{
   }
 
 
-  toSearch: string = "";
-  isEmpty = true;
 
   searchRequestByName(){
     this.bakerys = {}

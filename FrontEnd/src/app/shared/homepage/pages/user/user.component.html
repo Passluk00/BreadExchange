@@ -19,7 +19,7 @@
     </div>
 
     <div *ngIf="userData.url_picture != ''; else placePic" >
-      <img [src]="userData.url_picture" class="profile-img" >    <!-- profile img -->
+      <img [src]="userData.url_picture" class="profile-img shadow-2xl" >    <!-- profile img -->
     </div>
 
 
@@ -76,7 +76,7 @@
               <div class="ml-[40px]">
 
                 <div class="elem email">
-                  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Email</label>
+                  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
                   <div class="relative">
                     <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
                       <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 16">
@@ -91,7 +91,7 @@
                 <br>
 
                 <div class="elem username">
-                  <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Username</label>
+                  <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Username</label>
                   <div class="relative">
                     <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
                       <!-- Profile Icon SVG -->
@@ -107,14 +107,14 @@
 
                 <div class="elem flex justify-between address-id">
                   <div class="dato">
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Address</label>
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Il Tuo Indirizzo</label>
                     <div class="relative">
                       <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
                         <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 384 512">
                           <path d="M168 0C75.1 0 0 75.1 0 168C0 275.1 168 512 168 512C168 512 336 275.1 336 168C336 75.1 260.9 0 168 0zM168 240C123.1 240 88 204.9 88 160C88 115.1 123.1 80 168 80C212.9 80 248 115.1 248 160C248 204.9 212.9 240 168 240z"/>
                         </svg>
                       </div>
-                      <input type="text" aria-label="disabled input 2" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-auto ps-10 p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{userData?.address?.name}}" placeholder="Address" disabled readonly>
+                      <input type="text" aria-label="disabled input 2" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-auto ps-10 p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{userData.address?.name}}" placeholder="Address" disabled readonly>
                     </div>
                   </div>
 
@@ -127,7 +127,7 @@
 
                 <div class="elem flex justify-between password">
                   <div class="dato">
-                    <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Password</label>
+                    <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">La Tua Password</label>
                     <div class="relative">
                       <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
                         <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 448 512">
@@ -144,7 +144,7 @@
 
                 <br>
 
-                <button class="btn btn-primary h-[40px] mt-[29px] mr-[40px]" data-bs-target="#exampleModalToggle8" data-bs-toggle="modal">Diventa Bakery</button>
+                <button *ngIf="!isOwner" class="btn btn-primary h-[40px] mt-[29px] mr-[40px]" data-bs-target="#exampleModalToggle8" data-bs-toggle="modal">Diventa Bakery</button>
 
 
               </div>
@@ -153,11 +153,7 @@
 
           </div>
 
-          <div class="modal-footer">
-
-            <button class="btn btn-primary" (click)="ricaricaPagina()" >Ricarica Pagina</button>
-            <button class="btn btn-primary" (click)="navigateToUser(1)" >vai a bakery 1</button>
-
+          <div class="modal-footer h-10">
 
           </div>
 
@@ -189,7 +185,10 @@
             <div>
               <!-- Drag and Drop Area -->
 
-              <div class="border-2 border-dashed border-gray-400 rounded-lg p-8 text-center h-[800px] w-[1000px]" *ngIf="!previewImage" (drop)="onFileDrop($event)" (dragover)="onDragOver($event)" (dragleave)="onDragLeave($event)" [class.bg-blue-100]="isDragging">
+              <div class="border-2 border-dashed border-gray-400 rounded-lg p-8 text-center h-[700px] w-[700px] mt-10 mb-10" *ngIf="!previewImage" (drop)="onFileDrop($event)" (dragover)="onDragOver($event)" (dragleave)="onDragLeave($event)" [class.bg-blue-100]="isDragging">
+                <div class="flex justify-center">
+                  <svg class="mt-32 mb-32" xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M21.2 15c.7-1.2 1-2.5.7-3.9-.6-2-2.4-3.5-4.4-3.5h-1.2c-.7-3-3.2-5.2-6.2-5.6-3-.3-5.9 1.3-7.3 4-1.2 2.5-1 6.5.5 8.8m8.7-1.6V21"/><path d="M16 16l-4-4-4 4"/></svg>
+                </div>
                 <p class="text-gray-500 mb-2">Trascina qui un'immagine o clicca per selezionarla</p>
                 <input type="file" id="fileInput" accept="image/*" (change)="onFileSelect($event)" hidden>
                 <button type="button" class="btn btn-primary" (click)="triggerFileSelect()">Scegli File</button>
@@ -227,12 +226,18 @@
           </div>
 
 
+
+
+
           <div class="modal-body flex justify-center items-center min-h-[500px]">
 
             <div>
               <!-- Drag and Drop Area -->
 
-              <div class="border-2 border-dashed border-gray-400 rounded-lg p-8 text-center h-[800px] w-[1000px]" *ngIf="!previewImage" (drop)="onFileDrop($event)" (dragover)="onDragOver($event)" (dragleave)="onDragLeave($event)" [class.bg-blue-100]="isDragging">
+              <div class="border-2 border-dashed border-gray-400 rounded-lg p-8 text-center h-[700px] w-[700px] mt-10 mb-10" *ngIf="!previewImage" (drop)="onFileDrop($event)" (dragover)="onDragOver($event)" (dragleave)="onDragLeave($event)" [class.bg-blue-100]="isDragging">
+                <div class="flex justify-center">
+                  <svg class="mt-32 mb-32" xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M21.2 15c.7-1.2 1-2.5.7-3.9-.6-2-2.4-3.5-4.4-3.5h-1.2c-.7-3-3.2-5.2-6.2-5.6-3-.3-5.9 1.3-7.3 4-1.2 2.5-1 6.5.5 8.8m8.7-1.6V21"/><path d="M16 16l-4-4-4 4"/></svg>
+                </div>
                 <p class="text-gray-500 mb-2">Trascina qui un'immagine o clicca per selezionarla</p>
                 <input type="file" id="fileInput" accept="image/*" (change)="onFileSelect($event)" hidden>
                 <button type="button" class="btn btn-primary" (click)="triggerFileSelect()">Scegli File</button>
@@ -240,11 +245,12 @@
 
               <!-- Preview Area -->
               <div class="mt-4 text-center" *ngIf="previewImage">
-                <img [src]="previewImage" alt="Anteprima" class="w-64 h-64 object-cover rounded-md shadow-md mx-auto">
+                <img [src]="previewImage" alt="Anteprima" class="w-256 h-256 object-cover rounded-md shadow-md mx-auto">
                 <button class="btn btn-danger mt-2" (click)="removeImage()">Rimuovi Immagine</button>
               </div>
 
             </div>
+
 
           </div>
           <div class="modal-footer" *ngIf="previewImage">
@@ -401,7 +407,6 @@
         </div>
       </div>
     </div>
-
 
 
     <!-- Form per la modifica della password              step-1            -->
@@ -590,15 +595,9 @@
                   </div>
                 </ng-template>
 
-
               </div>
 
             </div>
-
-            <button class="btn btn-primary flex z-50 absolute top-[450px] left-[20px]" data-bs-target="#exampleModalToggle7" data-bs-toggle="modal">
-              <fa-icon [icon]="faPencil" class="mr-1"></fa-icon>
-              <span> Modifica Profilo </span>
-            </button>
 
           </div>
 
@@ -772,7 +771,7 @@
                   <div>
                     <!-- Nome Azienda -->
 
-                    <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nome Azienda</label>
+                    <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nome Azienda*</label>
                     <div class="relative">
                       <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
                         <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
@@ -790,7 +789,7 @@
                   <div>
                     <!-- Piccola Descrizione -->
 
-                    <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Descrizione</label>
+                    <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Descrizione*</label>
                     <div class="relative">
                       <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
                         <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
@@ -807,7 +806,7 @@
                   <div>
                     <!-- Email -->
 
-                    <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
+                    <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email*</label>
                     <div class="relative">
                       <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
                         <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
@@ -825,14 +824,14 @@
                   <div>
                     <!-- Numero Telefonico -->
 
-                    <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Numero Telefonico </label>
+                    <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Numero Telefonico* </label>
                     <div class="relative">
                       <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
                         <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
                           <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
                         </svg>
                       </div>
-                      <input [(ngModel)]="bakeryRegisterRequest.phone_azz" type="text" name="phone_az" id="phoneAz" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-auto ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Numero di Telefono" required="">
+                      <input [(ngModel)]="bakeryRegisterRequest.phone_azz" type="tel" name="phone_az" id="phoneAz" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-auto ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Numero di Telefono" required="">
                     </div>
 
 
@@ -893,6 +892,12 @@
                       <input [(ngModel)]="bakeryRegisterRequest.instagram" type="text" name="instagram" id="instagram" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-auto ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Link Instagram" required="">
                     </div>
 
+                  </div>
+
+                  <br>
+
+                  <div class="mt-4">
+                    <h6>* Sono Campi Obligatori</h6>
                   </div>
 
                 </div>
@@ -977,7 +982,7 @@
               <div class="custom:mr-[40px]">
 
                 <div class="elem">
-                  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nome</label>
+                  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nome*</label>
                   <div class="relative">
                     <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
                       <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
@@ -989,7 +994,7 @@
                 <br>
 
                 <div class="elem">
-                  <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Numero di Telefono</label>
+                  <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Numero di Telefono*</label>
                   <div class="relative">
                     <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
                       <img src="/public/testImg/icons8-telefono-100.png" height="19" width="19" alt="icona telefono">
@@ -1001,7 +1006,7 @@
                 <br>
 
                 <div class="elem">
-                  <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Stato</label>
+                  <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Stato*</label>
                   <div class="relative">
                     <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
                       <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path><line x1="4" y1="22" x2="4" y2="15"></line></svg>
@@ -1013,7 +1018,7 @@
                 <br>
 
                 <div class="elem">
-                  <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Regione</label>
+                  <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Regione*</label>
                   <div class="relative">
                     <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
                       <img src="/public/testImg/icons8-lazio-24.png" height="19" width="19" alt="icona regione">
@@ -1025,7 +1030,7 @@
                 <br>
 
                 <div class="elem">
-                  <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Provincia</label>
+                  <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Provincia*</label>
                   <div class="relative">
                     <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
                       <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="10" r="3"/><path d="M12 21.7C17.3 17 20 13 20 10a8 8 0 1 0-16 0c0 3 2.7 6.9 8 11.7z"/></svg>
@@ -1039,7 +1044,7 @@
               <div class="mt-[20px] mb-[40px] custom:ml-[40px] custom:mt-0 custom:mb-0">
 
                 <div class="elem">
-                  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Città</label>
+                  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Città*</label>
                   <div class="relative">
                     <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
                       <img src="public/testImg/icons8-città-50.png" width="19" height="19" alt="icona città">
@@ -1051,7 +1056,7 @@
                 <br>
 
                 <div class="elem">
-                  <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">CAP</label>
+                  <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">CAP*</label>
                   <div class="relative">
                     <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
                       <img src="public/testImg/zip-code.png" width="19" height="19" alt="icona Cap">
@@ -1063,7 +1068,7 @@
                 <br>
 
                 <div class="elem">
-                  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Strada / Via / Località</label>
+                  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Strada / Via / Località*</label>
                   <div class="relative">
                     <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
                       <img src="public/testImg/road.png" width="19" height="19" alt="icona strada">
@@ -1075,7 +1080,7 @@
                 <br>
 
                 <div class="elem">
-                  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">N°</label>
+                  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">N° *</label>
                   <div class="relative">
                     <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
                       <img src="public/testImg/letter-n.png" width="19" height="19" alt="icona numero civico">
@@ -1083,6 +1088,13 @@
                     <input  [(ngModel)]="address1.number" type="text" name="text" id="numberAz" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Numero" required="">
                   </div>
                 </div>
+
+                <br>
+
+                <div class="mt-4">
+                  <h6>* Sono Campi Obligatori</h6>
+                </div>
+
 
               </div>
 
@@ -1467,37 +1479,15 @@
 
       <div *ngIf="visibleElement === 'element2'" class="order">
 
-        <div *ngIf="orders.length === 0" class="container-empty" >
 
-          <span class="empty h-[300px]">Non hai mai fatto un ordine</span>
-
-        </div>
-
-        <div *ngFor="let order of orders">
-
-          <app-order></app-order>
-
-          <!-- [order]="order" -->
-
-        </div>
+        <app-order></app-order>
 
       </div>
 
       <div *ngIf="visibleElement === 'element3'" class="fav">
 
-        <div *ngIf="favBakery.length === 0" class="container-empty">
 
-          <span class="empty h-[300px]">Non Hai Salvato Nessuna Panetteria</span>
-
-        </div>
-
-        <div *ngFor="let favourite of favBakery" >
-
-          <app-favourite></app-favourite>
-
-          <!-- [fav]="favourite" -->
-
-        </div>
+        <app-favourite></app-favourite>
 
       </div>
 
@@ -1506,4 +1496,5 @@
   </div>
 
 </div>
+
 

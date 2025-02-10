@@ -31,11 +31,9 @@ export class ListRequestsComponent implements OnInit{
   pages: any =[]
 
 
-
   ngOnInit(): void {
     this.findAllRequest()
   }
-
 
   findAllRequest(){
     this.adminService.getAllRequest({

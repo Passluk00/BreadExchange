@@ -11,6 +11,8 @@ import { BaseService } from '../base-service';
 import { ApiConfiguration } from '../api-configuration';
 import { StrictHttpResponse } from '../strict-http-response';
 
+import { banBakery } from '../fn/admin-controller/ban-bakery';
+import { BanBakery$Params } from '../fn/admin-controller/ban-bakery';
 import { banUser } from '../fn/admin-controller/ban-user';
 import { BanUser$Params } from '../fn/admin-controller/ban-user';
 import { enableBakery } from '../fn/admin-controller/enable-bakery';
@@ -87,6 +89,31 @@ export class AdminControllerService extends BaseService {
    */
   banUser(params: BanUser$Params, context?: HttpContext): Observable<void> {
     return this.banUser$Response(params, context).pipe(
+      map((r: StrictHttpResponse<void>): void => r.body)
+    );
+  }
+
+  /** Path part for operation `banBakery()` */
+  static readonly BanBakeryPath = '/admin/banBakery';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `banBakery()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  banBakery$Response(params: BanBakery$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
+    return banBakery(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `banBakery$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  banBakery(params: BanBakery$Params, context?: HttpContext): Observable<void> {
+    return this.banBakery$Response(params, context).pipe(
       map((r: StrictHttpResponse<void>): void => r.body)
     );
   }

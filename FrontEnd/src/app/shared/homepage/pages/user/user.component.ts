@@ -17,6 +17,7 @@ import {Address} from "../../../../services/models/address";
 import {NewAddress} from "../../../../services/models/new-address";
 import {BakeryRegisterRequest} from "../../../../services/models/bakery-register-request";
 import {AdminControllerService} from "../../../../services/services/admin-controller.service";
+import {UserFrontEndResponse} from "../../../../services/models/user-front-end-response";
 
 @Component({
   selector: 'app-user',
@@ -49,14 +50,16 @@ export class UserComponent implements OnInit{
 
 
   isLogged: boolean = true;
-  userData:any = {}
+  userData:UserFrontEndResponse = {}
   visibleElement: string | null = 'element1';
+  isOwner: boolean = false
 
 
 
   ngOnInit() {
     this.checkLoginStatus();
     this.cdr.detectChanges();
+    this.checkIsOwner();
   }
 
   fetchMod(){
@@ -69,6 +72,18 @@ export class UserComponent implements OnInit{
       }
     })
   }
+
+  checkIsOwner(){
+    this.userService.checkIfOwner().subscribe({
+      next: (res) => {
+        this.isOwner = res
+      },
+      error: () => {
+        console.error("errore controllo se gia owner")
+      }
+    })
+  }
+
 
   checkLoginStatus(): void{
     if(isPlatformBrowser(this.platformId)) {
@@ -92,7 +107,6 @@ export class UserComponent implements OnInit{
       }
     }
   }
-
 
 
 
@@ -489,10 +503,7 @@ export class UserComponent implements OnInit{
     return (this.bakeryRegisterRequest.name &&
               this.bakeryRegisterRequest.description &&
               this.bakeryRegisterRequest.email_azz &&
-              this.bakeryRegisterRequest.phone_azz &&
-              this.bakeryRegisterRequest.twitter &&
-              this.bakeryRegisterRequest.facebook &&
-              this.bakeryRegisterRequest.instagram)
+              this.bakeryRegisterRequest.phone_azz)
   }
 
   isFilled2(){

@@ -11,18 +11,33 @@ import { BaseService } from '../base-service';
 import { ApiConfiguration } from '../api-configuration';
 import { StrictHttpResponse } from '../strict-http-response';
 
+import { acceptOrder } from '../fn/bakery-controller/accept-order';
+import { AcceptOrder$Params } from '../fn/bakery-controller/accept-order';
 import { addAddress1 } from '../fn/bakery-controller/add-address-1';
 import { AddAddress1$Params } from '../fn/bakery-controller/add-address-1';
+import { changeStatus } from '../fn/bakery-controller/change-status';
+import { ChangeStatus$Params } from '../fn/bakery-controller/change-status';
+import { changeStatusOrder } from '../fn/bakery-controller/change-status-order';
+import { ChangeStatusOrder$Params } from '../fn/bakery-controller/change-status-order';
 import { delCategory } from '../fn/bakery-controller/del-category';
 import { DelCategory$Params } from '../fn/bakery-controller/del-category';
 import { delItem } from '../fn/bakery-controller/del-item';
 import { DelItem$Params } from '../fn/bakery-controller/del-item';
+import { getAllOrdersBakery } from '../fn/bakery-controller/get-all-orders-bakery';
+import { GetAllOrdersBakery$Params } from '../fn/bakery-controller/get-all-orders-bakery';
 import { newCategory } from '../fn/bakery-controller/new-category';
 import { NewCategory$Params } from '../fn/bakery-controller/new-category';
 import { newItem } from '../fn/bakery-controller/new-item';
 import { NewItem$Params } from '../fn/bakery-controller/new-item';
+import { OrderFrontEnd } from '../models/order-front-end';
+import { rejectOrder } from '../fn/bakery-controller/reject-order';
+import { RejectOrder$Params } from '../fn/bakery-controller/reject-order';
+import { updateDesc } from '../fn/bakery-controller/update-desc';
+import { UpdateDesc$Params } from '../fn/bakery-controller/update-desc';
 import { updateItem } from '../fn/bakery-controller/update-item';
 import { UpdateItem$Params } from '../fn/bakery-controller/update-item';
+import { updateSocial } from '../fn/bakery-controller/update-social';
+import { UpdateSocial$Params } from '../fn/bakery-controller/update-social';
 import { updateWeek } from '../fn/bakery-controller/update-week';
 import { UpdateWeek$Params } from '../fn/bakery-controller/update-week';
 import { uploadBackPicture } from '../fn/bakery-controller/upload-back-picture';
@@ -236,6 +251,205 @@ export class BakeryControllerService extends BaseService {
       map((r: StrictHttpResponse<{
 }>): {
 } => r.body)
+    );
+  }
+
+  /** Path part for operation `updateSocial()` */
+  static readonly UpdateSocialPath = '/bakery/updateSocial';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `updateSocial()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  updateSocial$Response(params: UpdateSocial$Params, context?: HttpContext): Observable<StrictHttpResponse<{
+}>> {
+    return updateSocial(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `updateSocial$Response()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  updateSocial(params: UpdateSocial$Params, context?: HttpContext): Observable<{
+}> {
+    return this.updateSocial$Response(params, context).pipe(
+      map((r: StrictHttpResponse<{
+}>): {
+} => r.body)
+    );
+  }
+
+  /** Path part for operation `updateDesc()` */
+  static readonly UpdateDescPath = '/bakery/updateDesc';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `updateDesc()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  updateDesc$Response(params: UpdateDesc$Params, context?: HttpContext): Observable<StrictHttpResponse<{
+}>> {
+    return updateDesc(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `updateDesc$Response()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  updateDesc(params: UpdateDesc$Params, context?: HttpContext): Observable<{
+}> {
+    return this.updateDesc$Response(params, context).pipe(
+      map((r: StrictHttpResponse<{
+}>): {
+} => r.body)
+    );
+  }
+
+  /** Path part for operation `rejectOrder()` */
+  static readonly RejectOrderPath = '/bakery/rejectOrder';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `rejectOrder()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  rejectOrder$Response(params: RejectOrder$Params, context?: HttpContext): Observable<StrictHttpResponse<{
+}>> {
+    return rejectOrder(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `rejectOrder$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  rejectOrder(params: RejectOrder$Params, context?: HttpContext): Observable<{
+}> {
+    return this.rejectOrder$Response(params, context).pipe(
+      map((r: StrictHttpResponse<{
+}>): {
+} => r.body)
+    );
+  }
+
+  /** Path part for operation `changeStatus()` */
+  static readonly ChangeStatusPath = '/bakery/changeStatus';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `changeStatus()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  changeStatus$Response(params: ChangeStatus$Params, context?: HttpContext): Observable<StrictHttpResponse<{
+}>> {
+    return changeStatus(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `changeStatus$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  changeStatus(params: ChangeStatus$Params, context?: HttpContext): Observable<{
+}> {
+    return this.changeStatus$Response(params, context).pipe(
+      map((r: StrictHttpResponse<{
+}>): {
+} => r.body)
+    );
+  }
+
+  /** Path part for operation `changeStatusOrder()` */
+  static readonly ChangeStatusOrderPath = '/bakery/changeStatusOrder';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `changeStatusOrder()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  changeStatusOrder$Response(params: ChangeStatusOrder$Params, context?: HttpContext): Observable<StrictHttpResponse<{
+}>> {
+    return changeStatusOrder(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `changeStatusOrder$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  changeStatusOrder(params: ChangeStatusOrder$Params, context?: HttpContext): Observable<{
+}> {
+    return this.changeStatusOrder$Response(params, context).pipe(
+      map((r: StrictHttpResponse<{
+}>): {
+} => r.body)
+    );
+  }
+
+  /** Path part for operation `acceptOrder()` */
+  static readonly AcceptOrderPath = '/bakery/acceptOrder';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `acceptOrder()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  acceptOrder$Response(params: AcceptOrder$Params, context?: HttpContext): Observable<StrictHttpResponse<{
+}>> {
+    return acceptOrder(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `acceptOrder$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  acceptOrder(params: AcceptOrder$Params, context?: HttpContext): Observable<{
+}> {
+    return this.acceptOrder$Response(params, context).pipe(
+      map((r: StrictHttpResponse<{
+}>): {
+} => r.body)
+    );
+  }
+
+  /** Path part for operation `getAllOrdersBakery()` */
+  static readonly GetAllOrdersBakeryPath = '/bakery/getAllOrdersBakery';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `getAllOrdersBakery()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getAllOrdersBakery$Response(params?: GetAllOrdersBakery$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<OrderFrontEnd>>> {
+    return getAllOrdersBakery(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `getAllOrdersBakery$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getAllOrdersBakery(params?: GetAllOrdersBakery$Params, context?: HttpContext): Observable<Array<OrderFrontEnd>> {
+    return this.getAllOrdersBakery$Response(params, context).pipe(
+      map((r: StrictHttpResponse<Array<OrderFrontEnd>>): Array<OrderFrontEnd> => r.body)
     );
   }
 

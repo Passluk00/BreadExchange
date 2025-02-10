@@ -11,6 +11,8 @@ import it.uniromatre.breadexchange2_0.user.User;
 import it.uniromatre.breadexchange2_0.user.UserRepository;
 import it.uniromatre.breadexchange2_0.user.address.Address;
 import it.uniromatre.breadexchange2_0.user.address.AddressRepository;
+import it.uniromatre.breadexchange2_0.user.cart.Cart;
+import it.uniromatre.breadexchange2_0.user.cart.CartRepository;
 import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -24,6 +26,7 @@ import org.springframework.stereotype.Service;
 
 import java.security.SecureRandom;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 @Service
@@ -38,6 +41,7 @@ public class AuthService {
     private final AuthenticationManager authenticationManager;
     private final EmailService emailService;
     private final AddressRepository addressRepository;
+    private final CartRepository cartRepository;
 
 
     @Value("${application.security.mailing.frontend.activation-url}")
@@ -76,9 +80,15 @@ public class AuthService {
                 .telNumber("Numero Telefonico")
                 .build();
 
+        var cart = Cart.builder()
+                .items(new ArrayList<>())
+                .build();
+
         user.setAddress(add);
+        user.setCart(cart);
         user.setUrl_BackImg("./public/testImg/ceste_pane.jpeg");
         user.setUrl_picture("./public/testImg/profile.jpeg");
+        cartRepository.save(cart);
         addressRepository.save(add);
         userRepository.save(user);
         sendValidationEmail(user);
@@ -106,10 +116,18 @@ public class AuthService {
                 .telNumber("Numero Telefonico")
                 .build();
 
+        var cart = Cart.builder()
+                .items(new ArrayList<>())
+                .build();
+
+
+
         user.setAddress(add);
+        user.setCart(cart);
         user.setUrl_BackImg("./public/testImg/ceste_pane.jpeg");
         user.setUrl_picture("./public/testImg/profile.jpeg");
         addressRepository.save(add);
+        cartRepository.save(cart);
         userRepository.save(user);
     }
 

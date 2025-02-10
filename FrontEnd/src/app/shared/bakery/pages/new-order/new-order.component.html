@@ -1,0 +1,164 @@
+<app-navbar></app-navbar>
+
+<div class="">
+
+  <div class="flex justify-center mt-[70px]">
+
+    <a [routerLink]="['/bakery/', userId]" class="text-3xl no-underline text-black font-bold">
+      <img [src]="data.img_azz" class="items-center w-[300px] h-[300px] rounded-full object-cover shadow-2xl">       <!-- da cambaire con img del azz -->
+    </a>
+    <a class="no-underline mt-32 ml-10" [routerLink]="['/bakery/', userId]">
+      <h1 class="font-c">{{data.name_azz}}</h1>
+    </a>
+  </div>
+
+
+
+  <div class="mt-4">
+
+    <div class="justify-center pt-[50px]">
+
+      <ol class="justify-evenly items-center w-full space-y-4 sm:flex sm:space-x-8 sm:space-y-0 rtl:space-x-reverse ml-[-10px] custom1:ml-0">
+        <li class="flex items-center text-blue-600 dark:text-blue-500 space-x-2.5 rtl:space-x-reverse ml-[-30px] custom:ml-0">
+          <span class="flex items-center justify-center w-8 h-8 border border-blue-600 rounded-full shrink-0 dark:border-blue-500">
+            1
+          </span>
+          <span>
+            <h3 class="font-medium leading-tight">Scegli Oggetti</h3>
+            <p class="text-sm">Scelgi gli Oggetti che vuoi Ordinare</p>
+          </span>
+        </li>
+        <li class="flex hidden items-center text-gray-500 dark:text-blue-500 space-x-2.5 rtl:space-x-reverse below-745:hidden xl:flex">
+          <span class="flex items-center justify-center w-8 h-8 border border-gray-500 rounded-full shrink-0 dark:border-gray-400">
+            2
+          </span>
+          <span>
+            <h3 class="font-medium leading-tight">Conferma Dati</h3>
+            <p class="text-sm">Verifica Gli Elementi Scelti</p>
+          </span>
+        </li>
+        <li class="flex hidden items-center text-gray-500 dark:text-blue-500 space-x-2.5 rtl:space-x-reverse below-745:hidden xl:flex">
+          <span class="flex items-center justify-center w-8 h-8 border border-gray-500 rounded-full shrink-0 dark:border-gray-400">
+            3
+          </span>
+          <span>
+            <h3 class="font-medium leading-tight">Pagamento</h3>
+            <p class="text-sm">Seleziona Metodo di Pagamento</p>
+          </span>
+        </li>
+      </ol>
+
+    </div>
+
+  </div>
+
+
+
+  <ng-template #placeholder class="mx-auto h-56 rounded-lg w-full">
+    <img src="../../../../../public/testImg/profile.jpeg" alt="default profile pic">     <!-- TODO replace con default img for item -->                                                       <!-- Profile img -->
+  </ng-template>
+
+  <div *ngIf="data.categorys?.length == 0">
+
+    <div class="vuoto flex justify-center mt-40">
+
+      <h1 class="fo-p">Non ci Sono Elementi</h1>
+
+    </div>
+
+  </div>
+
+  <div class="mt-5 pb-5 ml-10 mr-10 min-h-64">
+
+    <div *ngFor="let cat of data.categorys" class="border-2 border-gray-200 rounded-3xl mb-4 mt-4 shadow-xl">
+
+
+      <h1 class="mb-11 fo-p pt-8 pl-8">{{cat.name}}</h1>
+
+
+      <div class="flex flex-wrap mb-20 justify-evenly">
+
+        <div *ngIf="cat.items?.length == 0">
+
+          <h1 class="">Al Momento non ci sono Delizie in Vendita</h1>
+
+        </div>
+
+        <div *ngFor="let item of cat.items">
+
+          <div class="rounded-lg border border-gray-200 bg-white p-6  dark:border-gray-700 dark:bg-gray-800 ml-4 mr-4 w-[400px] mb-8 shadow-2xl">
+
+            <div class="h-56 w-full">
+
+              <div *ngIf="item.img; else placeholder">
+                <img class="mx-auto h-56 rounded-lg" [src]="item.img" alt="" />      <!-- Img dell oggetto -->
+              </div>
+
+            </div>
+
+            <div class="pt-6">
+
+              <h2 class="text-xl font-bold leading-tight text-gray-900 hover:underline">{{item.name}}</h2>        <!--  Titolo oggetto -->
+              <h6 class="mt-2">{{item.description}}</h6>
+
+              <div class="mt-4 flex items-center justify-between gap-4">
+                <div class="mt-4">
+                  <p class="text-2xl font-extrabold leading-tight text-gray-900 dark:text-white">{{item.price}} €</p>   <!-- Qui va inserito il prezzo -->
+                  <p class="text-xl font-extralight leading-tight text-gray-700 dark:text-white mt-[-20px] pl-2">al pz</p>
+                </div>
+
+                <div class="max-w-xs mx-auto">
+                  <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Scegli la Quantità:</label>
+                  <div class="relative flex items-center max-w-[8rem]">
+
+                    <button (click)="removeOneToQuantity(item)" type="button" id="decrement-button" data-input-counter-decrement="quantity-input" class="bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-s-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
+                      <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h16"/>
+                      </svg>
+                    </button>
+
+                    <input  [(ngModel)]="item.quantity" type="text" data-input-counter data-input-counter-min="1" data-input-counter-max="99" aria-describedby="helper-text-explanation" class="bg-gray-50 border-x-0 border-gray-300 h-11 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block min-w-14 py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="999" required />
+
+                    <button (click)="addOneToQuantity(item)" type="button" id="increment-button" data-input-counter-increment="quantity-input" class="bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-e-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
+                      <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
+                      </svg>
+                    </button>
+
+                  </div>
+
+
+                </div>
+
+                <button type="button" *ngIf="item.quantity != 0" class="btn btn-primary mt-4 ease-in" (click)="addToCart(item)" >
+                  <fa-icon class="fa-solid fa-cart-shopping"></fa-icon>
+                </button>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+      </div>
+
+    </div>
+
+  </div>
+
+<div class="flex justify-end mb-10 mr-20">
+
+  <button class="btn btn-success shadow-2xl" [disabled]="data.categorys?.length == 0 " [routerLink]="['/bakery/riepilogo/',userId]">
+
+    <h1 class="fo-g p-2">Riepilogo</h1>
+
+  </button>
+</div>
+
+
+</div>
+
+<app-footer></app-footer>
+

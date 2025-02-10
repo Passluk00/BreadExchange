@@ -1,8 +1,11 @@
 package it.uniromatre.breadexchange2_0.user;
 
+import it.uniromatre.breadexchange2_0.bakery.fav.BakeryFav;
 import it.uniromatre.breadexchange2_0.role.Role;
 import it.uniromatre.breadexchange2_0.security.JwtToken;
 import it.uniromatre.breadexchange2_0.user.address.Address;
+import it.uniromatre.breadexchange2_0.user.cart.Cart;
+import it.uniromatre.breadexchange2_0.user.order.Order;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -14,6 +17,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.security.Principal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -50,8 +54,23 @@ public class User implements UserDetails , Principal {
 
     private boolean accountLocked;
 
+    @OneToMany
+    private List<BakeryFav> fav;
+
     @OneToMany(mappedBy = "userId")
     private List<JwtToken> tokens;
+
+    @OneToOne
+    private Cart cart;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Order> orders = new ArrayList<>();
+    /*
+    @OneToMany
+    private List<Order> orders = new ArrayList<>();
+
+     */
+
 
     // Non Modificare Dati Sensibili
 
@@ -59,6 +78,7 @@ public class User implements UserDetails , Principal {
     @CreatedDate
     @Column(updatable = false, nullable = false)
     private LocalDateTime createdDate;
+
     @LastModifiedDate
     @Column(insertable = false)
     private LocalDateTime lastModifiedDate;

@@ -6,10 +6,12 @@ import it.uniromatre.breadexchange2_0.bakery.hours.WeekDay;
 import it.uniromatre.breadexchange2_0.items.category.Category;
 import it.uniromatre.breadexchange2_0.user.User;
 import it.uniromatre.breadexchange2_0.user.address.Address;
+import it.uniromatre.breadexchange2_0.user.order.Order;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -43,16 +45,17 @@ public class Bakery {
     private ContactInfo contactInfo;                // Dati di contatto
 
 
-    /*
 
     @OneToMany(mappedBy = "bakery", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Order> orders
-
+    private List<Order> orders = new ArrayList<>();
+    /*
+    @OneToMany
+    private List<Order> orders = new ArrayList<>();
      */
+
 
     @OneToMany
     private List<Category> categories;
-
 
     @OneToOne
     private Week week;

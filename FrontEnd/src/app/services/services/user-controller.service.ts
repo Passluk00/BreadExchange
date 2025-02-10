@@ -13,21 +13,55 @@ import { StrictHttpResponse } from '../strict-http-response';
 
 import { addAddress } from '../fn/user-controller/add-address';
 import { AddAddress$Params } from '../fn/user-controller/add-address';
+import { addToCart } from '../fn/user-controller/add-to-cart';
+import { AddToCart$Params } from '../fn/user-controller/add-to-cart';
+import { addToFav } from '../fn/user-controller/add-to-fav';
+import { AddToFav$Params } from '../fn/user-controller/add-to-fav';
+import { BakeryFav } from '../models/bakery-fav';
+import { Cart } from '../models/cart';
+import { checkIfOwner } from '../fn/user-controller/check-if-owner';
+import { CheckIfOwner$Params } from '../fn/user-controller/check-if-owner';
+import { checkOwnerOfBakery } from '../fn/user-controller/check-owner-of-bakery';
+import { CheckOwnerOfBakery$Params } from '../fn/user-controller/check-owner-of-bakery';
 import { getAddress } from '../fn/user-controller/get-address';
 import { GetAddress$Params } from '../fn/user-controller/get-address';
+import { getAllForCart } from '../fn/user-controller/get-all-for-cart';
+import { GetAllForCart$Params } from '../fn/user-controller/get-all-for-cart';
+import { getAllItems } from '../fn/user-controller/get-all-items';
+import { GetAllItems$Params } from '../fn/user-controller/get-all-items';
+import { getAllOrders } from '../fn/user-controller/get-all-orders';
+import { GetAllOrders$Params } from '../fn/user-controller/get-all-orders';
+import { getCart } from '../fn/user-controller/get-cart';
+import { GetCart$Params } from '../fn/user-controller/get-cart';
 import { getCurrentUser } from '../fn/user-controller/get-current-user';
 import { GetCurrentUser$Params } from '../fn/user-controller/get-current-user';
+import { getFav } from '../fn/user-controller/get-fav';
+import { GetFav$Params } from '../fn/user-controller/get-fav';
 import { getUser } from '../fn/user-controller/get-user';
 import { GetUser$Params } from '../fn/user-controller/get-user';
 import { getUserInfo } from '../fn/user-controller/get-user-info';
 import { GetUserInfo$Params } from '../fn/user-controller/get-user-info';
 import { isAdmin } from '../fn/user-controller/is-admin';
 import { IsAdmin$Params } from '../fn/user-controller/is-admin';
+import { isToFav } from '../fn/user-controller/is-to-fav';
+import { IsToFav$Params } from '../fn/user-controller/is-to-fav';
+import { ItemsCart } from '../models/items-cart';
+import { ListCatForCart } from '../models/list-cat-for-cart';
+import { modQuantityItem } from '../fn/user-controller/mod-quantity-item';
+import { ModQuantityItem$Params } from '../fn/user-controller/mod-quantity-item';
+import { OrderFrontEnd } from '../models/order-front-end';
 import { PageResponseUserResponse } from '../models/page-response-user-response';
+import { removeToCart } from '../fn/user-controller/remove-to-cart';
+import { RemoveToCart$Params } from '../fn/user-controller/remove-to-cart';
+import { remToFav } from '../fn/user-controller/rem-to-fav';
+import { RemToFav$Params } from '../fn/user-controller/rem-to-fav';
 import { searchUserByName } from '../fn/user-controller/search-user-by-name';
 import { SearchUserByName$Params } from '../fn/user-controller/search-user-by-name';
+import { sendOrder } from '../fn/user-controller/send-order';
+import { SendOrder$Params } from '../fn/user-controller/send-order';
 import { sendRequest } from '../fn/user-controller/send-request';
 import { SendRequest$Params } from '../fn/user-controller/send-request';
+import { Status } from '../models/status';
 import { testSicurezza } from '../fn/user-controller/test-sicurezza';
 import { TestSicurezza$Params } from '../fn/user-controller/test-sicurezza';
 import { TokenVerifyResponse } from '../models/token-verify-response';
@@ -158,6 +192,122 @@ export class UserControllerService extends BaseService {
     );
   }
 
+  /** Path part for operation `sendOrder()` */
+  static readonly SendOrderPath = '/user/sendOrder';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `sendOrder()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  sendOrder$Response(params?: SendOrder$Params, context?: HttpContext): Observable<StrictHttpResponse<{
+}>> {
+    return sendOrder(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `sendOrder$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  sendOrder(params?: SendOrder$Params, context?: HttpContext): Observable<{
+}> {
+    return this.sendOrder$Response(params, context).pipe(
+      map((r: StrictHttpResponse<{
+}>): {
+} => r.body)
+    );
+  }
+
+  /** Path part for operation `removeToCart()` */
+  static readonly RemoveToCartPath = '/user/removeToCart';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `removeToCart()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  removeToCart$Response(params: RemoveToCart$Params, context?: HttpContext): Observable<StrictHttpResponse<{
+}>> {
+    return removeToCart(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `removeToCart$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  removeToCart(params: RemoveToCart$Params, context?: HttpContext): Observable<{
+}> {
+    return this.removeToCart$Response(params, context).pipe(
+      map((r: StrictHttpResponse<{
+}>): {
+} => r.body)
+    );
+  }
+
+  /** Path part for operation `addToFav()` */
+  static readonly AddToFavPath = '/user/addToFav';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `addToFav()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  addToFav$Response(params: AddToFav$Params, context?: HttpContext): Observable<StrictHttpResponse<{
+}>> {
+    return addToFav(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `addToFav$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  addToFav(params: AddToFav$Params, context?: HttpContext): Observable<{
+}> {
+    return this.addToFav$Response(params, context).pipe(
+      map((r: StrictHttpResponse<{
+}>): {
+} => r.body)
+    );
+  }
+
+  /** Path part for operation `addToCart()` */
+  static readonly AddToCartPath = '/user/addToCart';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `addToCart()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  addToCart$Response(params: AddToCart$Params, context?: HttpContext): Observable<StrictHttpResponse<{
+}>> {
+    return addToCart(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `addToCart$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  addToCart(params: AddToCart$Params, context?: HttpContext): Observable<{
+}> {
+    return this.addToCart$Response(params, context).pipe(
+      map((r: StrictHttpResponse<{
+}>): {
+} => r.body)
+    );
+  }
+
   /** Path part for operation `addAddress()` */
   static readonly AddAddressPath = '/user/addAddress';
 
@@ -181,6 +331,35 @@ export class UserControllerService extends BaseService {
   addAddress(params: AddAddress$Params, context?: HttpContext): Observable<{
 }> {
     return this.addAddress$Response(params, context).pipe(
+      map((r: StrictHttpResponse<{
+}>): {
+} => r.body)
+    );
+  }
+
+  /** Path part for operation `modQuantityItem()` */
+  static readonly ModQuantityItemPath = '/user/modQuantityItem';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `modQuantityItem()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  modQuantityItem$Response(params: ModQuantityItem$Params, context?: HttpContext): Observable<StrictHttpResponse<{
+}>> {
+    return modQuantityItem(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `modQuantityItem$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  modQuantityItem(params: ModQuantityItem$Params, context?: HttpContext): Observable<{
+}> {
+    return this.modQuantityItem$Response(params, context).pipe(
       map((r: StrictHttpResponse<{
 }>): {
 } => r.body)
@@ -345,6 +524,131 @@ export class UserControllerService extends BaseService {
     );
   }
 
+  /** Path part for operation `getFav()` */
+  static readonly GetFavPath = '/user/getFav';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `getFav()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getFav$Response(params?: GetFav$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<BakeryFav>>> {
+    return getFav(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `getFav$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getFav(params?: GetFav$Params, context?: HttpContext): Observable<Array<BakeryFav>> {
+    return this.getFav$Response(params, context).pipe(
+      map((r: StrictHttpResponse<Array<BakeryFav>>): Array<BakeryFav> => r.body)
+    );
+  }
+
+  /** Path part for operation `getCart()` */
+  static readonly GetCartPath = '/user/getCart';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `getCart()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getCart$Response(params?: GetCart$Params, context?: HttpContext): Observable<StrictHttpResponse<Cart>> {
+    return getCart(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `getCart$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getCart(params?: GetCart$Params, context?: HttpContext): Observable<Cart> {
+    return this.getCart$Response(params, context).pipe(
+      map((r: StrictHttpResponse<Cart>): Cart => r.body)
+    );
+  }
+
+  /** Path part for operation `getAllOrders()` */
+  static readonly GetAllOrdersPath = '/user/getAllOrders';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `getAllOrders()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getAllOrders$Response(params?: GetAllOrders$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<OrderFrontEnd>>> {
+    return getAllOrders(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `getAllOrders$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getAllOrders(params?: GetAllOrders$Params, context?: HttpContext): Observable<Array<OrderFrontEnd>> {
+    return this.getAllOrders$Response(params, context).pipe(
+      map((r: StrictHttpResponse<Array<OrderFrontEnd>>): Array<OrderFrontEnd> => r.body)
+    );
+  }
+
+  /** Path part for operation `getAllItems()` */
+  static readonly GetAllItemsPath = '/user/getAllItems';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `getAllItems()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getAllItems$Response(params?: GetAllItems$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<ItemsCart>>> {
+    return getAllItems(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `getAllItems$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getAllItems(params?: GetAllItems$Params, context?: HttpContext): Observable<Array<ItemsCart>> {
+    return this.getAllItems$Response(params, context).pipe(
+      map((r: StrictHttpResponse<Array<ItemsCart>>): Array<ItemsCart> => r.body)
+    );
+  }
+
+  /** Path part for operation `getAllForCart()` */
+  static readonly GetAllForCartPath = '/user/getAllItemForCart';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `getAllForCart()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getAllForCart$Response(params: GetAllForCart$Params, context?: HttpContext): Observable<StrictHttpResponse<ListCatForCart>> {
+    return getAllForCart(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `getAllForCart$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getAllForCart(params: GetAllForCart$Params, context?: HttpContext): Observable<ListCatForCart> {
+    return this.getAllForCart$Response(params, context).pipe(
+      map((r: StrictHttpResponse<ListCatForCart>): ListCatForCart => r.body)
+    );
+  }
+
   /** Path part for operation `getAddress()` */
   static readonly GetAddressPath = '/user/getAddress';
 
@@ -368,6 +672,110 @@ export class UserControllerService extends BaseService {
   getAddress(params?: GetAddress$Params, context?: HttpContext): Observable<{
 }> {
     return this.getAddress$Response(params, context).pipe(
+      map((r: StrictHttpResponse<{
+}>): {
+} => r.body)
+    );
+  }
+
+  /** Path part for operation `checkOwnerOfBakery()` */
+  static readonly CheckOwnerOfBakeryPath = '/user/checkOwnerOfBakery';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `checkOwnerOfBakery()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  checkOwnerOfBakery$Response(params?: CheckOwnerOfBakery$Params, context?: HttpContext): Observable<StrictHttpResponse<Status>> {
+    return checkOwnerOfBakery(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `checkOwnerOfBakery$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  checkOwnerOfBakery(params?: CheckOwnerOfBakery$Params, context?: HttpContext): Observable<Status> {
+    return this.checkOwnerOfBakery$Response(params, context).pipe(
+      map((r: StrictHttpResponse<Status>): Status => r.body)
+    );
+  }
+
+  /** Path part for operation `isToFav()` */
+  static readonly IsToFavPath = '/user/checkIsToFav';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `isToFav()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  isToFav$Response(params: IsToFav$Params, context?: HttpContext): Observable<StrictHttpResponse<boolean>> {
+    return isToFav(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `isToFav$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  isToFav(params: IsToFav$Params, context?: HttpContext): Observable<boolean> {
+    return this.isToFav$Response(params, context).pipe(
+      map((r: StrictHttpResponse<boolean>): boolean => r.body)
+    );
+  }
+
+  /** Path part for operation `checkIfOwner()` */
+  static readonly CheckIfOwnerPath = '/user/checkIfOwner';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `checkIfOwner()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  checkIfOwner$Response(params?: CheckIfOwner$Params, context?: HttpContext): Observable<StrictHttpResponse<boolean>> {
+    return checkIfOwner(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `checkIfOwner$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  checkIfOwner(params?: CheckIfOwner$Params, context?: HttpContext): Observable<boolean> {
+    return this.checkIfOwner$Response(params, context).pipe(
+      map((r: StrictHttpResponse<boolean>): boolean => r.body)
+    );
+  }
+
+  /** Path part for operation `remToFav()` */
+  static readonly RemToFavPath = '/user/remToFav';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `remToFav()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  remToFav$Response(params: RemToFav$Params, context?: HttpContext): Observable<StrictHttpResponse<{
+}>> {
+    return remToFav(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `remToFav$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  remToFav(params: RemToFav$Params, context?: HttpContext): Observable<{
+}> {
+    return this.remToFav$Response(params, context).pipe(
       map((r: StrictHttpResponse<{
 }>): {
 } => r.body)

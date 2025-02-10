@@ -14,17 +14,46 @@
     </div>
 
 
+
     <!-- Search -->
     <div class="container-search">
-      <form>
 
-        <div class="search bg-white mt-5px">
-          <fa-icon [icon]="faMagnifyingGlass" class="bg-white"></fa-icon>
-          <input class="search-input" type="search" placeholder="Search">
+      <div class="search bg-white mt-5px">
+        <fa-icon [icon]="faMagnifyingGlass" class="bg-white"></fa-icon>
+        <input
+          class="search-input"
+          type="text"
+          placeholder="Cerca Rivenditori..."
+          [(ngModel)]="searchValue"
+          (input)="onSearch()"
+        >
+
+      </div>
+
+      <div class="absolute risultati bg-transparent" *ngIf="results.length > 0 && searchValue != '' ">
+
+        <div *ngFor="let element of results" class="bg-transparent mt-2 mb-2 shadow-2xl rounded-bl-2xl" >
+
+          <a class="no-underline bg-white items-center flex rounded-3xl w-[600px]" routerLink="/bakery/{{element.id}}" >
+
+            <img [src]="element.picture" class="rounded-full pt-2 pb-2 pl-2 bg-white object-cover" height="200px" width="200px">
+
+            <h2 class="text-black text-center bg-white pl-200 ml-10">
+              {{element.name}}
+            </h2>
+          </a>
+
         </div>
+      </div>
 
-      </form>
+
+
     </div>
+
+
+
+
+
 
     <!-- Not Logged -->
 
@@ -89,24 +118,10 @@
               </a>
             </li>
 
-            <li class="elements-list">
-              <a routerLink="/homepage/newOrder">
-                <fa-icon class="icon" [icon]="faCartShopping"></fa-icon>
-                New Order
-              </a>
-            </li>
-
-            <li class="elements-list">
-              <a href="#">
-                <fa-icon class="icon" [icon]="faChartLine"></fa-icon>
-                Analytics
-              </a>
-            </li>
-
-            <li class="elements-list">
-              <a href="#">
-                <fa-icon class="icon" [icon]="faSliders"></fa-icon>
-                Settings
+            <li class="elements-list cursor-pointer" *ngIf="isOwner">
+              <a (click)="goToManage()">
+                <fa-icon class="icon" [icon]="faShop"></fa-icon>
+                Gestisci Ordini
               </a>
             </li>
 

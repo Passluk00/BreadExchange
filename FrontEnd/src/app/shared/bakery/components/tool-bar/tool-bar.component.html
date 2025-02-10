@@ -1,0 +1,1170 @@
+
+<div class="flex justify-end sfondo">
+
+  <!-- Bottone per modificare i dati dell utente -->
+  <div class="sfondo"  *ngIf="isOwner" >          <!-- TODO fare funzione per mostrare bottone soltanto se isLogged && user == owner_account -->
+
+    <!-- Modale Principale -->
+    <div class="modal modal-lg fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Edit Profile</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+
+          <div class="modal-body">
+
+            <div id="pofilo">
+
+              <div class="flex justify-between">
+                <h4 class="mb-8">Immagine Profilo</h4>
+                <button class="btn btn-primary h-[40px]" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">Modifica</button>
+              </div>
+
+              <img src="{{data.Logo}}" class="rounded-full mx-auto h-[200px]" onerror="this.src='./public/testImg/profile.jpeg'">
+
+            </div>
+
+            <hr>
+
+            <div id="back">
+
+              <div class="flex justify-between">
+                <h4 class="mb-8">Immagine HomePage</h4>
+                <button class="btn btn-primary h-[40px]" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">Modifica</button>
+              </div>
+
+              <img src="{{data.back_img}}" class="rounded-full mx-auto h-[200px]" onerror="this.src='./public/testImg/profile.jpeg'">
+
+            </div>
+
+            <hr>
+
+            <div id="dati profilo">
+
+              <div class="flex">
+                <h4 class="mb-8">Modifica i Dati del Profilo</h4>
+              </div>
+
+              <div class="ml-[40px]">
+
+                <div class="dato flex justify-between">
+
+                  <div class="elem email">
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Email</label>
+                    <div class="relative">
+                      <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                        <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 16">
+                          <path d="m10.036 8.278 9.258-7.79A1.979 1.979 0 0 0 18 0H2A1.987 1.987 0 0 0 .641.541l9.395 7.737Z"/>
+                          <path d="M11.241 9.817c-.36.275-.801.425-1.255.427-.428 0-.845-.138-1.187-.395L0 2.6V14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2.5l-8.759 7.317Z"/>
+                        </svg>
+                      </div>
+                      <input type="text" aria-label="disabled input 2" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-auto ps-10 p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="EmailAzz" disabled readonly>
+                    </div>
+                  </div>
+
+                  <div class="lg:ml-2 lg:mr-2 mb-2 lg:mb-0 cursor-pointer">
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Status Apertura</label>
+                    <label class="inline-flex items-center cursor-pointer">
+                      <input type="checkbox" [checked]="isOpen" (change)="changeStatus()" class="sr-only peer">
+                      <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600 dark:peer-checked:bg-blue-600"></div>
+                    </label>
+                  </div>
+
+                </div>
+
+                <br>
+
+                <div class="elem">
+                  <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Username</label>
+                  <div class="relative">
+                    <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                      <!-- Profile Icon SVG -->
+                      <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M10 10a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm0 2c-3.33 0-6 2.015-6 4.5V18h12v-1.5c0-2.485-2.67-4.5-6-4.5Z"/>
+                      </svg>
+                    </div>
+                    <input type="text" aria-label="disabled input 2" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-auto ps-10 p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{data.name}}" disabled readonly>
+                  </div>
+                </div>
+
+                <br>
+
+                <div class="elem flex justify-between address-id">
+                  <div class="dato">
+                    <label class="block text-sm mb-2 font-medium text-gray-900 dark:text-white">Your Address</label>
+                    <div class="relative">
+                      <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                        <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 384 512">
+                          <path d="M168 0C75.1 0 0 75.1 0 168C0 275.1 168 512 168 512C168 512 336 275.1 336 168C336 75.1 260.9 0 168 0zM168 240C123.1 240 88 204.9 88 160C88 115.1 123.1 80 168 80C212.9 80 248 115.1 248 160C248 204.9 212.9 240 168 240z"/>
+                        </svg>
+                      </div>
+                      <input type="text" aria-label="disabled input 2" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-auto ps-10 p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{data.address?.name}}" placeholder="Address" disabled readonly>
+                    </div>
+                  </div>
+
+                  <button class="btn btn-primary h-[40px] mt-[29px] mr-[40px]" data-bs-target="#exampleModalToggle4" data-bs-toggle="modal">Modifica</button>
+
+                </div>
+
+                <br>
+
+                <div class="elem flex justify-between address-id">
+                  <div class="dato">
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Modifica Social</label>
+                    <div class="relative">
+                      <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                        <svg class="text-gray-500" xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.07C24 5.41 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.04V9.41c0-3.02 1.8-4.7 4.54-4.7 1.31 0 2.68.24 2.68.24v2.97h-1.5c-1.5 0-1.96.93-1.96 1.89v2.26h3.32l-.53 3.5h-2.8V24C19.62 23.1 24 18.1 24 12.07"/></svg>
+                      </div>
+                      <input type="text" aria-label="disabled input 2" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-auto ps-10 p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="Social" disabled readonly>
+                    </div>
+                  </div>
+
+                  <button class="btn btn-primary h-[40px] mt-[29px] mr-[40px]" data-bs-target="#exampleModalToggle6" data-bs-toggle="modal">Modifica</button>
+
+                </div>
+
+                <br>
+
+                <div class="elem flex justify-between">
+                  <div class="elem email">
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Orari</label>
+                    <div class="relative">
+                      <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none" >
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-500 dark:text-gray-400" viewBox="0 0 24 24" fill="none" stroke="#6b7280" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                          <circle cx="12" cy="12" r="10"></circle>
+                          <polyline points="12 6 12 12 16 14"></polyline>
+                        </svg>
+                      </div>
+                      <input type="text" aria-label="disabled input 2" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-auto ps-10 p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="Orari Apertura" disabled readonly>
+                    </div>
+                  </div>
+
+                  <button class="btn btn-primary h-[40px] mt-[29px] mr-[40px]" data-bs-target="#exampleModalToggle5" data-bs-toggle="modal">Modifica</button>
+
+                </div>
+
+                <br>
+
+                <div class="elem flex justify-center mb-10 mr-[40px]">
+
+                  <div class="dato w-full">
+
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Modifica Descrizione</label>
+
+                    <textarea [(ngModel)]="newDesc.desc" [value]="newDesc.desc" class="form-control mb-2" rows="3"></textarea>
+
+                    <button class="btn btn-primary h-[40px] mt-[29px] mr-[40px]" (click)="updateDesc()">Modifica Descrizione</button>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+            <div class="modal-footer">
+
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+    
+
+    <!-- Form per la modifica del immagine profilo -->
+    <div class="modal fade modal-xl" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content min-h-[800px]">
+
+
+          <div class="modal-header flex items-center justify-between">
+            <button class="button" data-bs-target="#exampleModalToggle" data-bs-toggle="modal" (click)="removeImage()">
+              <fa-icon [icon]="faArrowLeft" class="mr-1"></fa-icon>
+            </button>
+            <h1 class="modal-title fs-5 text-center flex-1">Scegli l'immagine del Profilo</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="removeImage()" ></button>
+          </div>
+
+          <div class="modal-body flex justify-center items-center min-h-[500px]">
+
+            <div>
+              <!-- Drag and Drop Area -->
+
+              <div class="border-2 border-dashed border-gray-400 rounded-lg p-8 text-center h-[700px] w-[700px] mt-10 mb-10" *ngIf="!previewImage" (drop)="onFileDrop($event)" (dragover)="onDragOver($event)" (dragleave)="onDragLeave($event)" [class.bg-blue-100]="isDragging">
+                <div class="flex justify-center">
+                  <svg class="mt-32 mb-32" xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M21.2 15c.7-1.2 1-2.5.7-3.9-.6-2-2.4-3.5-4.4-3.5h-1.2c-.7-3-3.2-5.2-6.2-5.6-3-.3-5.9 1.3-7.3 4-1.2 2.5-1 6.5.5 8.8m8.7-1.6V21"/><path d="M16 16l-4-4-4 4"/></svg>
+                </div>
+                <p class="text-gray-500 mb-2">Trascina qui un'immagine o clicca per selezionarla</p>
+                <input type="file" id="fileInput" accept="image/*" (change)="onFileSelect($event)" hidden>
+                <button type="button" class="btn btn-primary" (click)="triggerFileSelect()">Scegli File</button>
+              </div>
+
+              <!-- Preview Area -->
+              <div class="mt-4 text-center" *ngIf="previewImage">
+                <img [src]="previewImage" alt="Anteprima" class="w-256 h-256 object-cover rounded-md shadow-md mx-auto">
+                <button class="btn btn-danger mt-2" (click)="removeImage()">Rimuovi Immagine</button>
+              </div>
+
+            </div>
+
+
+          </div>
+          <div class="modal-footer" *ngIf="previewImage">
+            <button class="btn btn-primary" data-bs-target="#exampleModalToggle" data-bs-toggle="modal" (click)="uploadImageProfile()">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Form per la modifica del immagine Background -->
+    <div class="modal fade modal-xl" id="exampleModalToggle3" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content min-h-[800px]">
+
+
+          <div class="modal-header flex items-center justify-between">
+            <button class="button" data-bs-target="#exampleModalToggle" data-bs-toggle="modal" (click)="removeImage()">
+              <fa-icon [icon]="faArrowLeft" class="mr-1"></fa-icon>
+            </button>
+            <h1 class="modal-title fs-5 text-center flex-1">Scegli l'immagine del Profilo</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="removeImage()" ></button>
+          </div>
+
+          <div class="modal-body flex justify-center items-center min-h-[500px]">
+
+            <div>
+              <!-- Drag and Drop Area -->
+
+              <div class="border-2 border-dashed border-gray-400 rounded-lg p-8 text-center h-[700px] w-[700px] mt-10 mb-10" *ngIf="!previewImage" (drop)="onFileDrop($event)" (dragover)="onDragOver($event)" (dragleave)="onDragLeave($event)" [class.bg-blue-100]="isDragging">
+                <div class="flex justify-center">
+                  <svg class="mt-32 mb-32" xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M21.2 15c.7-1.2 1-2.5.7-3.9-.6-2-2.4-3.5-4.4-3.5h-1.2c-.7-3-3.2-5.2-6.2-5.6-3-.3-5.9 1.3-7.3 4-1.2 2.5-1 6.5.5 8.8m8.7-1.6V21"/><path d="M16 16l-4-4-4 4"/></svg>
+                </div>
+                <p class="text-gray-500 mb-2">Trascina qui un'immagine o clicca per selezionarla</p>
+                <input type="file" id="fileInput" accept="image/*" (change)="onFileSelect($event)" hidden>
+                <button type="button" class="btn btn-primary" (click)="triggerFileSelect()">Scegli File</button>
+              </div>
+
+              <!-- Preview Area -->
+              <div class="mt-4 text-center" *ngIf="previewImage">
+                <img [src]="previewImage" alt="Anteprima" class="w-256 h-256 object-cover rounded-md shadow-md mx-auto">
+                <button class="btn btn-danger mt-2" (click)="removeImage()">Rimuovi Immagine</button>
+              </div>
+
+            </div>
+
+
+          </div>
+          <div class="modal-footer" *ngIf="previewImage">
+            <button class="btn btn-primary" data-bs-target="#exampleModalToggle" data-bs-toggle="modal" (click)="uploadImageBack()">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <!-- Form per la modifica dei dati di spedizione -->
+    <div class="modal fade modal-xl" id="exampleModalToggle4" aria-hidden="true" aria-labelledby="exampleModalToggleLabel4" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+
+          <div class="modal-header flex items-center justify-between">
+            <button class="button" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">
+              <fa-icon [icon]="faArrowLeft" class="mr-1"></fa-icon>
+            </button>
+            <h1 class="modal-title fs-5 text-center flex-1">Aggiorna la Posizione Dell'Azienda</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+
+          <div class="modal-body flex justify-center items-center min-h-[500px]">
+
+
+            <div class="flex">
+
+              <div class="mr-[40px]">
+
+                <div class="elem">
+                  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nome</label>
+                  <div class="relative">
+                    <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+                    </div>
+                    <input  [(ngModel)]="newAddress.name"  [value]="data.address?.name"  type="text" name="text" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Nome" required="">
+                  </div>
+                </div>
+
+                <br>
+
+                <div class="elem">
+                  <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Numero di Telefono</label>
+                  <div class="relative">
+                    <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                      <img src="/public/testImg/icons8-telefono-100.png" height="19" width="19" alt="icona telefono">
+                    </div>
+                    <input  [(ngModel)]="newAddress.telNumber" [value]="data.address?.telNumber" type="text" name="text" id="telNumber" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Numero di Telefono" required="">
+                  </div>
+                </div>
+
+                <br>
+
+                <div class="elem">
+                  <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Stato</label>
+                  <div class="relative">
+                    <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path><line x1="4" y1="22" x2="4" y2="15"></line></svg>
+                    </div>
+                    <input  [(ngModel)]="newAddress.country" [value]="data.address?.country" type="text" name="text" id="country" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Stato" required="">
+                  </div>
+                </div>
+
+                <br>
+
+                <div class="elem">
+                  <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Regione</label>
+                  <div class="relative">
+                    <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                      <img src="/public/testImg/icons8-lazio-24.png" height="19" width="19" alt="icona regione">
+                    </div>
+                    <input  [(ngModel)]="newAddress.state" [value]="data.address?.state" type="text" name="text" id="state" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Regione" required="">
+                  </div>
+                </div>
+
+                <br>
+
+                <div class="elem">
+                  <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Provincia</label>
+                  <div class="relative">
+                    <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="10" r="3"/><path d="M12 21.7C17.3 17 20 13 20 10a8 8 0 1 0-16 0c0 3 2.7 6.9 8 11.7z"/></svg>
+                    </div>
+                    <input  [(ngModel)]="newAddress.provincia" [value]="data.address?.provincia" type="text" name="text" id="provincia" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Provincia" required="">
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="ml-[40px]">
+
+                <div class="elem">
+                  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Città</label>
+                  <div class="relative">
+                    <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                      <img src="public/testImg/icons8-città-50.png" width="19" height="19" alt="icona città">
+                    </div>
+                    <input  [(ngModel)]="newAddress.city" [value]="data.address?.city" type="text" name="text" id="city" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Città" required="">
+                  </div>
+                </div>
+
+                <br>
+
+                <div class="elem">
+                  <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">CAP</label>
+                  <div class="relative">
+                    <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                      <img src="public/testImg/zip-code.png" width="19" height="19" alt="icona Cap">
+                    </div>
+                    <input  [(ngModel)]="newAddress.postalCode" [value]="data.address?.postalCode" type="text" name="text" id="cap" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="CAP" required="">
+                  </div>
+                </div>
+
+                <br>
+
+                <div class="elem">
+                  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Strada / Via / Località</label>
+                  <div class="relative">
+                    <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                      <img src="public/testImg/road.png" width="19" height="19" alt="icona strada">
+                    </div>
+                    <input  [(ngModel)]="newAddress.street" [value]="data.address?.street" type="text" name="text" id="street" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Strada / Via / Località" required="">
+                  </div>
+                </div>
+
+                <br>
+
+                <div class="elem">
+                  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">N°</label>
+                  <div class="relative">
+                    <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                      <img src="public/testImg/letter-n.png" width="19" height="19" alt="icona numero civico">
+                    </div>
+                    <input  [(ngModel)]="newAddress.number" [value]="data.address?.number" type="text" name="text" id="number" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Numero" required="">
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+          <div class="modal-footer">
+            <!-- Da modificare con save per i dati -->
+            <button class="btn btn-primary" data-bs-target="#exampleModalToggle" data-bs-toggle="modal" (click)="uploadAddress()">Save</button>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Form per la modifica dei dati degli orari di apertura -->
+    <div class="modal fade modal-fullscreen modal-xl" id="exampleModalToggle5" aria-hidden="true" aria-labelledby="exampleModalToggleLabel5" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered w-100 h-100 min-vw-100">
+        <div class="modal-content">
+
+
+          <div class="modal-header flex items-center justify-between">
+            <button class="button" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">
+              <fa-icon [icon]="faArrowLeft" class="mr-1"></fa-icon>
+            </button>
+            <h1 class="modal-title fs-5 text-center flex-1">Modifica Orari Di Apertura</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+
+          <div class="modal-body flex justify-center">
+
+
+            <div class="container justify-center">
+
+              <div class="lg:flex lg:justify-evenly mt-10 mb-10" id="lunedi">
+
+                <div class="nome lg:ml-2 lg:mr-2 mb-3 lg:mb-0" >
+                  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Giorno Della Settimana</label>
+                  <div class="relative">
+                    <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                    </div>
+                    <input [value]="lun.dayOfWeek" type="text" name="time" id="lun" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 cursor-not-allowed" placeholder="Lunedi" disabled readonly>
+                  </div>
+                </div>
+
+                <div class="Orario Apertura Mattina lg:ml-2 lg:mr-2 mb-3 lg:mb-0">
+                  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Orario Apertura Mattina</label>
+                  <div class="relative">
+                    <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-black" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="12 6 12 12 16 14"></polyline>
+                      </svg>
+                    </div>
+                    <input [(ngModel)]="lun.morningOpening" [value]="lun.morningOpening" type="time" name="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 " placeholder="Orario Apertura Mattina">
+                  </div>
+                </div>
+
+                <div class="Orario Chiusura Mattina lg:ml-2 lg:mr-2 mb-3 lg:mb-0">
+                  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Orario Chiusura Mattina</label>
+                  <div class="relative">
+                    <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-black dark:text-gray-400" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="12 6 12 12 16 14"></polyline>
+                      </svg>
+                    </div>
+                    <input [(ngModel)]="lun.morningClosing" [value]="lun.morningClosing" type="time" name="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 " placeholder="Orario Chiusura Mattina">
+                  </div>
+                </div>
+
+                <div class="Orario Apertura Pomeriggio lg:ml-2 lg:mr-2 mb-3 lg:mb-0">
+                  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Orario Apertura Pomeriggio</label>
+                  <div class="relative">
+                    <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-black dark:text-gray-400" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="12 6 12 12 16 14"></polyline>
+                      </svg>
+                    </div>
+                    <input [(ngModel)]="lun.eveningOpening" [value]="lun.eveningOpening" type="time" name="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 " placeholder="Orario Apertura Pomeriggio">
+                  </div>
+                </div>
+
+                <div class="Orario Chiusura Pomeriggio lg:ml-2 lg:mr-2 mb-3 lg:mb-0">
+                  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Orario Chiusura Pomeriggio</label>
+                  <div class="relative">
+                    <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-black dark:text-gray-400" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="12 6 12 12 16 14"></polyline>
+                      </svg>
+                    </div>
+                    <input [(ngModel)]="lun.eveningClosing" [value]="lun.eveningClosing" type="time" name="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 " placeholder="Orario Chiusura Pomeriggio">
+                  </div>
+                </div>
+
+                <div class="lg:ml-2 lg:mr-2 mb-3 lg:mb-0 cursor-pointer">
+                  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Orario Continuato</label>
+                  <label class="inline-flex items-center cursor-pointer">
+                    <input type="checkbox" [value]="lun.allDayOpen" [(ngModel)]="lun.allDayOpen"  class="sr-only peer">
+                    <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600 dark:peer-checked:bg-blue-600"></div>
+                  </label>
+                </div>
+
+
+                <div class="lg:ml-2 lg:mr-2 mb-3 lg:mb-0 cursor-pointer">
+                  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">E' Chiuso</label>
+                  <label class="inline-flex items-center cursor-pointer">
+                    <input type="checkbox" [value]="lun.closed" [(ngModel)]="lun.closed"  class="sr-only peer">
+                    <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600 dark:peer-checked:bg-blue-600"></div>
+                  </label>
+                </div>
+
+
+
+              </div>
+
+              <div class="lg:flex lg:justify-evenly mt-20 mb-10" id="martedi">
+
+                <div class="nome lg:ml-2 lg:mr-2 mb-3 lg:mb-0" >
+                  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Giorno Della Settimana</label>
+                  <div class="relative">
+                    <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                    </div>
+                    <input [value]="mar.dayOfWeek" type="text" name="time"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 cursor-not-allowed" placeholder="Martedi" disabled readonly>
+                  </div>
+                </div>
+
+
+                <div class="Orario Apertura Mattina lg:ml-2 lg:mr-2 mb-3 lg:mb-0">
+                  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Orario Apertura Mattina</label>
+                  <div class="relative">
+                    <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-black" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="12 6 12 12 16 14"></polyline>
+                      </svg>
+                    </div>
+                    <input [(ngModel)]="mar.morningOpening" [value]="mar.morningOpening" type="time" name="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 " placeholder="Orario Apertura Mattina">
+                  </div>
+                </div>
+
+                <div class="Orario Chiusura Mattina lg:ml-2 lg:mr-2 mb-3 lg:mb-0">
+                  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Orario Chiusura Mattina</label>
+                  <div class="relative">
+                    <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-black" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="12 6 12 12 16 14"></polyline>
+                      </svg>
+                    </div>
+                    <input [(ngModel)]="mar.morningClosing" [value]="mar.morningClosing" type="time" name="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 " placeholder="Orario Chiusura Mattina">
+                  </div>
+                </div>
+
+                <div class="Orario Apertura Pomeriggio lg:ml-2 lg:mr-2 mb-3 lg:mb-0">
+                  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Orario Apertura Pomeriggio</label>
+                  <div class="relative">
+                    <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-black" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="12 6 12 12 16 14"></polyline>
+                      </svg>
+                    </div>
+                    <input [(ngModel)]="mar.eveningOpening" [value]="mar.eveningOpening" type="time" name="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 " placeholder="Orario Apertura Pomeriggio">
+                  </div>
+                </div>
+
+                <div class="Orario Chiusura Pomeriggio lg:ml-2 lg:mr-2 mb-3 lg:mb-0">
+                  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Orario Chiusura Pomeriggio</label>
+                  <div class="relative">
+                    <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-black" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="12 6 12 12 16 14"></polyline>
+                      </svg>
+                    </div>
+                    <input [(ngModel)]="mar.eveningClosing" [value]="mar.eveningClosing" type="time" name="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 " placeholder="Orario Chiusura Pomeriggio">
+                  </div>
+                </div>
+
+                <div class="lg:ml-2 lg:mr-2 mb-3 lg:mb-0 cursor-pointer">
+                  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Orario Continuato</label>
+                  <label class="inline-flex items-center cursor-pointer">
+                    <input type="checkbox" [value]="mar.allDayOpen" [(ngModel)]="mar.allDayOpen"  class="sr-only peer">
+                    <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600 dark:peer-checked:bg-blue-600"></div>
+                  </label>
+                </div>
+
+
+                <div class="lg:ml-2 lg:mr-2 mb-3 lg:mb-0 cursor-pointer">
+                  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">E' Chiuso</label>
+                  <label class="inline-flex items-center cursor-pointer">
+                    <input type="checkbox" [value]="mar.closed" [(ngModel)]="mar.closed"  class="sr-only peer">
+                    <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600 dark:peer-checked:bg-blue-600"></div>
+                  </label>
+                </div>
+
+              </div>
+
+              <div class="lg:flex md:justify-evenly mt-20 mb-10" id="mercoledi">
+
+                <div class="nome lg:ml-2 lg:mr-2 mb-3 lg:mb-0" >
+                  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Giorno Della Settimana</label>
+                  <div class="relative">
+                    <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                    </div>
+                    <input [value]="mer.dayOfWeek" type="text" name="time"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 cursor-not-allowed" placeholder="Mercoledi" disabled readonly>
+                  </div>
+                </div>
+
+
+                <div class="Orario Apertura Mattina lg:ml-2 lg:mr-2 mb-3 lg:mb-0">
+                  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Orario Apertura Mattina</label>
+                  <div class="relative">
+                    <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-black" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="12 6 12 12 16 14"></polyline>
+                      </svg>
+                    </div>
+                    <input [(ngModel)]="mer.morningOpening" [value]="mer.morningOpening" type="time" name="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 " placeholder="Orario Apertura Mattina">
+                  </div>
+                </div>
+
+                <div class="Orario Chiusura Mattina lg:ml-2 lg:mr-2 mb-3 lg:mb-0">
+                  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Orario Chiusura Mattina</label>
+                  <div class="relative">
+                    <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-black" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="12 6 12 12 16 14"></polyline>
+                      </svg>
+                    </div>
+                    <input [(ngModel)]="mer.morningClosing" [value]="mer.morningClosing" type="time" name="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 " placeholder="Orario Chiusura Mattina">
+                  </div>
+                </div>
+
+                <div class="Orario Apertura Pomeriggio lg:ml-2 lg:mr-2 mb-3 lg:mb-0">
+                  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Orario Apertura Pomeriggio</label>
+                  <div class="relative">
+                    <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-black" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="12 6 12 12 16 14"></polyline>
+                      </svg>
+                    </div>
+                    <input [(ngModel)]="mer.eveningOpening" [value]="mer.eveningOpening" type="time" name="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 " placeholder="Orario Apertura Pomeriggio">
+                  </div>
+                </div>
+
+                <div class="Orario Chiusura Pomeriggio lg:ml-2 lg:mr-2 mb-3 lg:mb-0">
+                  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Orario Chiusura Pomeriggio</label>
+                  <div class="relative">
+                    <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-black" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="12 6 12 12 16 14"></polyline>
+                      </svg>
+                    </div>
+                    <input [(ngModel)]="mer.eveningClosing" [value]="mer.eveningClosing" type="time" name="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 " placeholder="Orario Chiusura Pomeriggio">
+                  </div>
+                </div>
+
+                <div class="lg:ml-2 lg:mr-2 mb-3 lg:mb-0 cursor-pointer">
+                  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Orario Continuato</label>
+                  <label class="inline-flex items-center cursor-pointer">
+                    <input type="checkbox" [value]="mer.allDayOpen" [(ngModel)]="mer.allDayOpen"  class="sr-only peer">
+                    <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600 dark:peer-checked:bg-blue-600"></div>
+                  </label>
+                </div>
+
+
+                <div class="lg:ml-2 lg:mr-2 mb-3 lg:mb-0 cursor-pointer">
+                  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">E' Chiuso</label>
+                  <label class="inline-flex items-center cursor-pointer">
+                    <input type="checkbox" [value]="mer.closed" [(ngModel)]="mer.closed"  class="sr-only peer">
+                    <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600 dark:peer-checked:bg-blue-600"></div>
+                  </label>
+                </div>
+
+              </div>
+
+              <div class="lg:flex lg:justify-evenly mt-20 mb-10" id="giovedi">
+
+                <div class="nome lg:ml-2 lg:mr-2 mb-3 lg:mb-0" >
+                  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Giorno Della Settimana</label>
+                  <div class="relative">
+                    <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                    </div>
+                    <input [value]="gio.dayOfWeek" type="text" name="time"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 cursor-not-allowed" placeholder="Giovedi" disabled readonly>
+                  </div>
+                </div>
+
+
+                <div class="Orario Apertura Mattina lg:ml-2 lg:mr-2 mb-3 lg:mb-0">
+                  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Orario Apertura Mattina</label>
+                  <div class="relative">
+                    <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-black" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="12 6 12 12 16 14"></polyline>
+                      </svg>
+                    </div>
+                    <input [(ngModel)]="gio.morningOpening" [value]="gio.morningOpening" type="time" name="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 " placeholder="Orario Apertura Mattina">
+                  </div>
+                </div>
+
+                <div class="Orario Chiusura Mattina lg:ml-2 lg:mr-2 mb-3 lg:mb-0">
+                  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Orario Chiusura Mattina</label>
+                  <div class="relative">
+                    <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-black" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="12 6 12 12 16 14"></polyline>
+                      </svg>
+                    </div>
+                    <input [(ngModel)]="gio.morningClosing" [value]="gio.morningClosing" type="time" name="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 " placeholder="Orario Chiusura Mattina">
+                  </div>
+                </div>
+
+                <div class="Orario Apertura Pomeriggio lg:ml-2 lg:mr-2 mb-3 lg:mb-0">
+                  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Orario Apertura Pomeriggio</label>
+                  <div class="relative">
+                    <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-black" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="12 6 12 12 16 14"></polyline>
+                      </svg>
+                    </div>
+                    <input [(ngModel)]="gio.eveningOpening" [value]="gio.eveningOpening" type="time" name="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 " placeholder="Orario Apertura Pomeriggio">
+                  </div>
+                </div>
+
+                <div class="Orario Chiusura Pomeriggio lg:ml-2 lg:mr-2 mb-3 lg:mb-0">
+                  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Orario Chiusura Pomeriggio</label>
+                  <div class="relative">
+                    <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-black" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="12 6 12 12 16 14"></polyline>
+                      </svg>
+                    </div>
+                    <input [(ngModel)]="gio.eveningClosing" [value]="gio.eveningClosing" type="time" name="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 " placeholder="Orario Chiusura Pomeriggio">
+                  </div>
+                </div>
+
+                <div class="lg:ml-2 lg:mr-2 mb-3 lg:mb-0 cursor-pointer">
+                  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Orario Continuato</label>
+                  <label class="inline-flex items-center cursor-pointer">
+                    <input type="checkbox" [value]="gio.allDayOpen" [(ngModel)]="gio.allDayOpen"  class="sr-only peer">
+                    <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600 dark:peer-checked:bg-blue-600"></div>
+                  </label>
+                </div>
+
+
+                <div class="lg:ml-2 lg:mr-2 mb-3 lg:mb-0 cursor-pointer">
+                  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">E' Chiuso</label>
+                  <label class="inline-flex items-center cursor-pointer">
+                    <input type="checkbox" [value]="gio.closed" [(ngModel)]="gio.closed"  class="sr-only peer">
+                    <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600 dark:peer-checked:bg-blue-600"></div>
+                  </label>
+                </div>
+
+
+              </div>
+
+              <div class="lg:flex lg:justify-evenly mt-20 mb-10" id="venerdi">
+
+                <div class="nome lg:ml-2 lg:mr-2 mb-3 lg:mb-0" >
+                  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Giorno Della Settimana</label>
+                  <div class="relative">
+                    <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                    </div>
+                    <input [value]="ven.dayOfWeek" type="text" name="time"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 cursor-not-allowed" placeholder="Venerdi" disabled readonly>
+                  </div>
+                </div>
+
+
+                <div class="Orario Apertura Mattina lg:ml-2 lg:mr-2 mb-3 lg:mb-0">
+                  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Orario Apertura Mattina</label>
+                  <div class="relative">
+                    <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-black" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="12 6 12 12 16 14"></polyline>
+                      </svg>
+                    </div>
+                    <input [(ngModel)]="ven.morningOpening" [value]="ven.morningOpening" type="time" name="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 " placeholder="Orario Apertura Mattina">
+                  </div>
+                </div>
+
+                <div class="Orario Chiusura Mattina lg:ml-2 lg:mr-2 mb-3 lg:mb-0">
+                  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Orario Chiusura Mattina</label>
+                  <div class="relative">
+                    <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-black" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="12 6 12 12 16 14"></polyline>
+                      </svg>
+                    </div>
+                    <input [(ngModel)]="ven.morningClosing" [value]="ven.morningClosing" type="time" name="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 " placeholder="Orario Chiusura Mattina">
+                  </div>
+                </div>
+
+                <div class="Orario Apertura Pomeriggio lg:ml-2 lg:mr-2 mb-3 lg:mb-0">
+                  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Orario Apertura Pomeriggio</label>
+                  <div class="relative">
+                    <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-black" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="12 6 12 12 16 14"></polyline>
+                      </svg>
+                    </div>
+                    <input [(ngModel)]="ven.eveningOpening" [value]="ven.eveningOpening" type="time" name="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 " placeholder="Orario Apertura Pomeriggio">
+                  </div>
+                </div>
+
+                <div class="Orario Chiusura Pomeriggio lg:ml-2 lg:mr-2 mb-3 lg:mb-0">
+                  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Orario Chiusura Pomeriggio</label>
+                  <div class="relative">
+                    <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-black" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="12 6 12 12 16 14"></polyline>
+                      </svg>
+                    </div>
+                    <input [(ngModel)]="ven.eveningClosing" [value]="ven.eveningClosing" type="time" name="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 " placeholder="Orario Chiusura Pomeriggio">
+                  </div>
+                </div>
+
+                <div class="lg:ml-2 lg:mr-2 mb-3 lg:mb-0 cursor-pointer">
+                  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Orario Continuato</label>
+                  <label class="inline-flex items-center cursor-pointer">
+                    <input type="checkbox" [value]="ven.allDayOpen" [(ngModel)]="ven.allDayOpen"  class="sr-only peer">
+                    <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600 dark:peer-checked:bg-blue-600"></div>
+                  </label>
+                </div>
+
+
+                <div class="lg:ml-2 lg:mr-2 mb-3 lg:mb-0 cursor-pointer">
+                  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">E' Chiuso</label>
+                  <label class="inline-flex items-center cursor-pointer">
+                    <input type="checkbox" [value]="ven.closed" [(ngModel)]="ven.closed"  class="sr-only peer">
+                    <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600 dark:peer-checked:bg-blue-600"></div>
+                  </label>
+                </div>
+
+
+              </div>
+
+              <div class="lg:flex lg:justify-evenly mt-20 mb-10" id="sabato">
+
+                <div class="nome lg:ml-2 lg:mr-2 mb-3 lg:mb-0" >
+                  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Giorno Della Settimana</label>
+                  <div class="relative">
+                    <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                    </div>
+                    <input [value]="sab.dayOfWeek" type="text" name="time"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 cursor-not-allowed" placeholder="Sabato" disabled readonly>
+                  </div>
+                </div>
+
+
+                <div class="Orario Apertura Mattina lg:ml-2 lg:mr-2 mb-3 lg:mb-0">
+                  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Orario Apertura Mattina</label>
+                  <div class="relative">
+                    <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-black" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="12 6 12 12 16 14"></polyline>
+                      </svg>
+                    </div>
+                    <input [(ngModel)]="sab.morningOpening" [value]="sab.morningOpening" type="time" name="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 " placeholder="Orario Apertura Mattina">
+                  </div>
+                </div>
+
+                <div class="Orario Chiusura Mattina lg:ml-2 lg:mr-2 mb-3 lg:mb-0">
+                  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Orario Chiusura Mattina</label>
+                  <div class="relative">
+                    <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-black" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="12 6 12 12 16 14"></polyline>
+                      </svg>
+                    </div>
+                    <input [(ngModel)]="sab.morningClosing" [value]="sab.morningClosing" type="time" name="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 " placeholder="Orario Chiusura Mattina">
+                  </div>
+                </div>
+
+                <div class="Orario Apertura Pomeriggio lg:ml-2 lg:mr-2 mb-3 lg:mb-0">
+                  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Orario Apertura Pomeriggio</label>
+                  <div class="relative">
+                    <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-black" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="12 6 12 12 16 14"></polyline>
+                      </svg>
+                    </div>
+                    <input [(ngModel)]="sab.eveningOpening" [value]="sab.eveningOpening" type="time" name="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 " placeholder="Orario Apertura Pomeriggio">
+                  </div>
+                </div>
+
+                <div class="Orario Chiusura Pomeriggio lg:ml-2 lg:mr-2 mb-3 lg:mb-0">
+                  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Orario Chiusura Pomeriggio</label>
+                  <div class="relative">
+                    <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-black" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="12 6 12 12 16 14"></polyline>
+                      </svg>
+                    </div>
+                    <input [(ngModel)]="sab.eveningClosing" [value]="sab.eveningClosing" type="time" name="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 " placeholder="Orario Chiusura Pomeriggio">
+                  </div>
+                </div>
+
+                <div class="lg:ml-2 lg:mr-2 mb-3 lg:mb-0 cursor-pointer">
+                  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Orario Continuato</label>
+                  <label class="inline-flex items-center cursor-pointer">
+                    <input type="checkbox" [value]="sab.allDayOpen" [(ngModel)]="sab.allDayOpen"  class="sr-only peer">
+                    <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600 dark:peer-checked:bg-blue-600"></div>
+                  </label>
+                </div>
+
+
+                <div class="lg:ml-2 lg:mr-2 mb-3 lg:mb-0 cursor-pointer">
+                  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">E' Chiuso</label>
+                  <label class="inline-flex items-center cursor-pointer">
+                    <input type="checkbox" [value]="sab.closed" [(ngModel)]="sab.closed"  class="sr-only peer">
+                    <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600 dark:peer-checked:bg-blue-600"></div>
+                  </label>
+                </div>
+
+
+              </div>
+
+              <div class="lg:flex lg:justify-evenly mt-20 mb-10" id="Domenica">
+
+                <div class="nome lg:ml-2 lg:mr-2 mb-3 lg:mb-0" >
+                  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Giorno Della Settimana</label>
+                  <div class="relative">
+                    <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                    </div>
+                    <input [value]="dom.dayOfWeek" type="text" name="time"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 cursor-not-allowed" placeholder="Domenica" disabled readonly>
+                  </div>
+                </div>
+
+
+                <div class="Orario Apertura Mattina lg:ml-2 lg:mr-2 mb-3 lg:mb-0">
+                  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Orario Apertura Mattina</label>
+                  <div class="relative">
+                    <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-black" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="12 6 12 12 16 14"></polyline>
+                      </svg>
+                    </div>
+                    <input [(ngModel)]="dom.morningOpening" [value]="dom.morningOpening" type="time" name="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 " placeholder="Orario Apertura Mattina">
+                  </div>
+                </div>
+
+                <div class="Orario Chiusura Mattina lg:ml-2 lg:mr-2 mb-3 lg:mb-0">
+                  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Orario Chiusura Mattina</label>
+                  <div class="relative">
+                    <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-black" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="12 6 12 12 16 14"></polyline>
+                      </svg>
+                    </div>
+                    <input [(ngModel)]="dom.morningClosing" [value]="dom.morningClosing" type="time" name="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 " placeholder="Orario Chiusura Mattina">
+                  </div>
+                </div>
+
+                <div class="Orario Apertura Pomeriggio lg:ml-2 lg:mr-2 mb-3 lg:mb-0">
+                  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Orario Apertura Pomeriggio</label>
+                  <div class="relative">
+                    <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-black" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="12 6 12 12 16 14"></polyline>
+                      </svg>
+                    </div>
+                    <input [(ngModel)]="dom.eveningOpening" [value]="dom.eveningOpening" type="time" name="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 " placeholder="Orario Apertura Pomeriggio">
+                  </div>
+                </div>
+
+                <div class="Orario Chiusura Pomeriggio lg:ml-2 lg:mr-2 mb-3 lg:mb-0">
+                  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Orario Chiusura Pomeriggio</label>
+                  <div class="relative">
+                    <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-black" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="12 6 12 12 16 14"></polyline>
+                      </svg>
+                    </div>
+                    <input [(ngModel)]="dom.eveningClosing" [value]="dom.eveningClosing" type="time" name="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 " placeholder="Orario Chiusura Pomeriggio">
+                  </div>
+                </div>
+
+
+                <div class="lg:ml-2 lg:mr-2 mb-3 lg:mb-0 cursor-pointer">
+                  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Orario Continuato</label>
+                  <label class="inline-flex items-center cursor-pointer">
+                    <input type="checkbox" [value]="dom.allDayOpen" [(ngModel)]="dom.allDayOpen"  class="sr-only peer">
+                    <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600 dark:peer-checked:bg-blue-600"></div>
+                  </label>
+                </div>
+
+
+                <div class="lg:ml-2 lg:mr-2 mb-3 lg:mb-0 cursor-pointer">
+                  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">E' Chiuso</label>
+                  <label class="inline-flex items-center cursor-pointer">
+                    <input type="checkbox" [value]="dom.closed" [(ngModel)]="dom.closed"  class="sr-only peer">
+                    <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600 dark:peer-checked:bg-blue-600"></div>
+                  </label>
+                </div>
+
+
+              </div>
+
+            </div>
+
+
+          </div>
+
+          <div class="modal-footer">
+            <!-- Da modificare con save per i dati -->
+            <button class="btn btn-primary" data-bs-target="#exampleModalToggle" data-bs-toggle="modal" (click)="updateOrari()">Save</button>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Form per la modifica dei dati social -->
+    <div class="modal fade modal-xl" id="exampleModalToggle6" aria-hidden="true" aria-labelledby="exampleModalToggleLabel6" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+
+          <div class="modal-header flex items-center justify-between">
+            <button class="button" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">
+              <fa-icon [icon]="faArrowLeft" class="mr-1"></fa-icon>
+            </button>
+            <h1 class="modal-title fs-5 text-center flex-1">Aggiorna i Social</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+
+          <div class="modal-body flex justify-center items-center min-h-[500px]">
+
+            <div class="mr-[40px] xl:min-w-[600px]">
+
+              <div class="elem ">
+                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Facebook</label>
+                <div class="relative">
+                  <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                    <svg class="text-black" xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.07C24 5.41 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.04V9.41c0-3.02 1.8-4.7 4.54-4.7 1.31 0 2.68.24 2.68.24v2.97h-1.5c-1.5 0-1.96.93-1.96 1.89v2.26h3.32l-.53 3.5h-2.8V24C19.62 23.1 24 18.1 24 12.07"/></svg>
+                  </div>
+                  <input  [(ngModel)]="updateSocial.facebook"  [value]="updateSocial.facebook"  type="text" name="text"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Link pagina Facebook" required="">
+                </div>
+              </div>
+
+              <br>
+
+              <div class="elem mt-10">
+                <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Instagram</label>
+                <div class="relative">
+                  <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                    <svg class="text-black" xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="currentColor"><path d="M16.98 0a6.9 6.9 0 0 1 5.08 1.98A6.94 6.94 0 0 1 24 7.02v9.96c0 2.08-.68 3.87-1.98 5.13A7.14 7.14 0 0 1 16.94 24H7.06a7.06 7.06 0 0 1-5.03-1.89A6.96 6.96 0 0 1 0 16.94V7.02C0 2.8 2.8 0 7.02 0h9.96zm.05 2.23H7.06c-1.45 0-2.7.43-3.53 1.25a4.82 4.82 0 0 0-1.3 3.54v9.92c0 1.5.43 2.7 1.3 3.58a5 5 0 0 0 3.53 1.25h9.88a5 5 0 0 0 3.53-1.25 4.73 4.73 0 0 0 1.4-3.54V7.02a5 5 0 0 0-1.3-3.49 4.82 4.82 0 0 0-3.54-1.3zM12 5.76c3.39 0 6.2 2.8 6.2 6.2a6.2 6.2 0 0 1-12.4 0 6.2 6.2 0 0 1 6.2-6.2zm0 2.22a3.99 3.99 0 0 0-3.97 3.97A3.99 3.99 0 0 0 12 15.92a3.99 3.99 0 0 0 3.97-3.97A3.99 3.99 0 0 0 12 7.98zm6.44-3.77a1.4 1.4 0 1 1 0 2.8 1.4 1.4 0 0 1 0-2.8z"/></svg>
+                  </div>
+                  <input  [(ngModel)]="updateSocial.instagram" [value]="updateSocial.instagram" type="text" name="text"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Link pagina Instagram" required="">
+                </div>
+              </div>
+
+              <br>
+
+              <div class="elem mt-10">
+                <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Twitter / X</label>
+                <div class="relative">
+                  <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                    <svg class="text-black" xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="currentColor"><path d="M24 4.37a9.6 9.6 0 0 1-2.83.8 5.04 5.04 0 0 0 2.17-2.8c-.95.58-2 1-3.13 1.22A4.86 4.86 0 0 0 16.61 2a4.99 4.99 0 0 0-4.79 6.2A13.87 13.87 0 0 1 1.67 2.92 5.12 5.12 0 0 0 3.2 9.67a4.82 4.82 0 0 1-2.23-.64v.07c0 2.44 1.7 4.48 3.95 4.95a4.84 4.84 0 0 1-2.22.08c.63 2.01 2.45 3.47 4.6 3.51A9.72 9.72 0 0 1 0 19.74 13.68 13.68 0 0 0 7.55 22c9.06 0 14-7.7 14-14.37v-.65c.96-.71 1.79-1.6 2.45-2.61z"/></svg>
+                  </div>
+                  <input  [(ngModel)]="updateSocial.twitter" [value]="updateSocial.twitter" type="text" name="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Link pagina Twitter / X" required="">
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+          <div class="modal-footer">
+            <!-- Da modificare con save per i dati -->
+            <button class="btn btn-primary" data-bs-target="#exampleModalToggle" data-bs-toggle="modal" (click)="modSocial()">Save</button>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+
+
+    <button class="btn btn-primary flex z-50 mr-10 mt-4" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">
+      <fa-icon [icon]="faPencil" class="mr-1"></fa-icon>
+      <span> Modifica Profilo </span>
+    </button>
+
+  </div>
+
+  <div class="pt-3 pr-4">   <!-- TODO da Cambiare Colore -->
+
+    <button mat-fab type="button" class="px-6 py-3 font-medium text-xl twitter" (click)="redirectToX()" *ngIf="info.twitter">
+
+      <fa-icon class="hover:scale-1/2 fa-brands fa-x-twitter h-5 w-5"></fa-icon>
+
+    </button>
+
+  </div>
+
+  <div class="pt-3 pr-4">   <!-- TODO da Cambiare Colore -->
+
+    <button mat-fab type="button" class="px-6 py-3 font-medium text-xl instagram" (click)="redirectToInstagram()" *ngIf="info.instagram">
+
+      <fa-icon class="hover:scale-1/2 fa-brands fa-instagram h-5 w-5"></fa-icon>
+
+    </button>
+
+  </div>
+
+  <div class="pt-3 pr-4">
+
+    <button mat-fab type="button" class="px-6 py-3 font-medium text-2xl facebook" (click)="redirectToFacebook()" *ngIf="info.facebook">
+
+      <fa-icon class="hover:scale-1/2 fa-brands fa-facebook-f h-5 w-5"></fa-icon>
+
+    </button>
+
+  </div>
+
+
+  <div class=" pt-3 sfondo justify-end pr-4" >
+
+    <button mat-fab type="button"  class="px-6 py-3 font-medium text-xl custom-btn" (click)="addToFavourite()" *ngIf="!isInFav">
+
+      <fa-icon class=" hover:scale-1/2 fa-regular fa-heart h-5 w-5"></fa-icon>
+
+    </button>
+
+    <button mat-fab type="button" class="px-6 py-3 font-medium text-xl pressed-btn" (click)="remToFavourite()" *ngIf="isInFav">
+
+      <fa-icon class=" fa-solid fa-heart h-5 w-5"></fa-icon>
+
+
+    </button>
+
+  </div>
+
+</div>

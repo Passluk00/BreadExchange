@@ -27,4 +27,15 @@ public class ItemMapper {
     }
 
 
+    public ItemForCart toCart(Item item){
+        return ItemForCart.builder()
+                .id(item.getId())
+                .name(item.getName())
+                .description(item.getDescription())
+                .img(item.getImg())
+                .price(item.getPrice())
+                .quantity(0)
+                .build();
+    }
+
 }

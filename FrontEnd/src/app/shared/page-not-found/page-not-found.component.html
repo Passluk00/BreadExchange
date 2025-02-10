@@ -122,6 +122,50 @@
 
     <!-- da finire -->
 
+    <br>
+    <br>
+
+
+    <div class="autocomplete search-container max-w-sm mx-auto mt-32">
+
+      <div class="search-box">
+
+        <input
+          type="text"
+          class="search-input"
+          placeholder="Ricerca Rivenditori..."
+          [(ngModel)]="searchValue"
+          (input)="onSearchInput()">
+
+      </div>
+
+      <div class="z-10" *ngIf="results.length > 0">
+
+        <div *ngFor="let ele of results">
+
+          <a routerLink="/bakery/{{ele.id}}" >{{ele.name}}</a>
+          <img [src]="ele.pic">
+          <h3>{{ele.name}}</h3>
+
+        </div>
+
+      </div>
+
+
+    </div>
+
+
+
+    <app-tool-bar [userId]="userId" ></app-tool-bar>
+
+
+
+
+
+
+
+
+
     <button (click)="delItem()" class="btn btn-danger mb-24 justify-center mt-5">Del Item</button>
 
 

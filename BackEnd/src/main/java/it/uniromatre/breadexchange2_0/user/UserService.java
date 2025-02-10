@@ -1,17 +1,33 @@
 package it.uniromatre.breadexchange2_0.user;
 
 import it.uniromatre.breadexchange2_0.auth.ChangePasswordRequest;
+import it.uniromatre.breadexchange2_0.bakery.Bakery;
+import it.uniromatre.breadexchange2_0.bakery.Status;
+import it.uniromatre.breadexchange2_0.bakery.fav.BakeryFav;
+import it.uniromatre.breadexchange2_0.bakery.BakeryMapper;
+import it.uniromatre.breadexchange2_0.bakery.BakeryRepository;
+import it.uniromatre.breadexchange2_0.bakery.fav.BakeryFavRepository;
 import it.uniromatre.breadexchange2_0.bakery.registerRequest.BRRService;
 import it.uniromatre.breadexchange2_0.bakery.registerRequest.BakeryRegisterRequest;
 import it.uniromatre.breadexchange2_0.common.PageResponse;
 import it.uniromatre.breadexchange2_0.email.emailVerifyRequest;
 import it.uniromatre.breadexchange2_0.file.FileStorageService;
+import it.uniromatre.breadexchange2_0.items.category.Category;
+import it.uniromatre.breadexchange2_0.items.category.CategoryForCart;
+import it.uniromatre.breadexchange2_0.items.category.CategoryMapper;
+import it.uniromatre.breadexchange2_0.items.category.ListCatForCart;
+import it.uniromatre.breadexchange2_0.items.item.Item;
 import it.uniromatre.breadexchange2_0.role.Role;
 import it.uniromatre.breadexchange2_0.token.TokenRepository;
 import it.uniromatre.breadexchange2_0.token.TokenService;
 import it.uniromatre.breadexchange2_0.token.tokenVerifyRequest;
 import it.uniromatre.breadexchange2_0.token.tokenVerifyResponse;
+import it.uniromatre.breadexchange2_0.user.ItemsCart.ItemsCart;
 import it.uniromatre.breadexchange2_0.user.address.*;
+import it.uniromatre.breadexchange2_0.user.cart.Cart;
+import it.uniromatre.breadexchange2_0.user.order.Order;
+import it.uniromatre.breadexchange2_0.user.order.OrderFrontEnd;
+import it.uniromatre.breadexchange2_0.user.order.OrderMapper;
 import jakarta.mail.MessagingException;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -30,6 +46,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 
 @Service
@@ -46,6 +63,11 @@ public class UserService {
     private final TokenService tokenService;
     private final TokenRepository tokenRepository;
     private final BRRService brrService;
+    private final BakeryRepository bakeryRepository;
+    private final BakeryMapper bakeryMapper;
+    private final BakeryFavRepository bakeryFavRepository;
+    private final CategoryMapper categoryMapper;
+    private final OrderMapper orderMapper;
 
     public void uploadProfilePicture(MultipartFile file, Authentication connectedUser, int dir) {
         User user = ((User) connectedUser.getPrincipal());
@@ -301,6 +323,189 @@ public class UserService {
     }
 
 
+    public void addToFav(Integer idBac, Authentication connectedUser) {
+
+        User user = ((User) connectedUser.getPrincipal());
+        User currentUser = userRepository.findUserById(user.getId());
+
+        if (currentUser == null) {
+            throw new UsernameNotFoundException("User not found with username: " + user.getId());
+        }
+
+        Bakery bac = bakeryRepository.getBakeryById(idBac);
+
+        if(bac == null){
+            throw new EntityNotFoundException("no entity found with id: "+ idBac);
+        }
+
+        BakeryFav newFav = bakeryMapper.toBakeryFav(bac);
+
+        bakeryFavRepository.save(newFav);
+
+        List<BakeryFav> list = currentUser.getFav();
+
+        list.add(newFav);
+
+        currentUser.setFav(list);
+
+        userRepository.save(currentUser);
+    }
+
+    public void remToFav(Integer idBac, Authentication connectedUser) {
+
+        if(idBac == null){
+            throw new RuntimeException("idBac is null");
+        }
+
+        User user = ((User) connectedUser.getPrincipal());
+        User currentUser = userRepository.findUserById(user.getId());
+
+        if (currentUser == null) {
+            throw new UsernameNotFoundException("User not found with username: " + user.getId());
+        }
+
+        currentUser.getFav().removeIf(fav -> Objects.equals(fav.getId(), idBac));
+
+        userRepository.save(currentUser);
+    }
+
+    public Boolean isToFav(Authentication connectedUser, Integer idBac) {
+
+        if(idBac == null){
+            throw new RuntimeException("idBac is null");
+        }
+
+        User user = ((User) connectedUser.getPrincipal());
+        User currentUser = userRepository.findUserById(user.getId());
+
+        return currentUser.getFav().stream()
+                .anyMatch(fav -> Objects.equals(fav.getId(), idBac));
+
+    }
+
+    public List<BakeryFav> getFav(Authentication connectedUser) {
+
+        User user = ((User) connectedUser.getPrincipal());
+        User currentUser = userRepository.findUserById(user.getId());
+
+        return currentUser.getFav();
+
+    }
+
+    public List<ItemsCart> getAllItems(Authentication connectedUser) {
+
+        User user = ((User) connectedUser.getPrincipal());
+        User toCheck = userRepository.findUserById(user.getId());
+
+        if (toCheck == null) {
+            throw new UsernameNotFoundException("User not found with username: " + user.getId());
+        }
+
+        if(toCheck.getCart().getItems().isEmpty()){
+            return null;
+        }
+
+        return toCheck.getCart().getItems();
+    }
+
+    public ListCatForCart getAllForCart(Integer idBac, Authentication connectedUser) {
+
+        User user = ((User) connectedUser.getPrincipal());
+        User toCheck = userRepository.findUserById(user.getId());
+
+        if (toCheck == null) {
+            throw new UsernameNotFoundException("User not found with username: " + user.getId());
+        }
+
+        Bakery bac = bakeryRepository.findById(idBac).orElseThrow(() -> new EntityNotFoundException("bakery not found"));
+
+        List<Category> catList = bac.getCategories();
+
+        return ListCatForCart.builder()
+                .name_azz(bac.getName())
+                .Categorys(categoryMapper.toCategoryForCartList(catList))
+                .id_azz(bac.getId())
+                .img_azz(bac.getUrl_picture())
+                .build();
+
+    }
+
+    public Cart getCart(Authentication connectedUser) {
+
+        User user = ((User) connectedUser.getPrincipal());
+        User toCheck = userRepository.findUserById(user.getId());
+
+        if (toCheck == null) {
+            throw new UsernameNotFoundException("User not found with username: " + user.getId());
+        }
+
+        if(toCheck.getCart().getItems().isEmpty()){
+            throw new RuntimeException("carrello vuoto non hai nulla da mostrare");
+        }
+
+        return toCheck.getCart();
+    }
+
+
+    public List<OrderFrontEnd> getAllOrders(Authentication connectedUser) {
+
+        User user = ((User) connectedUser.getPrincipal());
+        User toCheck = userRepository.findUserById(user.getId());
+
+        if (toCheck == null) {
+            throw new UsernameNotFoundException("User not found with username: " + user.getId());
+        }
+
+        if(toCheck.getOrders().isEmpty()){
+            throw new RuntimeException("orders non hai nulla da mostrare");
+        }
+
+        List<Order> ord = toCheck.getOrders();
+
+        return orderMapper.toFrontEnd(ord);
+    }
+
+
+    public Boolean checkIfOwner(Authentication connectedUser) {
+
+        User user = ((User) connectedUser.getPrincipal());
+        User toCheck = userRepository.findUserById(user.getId());
+
+        if (toCheck == null) {
+            throw new UsernameNotFoundException("User not found with username: " + user.getId());
+        }
+
+        return bakeryRepository.existsbyOwnerId(toCheck);
+
+    }
+
+    public Status checkOwner(Authentication connectedUser) {
+
+
+        User user = ((User) connectedUser.getPrincipal());
+        User toCheck = userRepository.findUserById(user.getId());
+
+        if (toCheck == null) {
+            throw new UsernameNotFoundException("User not found with username: " + user.getId());
+        }
+
+        Bakery bac = bakeryRepository.findByOwner(toCheck);
+
+        if(bac == null){
+            Status sta = Status.builder()
+                    .id(null)
+                    .status(false)
+                    .build();
+            return sta;
+        }
+
+        Status stat = Status.builder()
+                .id(bac.getId())
+                .status(true)
+                .build();
+
+        return stat;
+    }
 }
 
 

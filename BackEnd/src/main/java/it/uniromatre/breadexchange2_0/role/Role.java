@@ -30,7 +30,11 @@ public enum Role {
                     BAKERY_OWNER_READ,
                     BAKERY_OWNER_UPDATE,
                     BAKERY_OWNER_DELETE,
-                    BAKERY_OWNER_CREATE
+                    BAKERY_OWNER_CREATE,
+                    CUSTOMER_READ,
+                    CUSTOMER_UPDATE,
+                    CUSTOMER_DELETE,
+                    CUSTOMER_CREATE
 
             )
     ),

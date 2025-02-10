@@ -3,6 +3,8 @@ import {AdminControllerService} from "../../../../services/services/admin-contro
 import {FrontEndControllerService} from "../../../../services/services/front-end-controller.service";
 import {RandomDataBakeryResponse} from "../../../../services/models/random-data-bakery-response";
 import {NgIf} from "@angular/common";
+import {routes} from "../../../../app.routes";
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -18,17 +20,13 @@ export class CaroselloInfinitoComponent implements OnInit{
   constructor(
     private frontEndService: FrontEndControllerService,
     private cdr: ChangeDetectorRef,
+    private router: Router,
     @Inject(PLATFORM_ID) private platformId: Object
   ) {}
 
 
-
-
-
   dati:RandomDataBakeryResponse[] = []
   @Input() id!: number | undefined;
-
-
 
 
   ngOnInit() {
@@ -36,6 +34,12 @@ export class CaroselloInfinitoComponent implements OnInit{
     this.cdr.detectChanges()
   }
 
+
+  goToMenu(){
+    if(this.id != undefined ){
+      this.router.navigate([`/bakery/menu/${this.id}`]);
+    }
+  }
 
   async getData(){
     if( this.id != undefined ) {

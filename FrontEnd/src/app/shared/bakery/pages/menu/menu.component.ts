@@ -313,4 +313,3 @@ export class MenuComponent implements OnInit{
 
   protected readonly faArrowLeft = faArrowLeft;
 }
-

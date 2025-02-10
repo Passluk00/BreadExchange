@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Richiesta Rifiutata</title>
+    <title>📢 Esito della tua richiesta di registrazione come rivenditore</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -14,34 +13,37 @@
         }
         .container {
             max-width: 600px;
-            margin: 10px auto;
-            padding: 20px;
+            margin: 20px auto;
+            padding: 30px;
             background-color: #fff;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        .activation-code {
-            font-size: 36px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
             text-align: center;
-            margin-bottom: 20px;
         }
-        .activation-link a {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 5px;
+        .title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+        }
+        .message {
+            font-size: 16px;
+            color: #555;
+            margin: 20px 0;
+            line-height: 1.6;
+        }
+        .footer {
+            margin-top: 30px;
+            font-size: 14px;
+            color: #777;
         }
     </style>
 </head>
 <body>
 <div class="container">
-    <h1>Richiesta Rifiutata</h1>
-    <p class="greeting" th:text="'Hello ' + ${username} + ','"></p>
-    <p>Questa è un email per informarti che la tua richiesta per avere la tua pagina è stata rifiutata:</p>
-
-
+    <h1 class="title" th:text="'Ciao ' + ${username}"></h1>
+    <p class="message">Ti ringraziamo per il tuo interesse nel diventare rivenditore sul nostro sito. Dopo aver esaminato la tua richiesta, purtroppo non possiamo approvarla in questo momento.</p>
+    <p class="message">Se desideri ricevere maggiori dettagli sui criteri di approvazione o se ritieni che ci sia stato un errore, non esitare a contattarci.</p>
+    <p class="footer">Speriamo di poter collaborare in futuro!<br><strong>Il Team di BreadExchange</strong></p>
 </div>
 </body>
 </html>

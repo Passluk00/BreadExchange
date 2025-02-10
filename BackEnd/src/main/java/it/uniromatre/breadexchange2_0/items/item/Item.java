@@ -1,5 +1,6 @@
 package it.uniromatre.breadexchange2_0.items.item;
 
+import it.uniromatre.breadexchange2_0.user.cart.Cart;
 import jakarta.persistence.*;
 import lombok.*;
 

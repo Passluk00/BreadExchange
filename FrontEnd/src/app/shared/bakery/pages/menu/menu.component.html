@@ -5,14 +5,15 @@
   <div class="icon justify-center flex pt-5">
 
     <a [routerLink]="['/bakery/', userId]" class="text-3xl no-underline text-black font-bold">
-      <img [src]="data.img_azz" class="items-center w-[300px] h-[300px] rounded-full">       <!-- da cambaire con img del azz -->
+      <img [src]="data.img_azz" class="items-center w-[300px] h-[300px] rounded-full object-cover shadow-2xl">       <!-- da cambaire con img del azz -->
     </a>
-    <h1 class="fo-p mt-32">{{data.name_azz}}</h1>
+    <h1 class="fo-p mt-32 ml-5">{{data.name_azz}}</h1>
 
   </div>
 
   <br>
   <br>
+
 
   <div>
 
@@ -36,8 +37,8 @@
 
   </div>
 
-
   <div class="ml-32 mr-32 mt-4 mb-24 h-[5px] w-[calc(100%-2rem)]] colore rounded-lg"></div>
+
 
 
   <ng-template #placeholder class="mx-auto h-56 rounded-lg w-full">
@@ -128,7 +129,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="removeImage()" ></button>
       </div>
 
-      <div class="modal-body min-h-[500px] md:flex md:justify-evenly items-center">
+      <div class="modal-body min-h-[500px] xl:flex xl:justify-evenly items-center">
 
         <div class="flex justify-center">
 

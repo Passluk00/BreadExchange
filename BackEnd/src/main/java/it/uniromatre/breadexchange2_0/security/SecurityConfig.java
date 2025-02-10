@@ -77,11 +77,11 @@ public class SecurityConfig {
 
                                 // Customers
 
-                                .requestMatchers("/user/**").hasAnyRole(ADMIN.name(), CUSTOMER.name())
-                                .requestMatchers(GET,"/user/**").hasAnyAuthority(ADMIN_READ.name(), CUSTOMER.name())
-                                .requestMatchers(POST, "/user/**").hasAnyAuthority(ADMIN_CREATE.name(), CUSTOMER.name())
-                                .requestMatchers(PUT, "/user/**").hasAnyAuthority(ADMIN_UPDATE.name(), CUSTOMER.name())
-                                .requestMatchers(DELETE, "/user/**").hasAnyAuthority(ADMIN_DELETE.name(), CUSTOMER.name())
+                                .requestMatchers("/user/**").hasAnyRole(ADMIN.name(), CUSTOMER.name(), BAKERY_OWNER.name() )
+                                .requestMatchers(GET,"/user/**").hasAnyAuthority(ADMIN_READ.name(), CUSTOMER.name(), BAKERY_OWNER.name())
+                                .requestMatchers(POST, "/user/**").hasAnyAuthority(ADMIN_CREATE.name(), CUSTOMER.name(), BAKERY_OWNER.name())
+                                .requestMatchers(PUT, "/user/**").hasAnyAuthority(ADMIN_UPDATE.name(), CUSTOMER.name(), BAKERY_OWNER.name())
+                                .requestMatchers(DELETE, "/user/**").hasAnyAuthority(ADMIN_DELETE.name(), CUSTOMER.name(), BAKERY_OWNER.name())
 
                                 .anyRequest()
                                 .authenticated()

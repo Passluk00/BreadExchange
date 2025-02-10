@@ -44,6 +44,14 @@ public class AdminController {
         return ResponseEntity.accepted().build();
     }
 
+    @PatchMapping("/banBakery")
+    public ResponseEntity<Void> banBakery(
+            @RequestParam(name = "idBac") Integer idBac
+    ){
+        this.bakeryService.banBakery(idBac);
+        return ResponseEntity.accepted().build();
+    }
+
 
     @GetMapping("/test")
     @PreAuthorize("hasAuthority('admin:create')")

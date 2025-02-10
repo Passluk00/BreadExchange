@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Account Activation</title>
+    <title>Verifica Identità Account</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -19,29 +18,23 @@
             background-color: #fff;
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            text-align: center;
         }
         .activation-code {
             font-size: 36px;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .activation-link a {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 5px;
+            font-weight: bold;
+            color: #007bff;
+            margin: 20px 0;
         }
     </style>
 </head>
 <body>
 <div class="container">
-    <h1>Account Identity Verification</h1>
-    <p class="greeting" th:text="'Hello ' + ${username} + ','"></p>
-    <p>Questa è un email per la verifica dell'identita:</p>
+    <h1>Verifica della tua Identità</h1>
+    <p class="greeting" th:text="'Ciao ' + ${username} + ','"></p>
+    <p>Per completare la verifica della tua identità, utilizza il seguente codice di conferma:</p>
     <div class="activation-code"><span th:text="${activation_code}"></span></div>
-
+    <p>Se non hai richiesto questa verifica, ignora questa email.</p>
 </div>
 </body>
 </html>

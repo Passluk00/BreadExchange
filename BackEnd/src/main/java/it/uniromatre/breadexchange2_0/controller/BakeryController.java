@@ -2,6 +2,8 @@ package it.uniromatre.breadexchange2_0.controller;
 
 import io.swagger.v3.oas.annotations.Parameter;
 import it.uniromatre.breadexchange2_0.bakery.BakeryService;
+import it.uniromatre.breadexchange2_0.bakery.ReqModDesc;
+import it.uniromatre.breadexchange2_0.bakery.UpdateSocialBakery;
 import it.uniromatre.breadexchange2_0.bakery.Week.ModifyWeekRequest;
 import it.uniromatre.breadexchange2_0.bakery.Week.Week;
 import it.uniromatre.breadexchange2_0.bakery.Week.WeekService;
@@ -9,12 +11,17 @@ import it.uniromatre.breadexchange2_0.items.category.CategoryService;
 import it.uniromatre.breadexchange2_0.items.item.ItemRequest;
 import it.uniromatre.breadexchange2_0.items.item.ItemService;
 import it.uniromatre.breadexchange2_0.user.address.NewAddress;
+import it.uniromatre.breadexchange2_0.user.order.Order;
+import it.uniromatre.breadexchange2_0.user.order.OrderFrontEnd;
+import it.uniromatre.breadexchange2_0.user.order.OrderService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("bakery")
@@ -26,6 +33,7 @@ public class BakeryController {
     private final CategoryService categoryService;
     private final ItemService itemService;
     private final BakeryService bakeryService;
+    private final OrderService orderService;
 
 
 
@@ -141,7 +149,78 @@ public class BakeryController {
     }
 
 
+    @PatchMapping("/changeStatus")
+    public ResponseEntity<?> changeStatus(
+            Authentication connectedUser,
+            @RequestParam(name = "idBac") Integer idBac
+    ){
+        this.bakeryService.changeStatus(connectedUser, idBac);
+        return ResponseEntity.accepted().build();
+    }
 
+    @PatchMapping("/updateDesc")
+    public ResponseEntity<?> updateDesc(
+            Authentication connectedUser,
+            @RequestParam(name = "idBac") Integer idBac,
+            @RequestBody ReqModDesc req
+    ){
+        this.bakeryService.modDesc(connectedUser, idBac, req);
+        return ResponseEntity.accepted().build();
+    }
+
+
+    @PatchMapping("/updateSocial")
+    public ResponseEntity<?> updateSocial(
+            Authentication connectedUser,
+            @RequestParam(name = "idBac") Integer idBac,
+            @RequestBody UpdateSocialBakery req
+    ){
+        this.bakeryService.modSocial(connectedUser, idBac, req);
+        return ResponseEntity.accepted().build();
+    }
+
+
+    // accetta ordine
+
+
+    @PatchMapping("/acceptOrder")
+    public ResponseEntity<?> acceptOrder(
+            @RequestParam(name = "idOrder") Integer idOrder,
+            Authentication connectedUser
+    ){
+        this.orderService.acceptOrder(connectedUser, idOrder);
+        return ResponseEntity.accepted().build();
+    }
+
+
+    // rifiuta ordine
+    @PatchMapping("/rejectOrder")
+    public ResponseEntity<?> rejectOrder(
+            @RequestParam(name = "idOrder") Integer idOrder,
+            Authentication connectedUser
+    ){
+        this.orderService.rejectOrder(connectedUser, idOrder);
+        return ResponseEntity.accepted().build();
+    }
+
+
+    // cambia stato Ordine " in Spedizione "
+    @PatchMapping("/changeStatusOrder")
+    public ResponseEntity<?> changeStatusOrder(
+            @RequestParam(name = "idOrder") Integer idOrder,
+            Authentication connectedUser
+    ){
+        this.orderService.changeStatus(connectedUser, idOrder);
+        return ResponseEntity.accepted().build();
+    }
+
+    @GetMapping("/getAllOrdersBakery")
+    public ResponseEntity<List<OrderFrontEnd>> getAllOrdersBakery(
+            Authentication connectedUser
+    ){
+        return ResponseEntity.ok(this.bakeryService.getAllOrdersBakery(connectedUser));
+
+    }
 
 
 

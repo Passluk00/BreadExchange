@@ -5,99 +5,182 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="def00291-6796-4523-8aed-85c7574e50f3" name="Changes" comment="Commit iniziale Base BackEnd + Impostaioni cartelle">
-      <change afterPath="$PROJECT_DIR$/FrontEnd/src/app/services/fn/bakery-controller/del-category.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FrontEnd/src/app/services/fn/bakery-controller/del-item.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FrontEnd/src/app/services/fn/bakery-controller/new-category.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FrontEnd/src/app/services/fn/bakery-controller/new-item.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FrontEnd/src/app/services/fn/bakery-controller/update-item.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FrontEnd/src/app/services/fn/front-end-controller/check-owner.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FrontEnd/src/app/services/fn/front-end-controller/get-all-category.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FrontEnd/src/app/services/fn/front-end-controller/get-category.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FrontEnd/src/app/services/fn/front-end-controller/test-category.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FrontEnd/src/app/services/models/category.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FrontEnd/src/app/services/models/item-request.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FrontEnd/src/app/services/models/item.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FrontEnd/src/app/services/models/list-category-front-end.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FrontEnd/src/app/shared/bakery/pages/menu/menu.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FrontEnd/src/app/shared/bakery/pages/menu/menu.component.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FrontEnd/src/app/shared/bakery/pages/menu/menu.component.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FrontEnd/src/app/shared/bakery/pages/menu/menu.component.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1738619270742.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1738624442525.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1738624713465.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1738625115466.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1738625375140.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1738625388508.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1738625463839.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1738626066851.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1738626083968.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1738626097928.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1738626111300.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1738626520592.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1738626532964.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1738626707506.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1738627789761.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1738627809350.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1738627826982.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1738627839603.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1738629370860.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1738629385077.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1738629400380.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1738629419028.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1738629433498.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1738629449206.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1738629465898.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1738629482623.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1738629502102.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1738629518340.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1738630028577.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1738630038702.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1738630049307.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1738630059271.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1738630073198.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1738630088946.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1738630101505.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1738630116440.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1738630132639.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1738630151823.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1738630165521.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1738664269294.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1738670022013.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1738670032163.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1738670044375.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1738670056055.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1738670073367.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1738670085366.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1738670097662.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1738670110231.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/BreadExchange.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/0c8bb871-c311-4f15-8d46-26cf6eae043a.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/0c8bb871-c311-4f15-8d46-26cf6eae043a/storage_v2/_src_/database/BreadExchange2.d2D_JQ.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/0c8bb871-c311-4f15-8d46-26cf6eae043a/storage_v2/_src_/database/BreadExchange2.d2D_JQ/schema/public.abK9xQ.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/icon.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/app.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/app.config.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/app.routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/app.routes.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/services/api.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/services/api.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/services/fn/front-end-controller/get-random-data.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/services/fn/front-end-controller/get-random-data.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontEnd/src/app/services/fn/admin-controller/ban-bakery.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontEnd/src/app/services/fn/bakery-controller/accept-order.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontEnd/src/app/services/fn/bakery-controller/change-status-order.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontEnd/src/app/services/fn/bakery-controller/change-status.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontEnd/src/app/services/fn/bakery-controller/get-all-orders-bakery.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontEnd/src/app/services/fn/bakery-controller/reject-order.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontEnd/src/app/services/fn/bakery-controller/update-desc.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontEnd/src/app/services/fn/bakery-controller/update-social.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontEnd/src/app/services/fn/front-end-controller/get-b-akery-by-id.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontEnd/src/app/services/fn/front-end-controller/get-random-for-carosello.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontEnd/src/app/services/fn/front-end-controller/is-open.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontEnd/src/app/services/fn/front-end-controller/search-bakery.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontEnd/src/app/services/fn/user-controller/add-to-cart.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontEnd/src/app/services/fn/user-controller/add-to-fav.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontEnd/src/app/services/fn/user-controller/check-if-owner.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontEnd/src/app/services/fn/user-controller/check-owner-of-bakery.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontEnd/src/app/services/fn/user-controller/get-all-for-cart.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontEnd/src/app/services/fn/user-controller/get-all-items.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontEnd/src/app/services/fn/user-controller/get-all-orders.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontEnd/src/app/services/fn/user-controller/get-cart.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontEnd/src/app/services/fn/user-controller/get-fav.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontEnd/src/app/services/fn/user-controller/is-to-fav.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontEnd/src/app/services/fn/user-controller/mod-quantity-item.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontEnd/src/app/services/fn/user-controller/rem-to-fav.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontEnd/src/app/services/fn/user-controller/remove-to-cart.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontEnd/src/app/services/fn/user-controller/send-order.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontEnd/src/app/services/models/bakery-fav.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontEnd/src/app/services/models/bakery-nav-bar-response.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontEnd/src/app/services/models/bakery.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontEnd/src/app/services/models/cart.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontEnd/src/app/services/models/category-for-cart.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontEnd/src/app/services/models/item-for-cart.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontEnd/src/app/services/models/items-cart.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontEnd/src/app/services/models/list-cat-for-cart.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontEnd/src/app/services/models/order-front-end.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontEnd/src/app/services/models/order.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontEnd/src/app/services/models/random-data-bakery-carosello.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontEnd/src/app/services/models/req-mod-desc.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontEnd/src/app/services/models/status.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontEnd/src/app/services/models/update-social-bakery.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontEnd/src/app/shared/bakery/components/tool-bar/tool-bar.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontEnd/src/app/shared/bakery/components/tool-bar/tool-bar.component.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontEnd/src/app/shared/bakery/components/tool-bar/tool-bar.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontEnd/src/app/shared/bakery/components/tool-bar/tool-bar.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontEnd/src/app/shared/bakery/pages/manage/manage.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontEnd/src/app/shared/bakery/pages/manage/manage.component.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontEnd/src/app/shared/bakery/pages/manage/manage.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontEnd/src/app/shared/bakery/pages/manage/manage.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontEnd/src/app/shared/bakery/pages/new-order/new-order.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontEnd/src/app/shared/bakery/pages/new-order/new-order.component.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontEnd/src/app/shared/bakery/pages/new-order/new-order.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontEnd/src/app/shared/bakery/pages/new-order/new-order.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontEnd/src/app/shared/bakery/pages/payment/payment.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontEnd/src/app/shared/bakery/pages/payment/payment.component.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontEnd/src/app/shared/bakery/pages/payment/payment.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontEnd/src/app/shared/bakery/pages/payment/payment.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontEnd/src/app/shared/bakery/pages/riepilogo/riepilogo.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontEnd/src/app/shared/bakery/pages/riepilogo/riepilogo.component.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontEnd/src/app/shared/bakery/pages/riepilogo/riepilogo.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontEnd/src/app/shared/bakery/pages/riepilogo/riepilogo.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontEnd/src/public/image-2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontEnd/src/public/image-3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontEnd/src/public/image.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontEnd/src/public/panettiere.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1738864739276.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1738864825596.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1738864897801.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1738973915596.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1738973928995.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1738973943543.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1738974596690.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1738974810758.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1738974838915.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1738974854085.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1738974873019.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1738974892616.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1738974908624.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1738976568687.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1738976609231.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1738980785398.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1739033730339.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1739033744979.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1739033971574.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1739034208134.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1739034885038.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1739034941797.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1739035260398.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1739035800665.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1739036077206.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1739036193192.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1739036795263.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1739036810937.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1739036956821.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1739036974452.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1739037124965.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1739037138299.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1739037769130.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1739037784826.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1739038464151.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1739038481059.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1739040191615.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1739040206909.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1739040570807.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1739040584072.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1739041345515.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1739041360169.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1739048093988.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1739048109570.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1739048630044.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1739048643066.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1739050081893.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1739050095230.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1739050436717.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1739050448421.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1739050608794.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1739051044674.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1739051229938.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1739052125625.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1739052476873.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1739052640921.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1739052797764.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1739052986226.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1739053103171.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1739053773250.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1739053784849.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1739058950709.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1739058968178.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1739059710254.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1739059724508.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1739059963888.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1739059982570.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1739061695314.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1739061714830.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1739063061989.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1739063076958.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1739113927157.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1739113960111.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1739113991809.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1739117674091.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1739117688630.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1739117712078.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1739125101795.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1739125128174.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1739135508115.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1739135530507.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1739135573947.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1739136923964.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1739136942775.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1739139694611.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1739139934094.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1739139957485.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1739141392514.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1739141412121.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1739141441269.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1739141468786.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1739141497501.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1739141547720.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1739141571146.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1739141598008.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1739145704960.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1739147571635.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1739147627161.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1739148389721.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/1/1739148432126.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/2/1738973234031.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/2/1738973278382.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uploads/users/2/1738973372442.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/0c8bb871-c311-4f15-8d46-26cf6eae043a.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/0c8bb871-c311-4f15-8d46-26cf6eae043a.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/0c8bb871-c311-4f15-8d46-26cf6eae043a/storage_v2/_src_/database/BreadExchange2.d2D_JQ/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/0c8bb871-c311-4f15-8d46-26cf6eae043a/storage_v2/_src_/database/BreadExchange2.d2D_JQ/schema/public.abK9xQ.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/services/models.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/services/models.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/services/models/bakery-response.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/services/models/bakery-response.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/services/models/bakeryfront-end-response.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/services/models/bakeryfront-end-response.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/services/services.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/services/services.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/services/models/user.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/services/models/user.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/services/services/admin-controller.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/services/services/admin-controller.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/services/services/bakery-controller.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/services/services/bakery-controller.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/services/services/front-end-controller.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/services/services/front-end-controller.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/services/services/user-controller.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/services/services/user-controller.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/shared/bakery/bakery-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/shared/bakery/bakery-routing.module.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/shared/bakery/components/carosello-infinito/carosello-infinito.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/shared/bakery/components/carosello-infinito/carosello-infinito.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/shared/bakery/components/carosello-infinito/carosello-infinito.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/shared/bakery/components/carosello-infinito/carosello-infinito.component.scss" afterDir="false" />
@@ -105,20 +188,37 @@
       <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/shared/bakery/components/orari/orari.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/shared/bakery/components/orari/orari.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/shared/bakery/pages/bakery/bakery.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/shared/bakery/pages/bakery/bakery.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/shared/bakery/pages/bakery/bakery.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/shared/bakery/pages/bakery/bakery.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/shared/bakery/pages/menu/menu.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/shared/bakery/pages/menu/menu.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/shared/bakery/pages/menu/menu.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/shared/bakery/pages/menu/menu.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/shared/components/carosello/carosello.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/shared/components/carosello/carosello.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/shared/components/carosello/carosello.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/shared/components/carosello/carosello.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/shared/components/favourite/favourite.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/shared/components/favourite/favourite.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/shared/components/favourite/favourite.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/shared/components/favourite/favourite.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/shared/components/favourite/favourite.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/shared/components/favourite/favourite.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/shared/components/info/info.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/shared/components/info/info.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/shared/components/marketing/marketing.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/shared/components/marketing/marketing.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/shared/components/marketing/marketing.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/shared/components/marketing/marketing.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/shared/components/navbar/navbar.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/shared/components/navbar/navbar.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/shared/components/navbar/navbar.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/shared/components/navbar/navbar.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/shared/components/navbar/navbar.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/shared/components/navbar/navbar.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/shared/components/order/order.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/shared/components/order/order.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/shared/components/order/order.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/shared/components/order/order.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/shared/homepage/homepage-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/shared/homepage/homepage-routing.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/shared/homepage/pages/admin/admin.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/shared/homepage/pages/admin/admin.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/shared/homepage/pages/admin/components/list-bakery/list-bakery.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/shared/homepage/pages/admin/components/list-bakery/list-bakery.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/shared/homepage/pages/admin/components/list-bakery/list-bakery.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/shared/homepage/pages/admin/components/list-bakery/list-bakery.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/shared/homepage/pages/admin/components/list-requests/list-requests.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/shared/homepage/pages/admin/components/list-requests/list-requests.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/shared/homepage/pages/admin/components/list-users/list-users.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/shared/homepage/pages/admin/components/list-users/list-users.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/shared/homepage/pages/home/homepage.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/shared/homepage/pages/home/homepage.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/shared/homepage/pages/home/homepage.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/shared/homepage/pages/home/homepage.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/shared/homepage/pages/main/main.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/shared/homepage/pages/main/main.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/shared/homepage/pages/main/main.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/shared/homepage/pages/main/main.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/shared/homepage/pages/user/user.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/shared/homepage/pages/user/user.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/shared/homepage/pages/user/user.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/shared/homepage/pages/user/user.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/shared/homepage/pages/user/user.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/shared/homepage/pages/user/user.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/shared/page-not-found/page-not-found.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/shared/page-not-found/page-not-found.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FrontEnd/src/app/shared/page-not-found/page-not-found.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/app/shared/page-not-found/page-not-found.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FrontEnd/src/openapi/openapi.json" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/src/openapi/openapi.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uploads/users/1/1736809115126.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/Uploads/users/1/1738598494221.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uploads/users/1/1736810650178.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/Uploads/users/1/1738626715460.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uploads/users/1/1736863746201.webp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uploads/users/1/1736863773665.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uploads/users/1/1736934227652.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/Uploads/users/1/1738598821027.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uploads/users/1/1736934259223.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uploads/users/1/1736936131861.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/Uploads/users/1/1738617183178.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uploads/users/1/1736936140931.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/Uploads/users/1/1738598211817.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uploads/users/1/1737039114625.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/Uploads/users/1/1738618269219.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uploads/users/1/1737039318673.png" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -162,6 +262,8 @@
   &quot;keyToString&quot;: {
     &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
     &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;Notification.DisplayName-DoNotAsk-Vcs Important Messages&quot;: &quot;VCS important messages&quot;,
+    &quot;Notification.DoNotAsk-Vcs Important Messages&quot;: &quot;true&quot;,
     &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
     &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
     &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
@@ -192,8 +294,8 @@
 }</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
-      <recent name="it.uniromatre.breadexchange2_0.bakery.Week" />
       <recent name="it.uniromatre.breadexchange2_0.bakery" />
+      <recent name="it.uniromatre.breadexchange2_0.bakery.Week" />
       <recent name="it.uniromatre.breadexchange2_0.user.address" />
       <recent name="it.uniromatre.breadexchange2_0.token" />
       <recent name="it.uniromatre.breadexchange2_0.user" />
@@ -207,10 +309,10 @@
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/FrontEnd/src/public" />
+      <recent name="$PROJECT_DIR$/FrontEnd/src/app/shared/bakery/pages" />
       <recent name="$PROJECT_DIR$/FrontEnd/src/app/shared/bakery/components" />
       <recent name="$PROJECT_DIR$/FrontEnd/src/public/testImg" />
       <recent name="$PROJECT_DIR$/FrontEnd/src/app/services/directive" />
-      <recent name="$PROJECT_DIR$/FrontEnd/src/app/shared/homepage/pages" />
     </key>
   </component>
   <component name="RunManager">
@@ -270,7 +372,15 @@
       <workItem from="1737728989923" duration="60197000" />
       <workItem from="1738621592704" duration="9760000" />
       <workItem from="1738661587664" duration="13906000" />
-      <workItem from="1738771460213" duration="20711000" />
+      <workItem from="1738771460213" duration="21565000" />
+      <workItem from="1738835205788" duration="22265000" />
+      <workItem from="1738874690762" duration="388000" />
+      <workItem from="1738875218739" duration="403000" />
+      <workItem from="1738876258214" duration="6509000" />
+      <workItem from="1738921535207" duration="39635000" />
+      <workItem from="1739012783228" duration="40662000" />
+      <workItem from="1739112625841" duration="38855000" />
+      <workItem from="1739168782672" duration="14423000" />
     </task>
     <servers />
   </component>

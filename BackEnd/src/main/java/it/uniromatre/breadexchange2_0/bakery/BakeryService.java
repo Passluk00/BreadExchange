@@ -19,6 +19,9 @@ import it.uniromatre.breadexchange2_0.user.address.Address;
 import it.uniromatre.breadexchange2_0.user.address.AddressMapper;
 import it.uniromatre.breadexchange2_0.user.address.AddressRepository;
 import it.uniromatre.breadexchange2_0.user.address.NewAddress;
+import it.uniromatre.breadexchange2_0.user.order.Order;
+import it.uniromatre.breadexchange2_0.user.order.OrderFrontEnd;
+import it.uniromatre.breadexchange2_0.user.order.OrderMapper;
 import jakarta.mail.MessagingException;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -29,6 +32,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -55,6 +59,7 @@ public class BakeryService {
     private final ItemMapper itemMapper;
     private final FileStorageService fileStorageService;
     private final AddressMapper addressMapper;
+    private final OrderMapper orderMapper;
 
 
     // errore devo cercare se l'utente passato è valido
@@ -76,13 +81,14 @@ public class BakeryService {
             throw new SecurityException("User does not have admin permission");
         }
 
-        User toSave = userRepository.findUserById(id);
-        if(toSave==null){                                                                          // controlloche l'utente esista
-            throw new EntityNotFoundException("User not Found with id: "+ id);
-        }
+
 
         var req = brrRepository.findById(id).orElseThrow(() -> new RuntimeException("Request non esistente con id: "+ id));
 
+        User toSave = userRepository.findUserById(req.getUser().getId());
+        if(toSave==null){                                                                          // controlloche l'utente esista
+            throw new EntityNotFoundException("User not Found with id: "+ id);
+        }
 
         var bakery = Bakery.builder()
 
@@ -91,6 +97,7 @@ public class BakeryService {
                 .owner(toSave)
                 .registrationDate(LocalDateTime.now())
                 .abilitato(true)
+                .openStatus(false)
                 .url_picture("./public/testImg/profile.jpeg")
                 .url_backImg("./public/testImg/misto_su_tavolo.JPG")
                 .build();
@@ -123,6 +130,11 @@ public class BakeryService {
 
         req.setEnable(true);
         brrRepository.save(req);
+
+        if(!toSave.getRoles().equals(Role.ADMIN)){
+            toSave.setRoles(Role.BAKERY_OWNER);
+            userRepository.save(toSave);
+        }
 
         bakery.setAddress(add);
         bakery.setContactInfo(co);
@@ -280,6 +292,32 @@ public class BakeryService {
         return isOwner || isAdmin;
     }
 
+    public void addAddress(Authentication connectedUser, NewAddress address, Integer idBac) {
+
+        User user = ((User) connectedUser.getPrincipal());
+        User toCheck = userRepository.findUserById(user.getId());
+
+        if(toCheck == null){
+            throw new EntityNotFoundException("User not found with id: " + user.getId());
+        }
+
+        Bakery bac = bakeryRepository.getBakeryById(idBac);
+
+        if(bac == null){
+            throw new EntityNotFoundException("bakery not found with id: "+ idBac);
+        }
+
+        if(!toCheck.getId().equals(bac.getOwner().getId())){
+            throw new RuntimeException("non sei Il propietario");
+        }
+
+        Address add = addressMapper.toAddress(address);
+        bac.setAddress(add);
+        addressRepository.save(add);
+        bakeryRepository.save(bac);
+
+    }
+
 
     public void uploadProfilePicture(MultipartFile file, Authentication connectedUser, Integer idBac) {
 
@@ -307,32 +345,6 @@ public class BakeryService {
     }
 
 
-    public void addAddress(Authentication connectedUser, NewAddress address, Integer idBac) {
-
-        User user = ((User) connectedUser.getPrincipal());
-        User toCheck = userRepository.findUserById(user.getId());
-
-        if(toCheck == null){
-            throw new EntityNotFoundException("User not found with id: " + user.getId());
-        }
-
-        Bakery bac = bakeryRepository.getBakeryById(idBac);
-
-        if(bac == null){
-            throw new EntityNotFoundException("bakery not found with id: "+ idBac);
-        }
-
-        if(!toCheck.getId().equals(bac.getOwner().getId())){
-            throw new RuntimeException("non sei Il propietario");
-        }
-
-        Address add = addressMapper.toAddress(address);
-        bac.setAddress(add);
-        addressRepository.save(add);
-        bakeryRepository.save(bac);
-    }
-
-
     public void uploadBackPicture(MultipartFile file, Authentication connectedUser, Integer idBac) {
 
         User user = (User)connectedUser.getPrincipal();
@@ -352,10 +364,231 @@ public class BakeryService {
 
         Bakery bac = bakeryRepository.getBakeryById(idBac);
 
+        if(bac == null){
+            throw new EntityNotFoundException("bakery not found with id: "+ idBac);
+        }
+
         bac.setUrl_backImg(fileStorageService.saveFile(file,toCheck.getId()));
 
         bakeryRepository.save(bac);
 
+    }
+
+    public List<BakeryNavBarResponse> searchByName(String req) {
+
+        List<Bakery> bac =bakeryRepository.findByName(req);
+
+        if(bac == null){
+            throw new EntityNotFoundException("bakery with this name not found");
+        }
+
+        return bakeryMapper.toBakeryNavBar(bac);
+    }
+
+    public ContactInfo getInfo(Integer idBac) {
+
+        if(idBac == null){
+            throw new RuntimeException("Id bakery null");
+        }
+
+        Bakery bac = bakeryRepository.getBakeryById(idBac);
+
+        if(bac == null){
+            throw new EntityNotFoundException("bakery not found with id: "+ idBac);
+        }
+
+        return bac.getContactInfo();
+    }
+
+    public Boolean checkOpen(Integer idBac) {
+
+        if(idBac == null){
+            throw new RuntimeException("Id bakery null");
+        }
+
+        Bakery bac = bakeryRepository.getBakeryById(idBac);
+
+        if(bac == null){
+            throw new EntityNotFoundException("bakery not found with id: "+ idBac);
+        }
+
+        return bac.getOpenStatus();
+
+    }
+
+    public void changeStatus(Authentication connectedUser, Integer idBac) {
+
+        if(idBac == null){
+            throw new RuntimeException("Id bakery null");
+        }
+
+        User user = (User)connectedUser.getPrincipal();
+        User toCheck = userRepository.findUserById(user.getId());
+
+        if(toCheck == null){
+            throw new EntityNotFoundException("User not found with id: "+ user.getId());
+        }
+
+        Bakery bac = bakeryRepository.getBakeryById(idBac);
+
+        if(bac == null){
+            throw new EntityNotFoundException("bakery not found with id: "+ idBac);
+        }
+
+        if(!toCheck.getId().equals(bac.getOwner().getId())){
+            throw new RuntimeException("non sei Il propietario");
+        }
+
+
+        bac.setOpenStatus(!bac.getOpenStatus());
+        bakeryRepository.save(bac);
+
+
+
+    }
+
+    public void modDesc(Authentication connectedUser, Integer idBac, ReqModDesc req) {
+
+
+        if(idBac == null){
+            throw new RuntimeException("Id bakery null");
+        }
+
+        if(req == null){
+            throw new RuntimeException("request is null");
+        }
+
+        User user = (User)connectedUser.getPrincipal();
+        User toCheck = userRepository.findUserById(user.getId());
+
+        if(toCheck == null){
+            throw new EntityNotFoundException("User not found with id: "+ user.getId());
+        }
+
+        Bakery bac = bakeryRepository.getBakeryById(idBac);
+
+        if(bac == null){
+            throw new EntityNotFoundException("bakery not found with id: "+ idBac);
+        }
+
+        if(!toCheck.getId().equals(bac.getOwner().getId())){
+            throw new RuntimeException("non sei Il propietario");
+        }
+
+        bac.setDescription(req.desc);
+        bakeryRepository.save(bac);
+
+    }
+
+    public void modSocial(Authentication connectedUser, Integer idBac, UpdateSocialBakery req) {
+
+
+        if(idBac == null){
+            throw new RuntimeException("Id bakery null");
+        }
+
+        if(req == null){
+            throw new RuntimeException("request is null");
+        }
+
+        User user = (User)connectedUser.getPrincipal();
+        User toCheck = userRepository.findUserById(user.getId());
+
+        if(toCheck == null){
+            throw new EntityNotFoundException("User not found with id: "+ user.getId());
+        }
+
+        Bakery bac = bakeryRepository.getBakeryById(idBac);
+
+        if(bac == null){
+            throw new EntityNotFoundException("bakery not found with id: "+ idBac);
+        }
+
+        if(!toCheck.getId().equals(bac.getOwner().getId())){
+            throw new RuntimeException("non sei Il propietario");
+        }
+
+        ContactInfo social = bac.getContactInfo();
+
+        if(req.facebook != null){
+            social.setFacebook(req.facebook);
+        }
+
+        if(req.instagram != null){
+            social.setInstagram(req.instagram);
+        }
+
+        if(req.twitter != null){
+            social.setTwitter(req.twitter);
+        }
+
+        bac.setContactInfo(social);
+        bakeryRepository.save(bac);
+
+
+    }
+
+    public BakeryNavBarResponse getBakeryById(Integer idBac) {
+        if(idBac == null){
+            throw new RuntimeException("Id bakery null");
+        }
+
+        Bakery bac = bakeryRepository.getBakeryById(idBac);
+
+        if(bac == null){
+            throw new EntityNotFoundException("bakery not found with id: "+ idBac);
+        }
+
+        return bakeryMapper.toBakeryNavBar(bac);
+
+
+    }
+
+    public List<OrderFrontEnd> getAllOrdersBakery(Authentication connectedUser) {
+
+        User user = (User)connectedUser.getPrincipal();
+        User toCheck = userRepository.findUserById(user.getId());
+
+        if(toCheck == null){
+            throw new EntityNotFoundException("User not found with id: "+ user.getId());
+        }
+
+        Bakery bac = bakeryRepository.findByOwner(toCheck);
+
+        if(bac == null){
+            throw new RuntimeException("bakery not found with owner");
+        }
+
+        if(bac.getOrders().isEmpty()){
+            throw new RuntimeException("Non ci sono ordini");
+        }
+
+        List<Order> ord = bac.getOrders();
+
+        return orderMapper.toFrontEnd(ord);
+    }
+
+    public void banBakery(Integer idBac) {
+
+        Bakery bac = bakeryRepository.getBakeryById(idBac);
+
+        if (bac == null) {
+            throw new UsernameNotFoundException("Bakery not found with id:: " + idBac);
+        }
+
+        bac.setAbilitato(!bac.getAbilitato());
+
+        bakeryRepository.save(bac);
+
+
+
+    }
+
+    public List<RandomDataBakeryCarosello> getRandomForCarosello() {
+
+        List<Bakery> bacs = bakeryRepository.getForCarosello();
+
+        return bakeryMapper.toRandomDataBakeryCarosello(bacs);
     }
 }
 

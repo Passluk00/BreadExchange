@@ -27,6 +27,7 @@ export class OrariComponent implements OnInit{
     this.getWeek()
   }
 
+
   getWeek(){
     if(this.id){
       this.frontEndService.getWeek({

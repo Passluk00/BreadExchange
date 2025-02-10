@@ -4,14 +4,19 @@ import {BakeryControllerService} from "../../services/services/bakery-controller
 import {ItemRequest} from "../../services/models/item-request";
 import {ListCategoryFrontEnd} from "../../services/models/list-category-front-end";
 import {FrontEndControllerService} from "../../services/services/front-end-controller.service";
-import {NgForOf} from "@angular/common";
+import {NgForOf, NgIf} from "@angular/common";
+import {RouterLink} from "@angular/router";
+import {ToolBarComponent} from "../bakery/components/tool-bar/tool-bar.component";
 
 @Component({
   selector: 'app-page-not-found',
   imports: [
     ReactiveFormsModule,
     FormsModule,
-    NgForOf
+    NgForOf,
+    NgIf,
+    RouterLink,
+    ToolBarComponent
   ],
   templateUrl: './page-not-found.component.html',
   standalone: true,
@@ -20,11 +25,13 @@ import {NgForOf} from "@angular/common";
 export class PageNotFoundComponent implements OnInit{
 
   constructor(
-    private service: BakeryControllerService,
+    private bakeryService: BakeryControllerService,
     private frontEndService: FrontEndControllerService,
     private cdr: ChangeDetectorRef,
   ) {
   }
+
+  userId: number = 1;
 
   owner:number = 1    // da prendere dinamicamente con pssaggio da url
   catName: string = ""
@@ -43,9 +50,31 @@ export class PageNotFoundComponent implements OnInit{
   toUpload:any;
   data:ListCategoryFrontEnd = {}
 
+
+  searchValue: string = "";
+  results: any = {}
+
+
   ngOnInit(): void {
     this.getCategorys()
   }
+
+
+  onSearchInput(){
+    if(this.searchValue != ""){
+      this.frontEndService.searchBakery({
+        name: this.searchValue
+      }).subscribe({
+        next:(res) => {
+          this.results = res
+        },
+        error: (err) => {
+          console.error("ricerca fallita "+ err)
+        }
+      })
+    }
+  }
+
 
 
   onFileSelected(event: Event) {
@@ -71,7 +100,7 @@ export class PageNotFoundComponent implements OnInit{
 
 
   sendReq(){
-    this.service.newItem({
+    this.bakeryService.newItem({
       idBac:1,                          // preso automaticamente da path
       idCat:this.categorySelected,
       body:{
@@ -91,7 +120,7 @@ export class PageNotFoundComponent implements OnInit{
 
 
   newCategory(){
-    this.service.newCategory({
+    this.bakeryService.newCategory({
       bakeryId:1,                         // preso automaticamente da path
       nomeCat: this.catName
     }).subscribe({
@@ -108,7 +137,7 @@ export class PageNotFoundComponent implements OnInit{
 
 
   modItem(){
-    this.service.updateItem({
+    this.bakeryService.updateItem({
       idBac: 1,                         // preso dinameicamente da path
       idItem: 1,                        // preso al momento di click tasto modifica
       body: this.itemMod
@@ -126,7 +155,7 @@ export class PageNotFoundComponent implements OnInit{
 
 
   delItem(){
-    this.service.delItem({
+    this.bakeryService.delItem({
       idItem:1,                           // preso al click
       idCat:1,                            // preso al click
       idBac:1                             // preso dinamicamente da path
@@ -144,7 +173,7 @@ export class PageNotFoundComponent implements OnInit{
 
   delCat(){
     if(this.categorySelectedDel) {
-      this.service.delCategory({
+      this.bakeryService.delCategory({
         idCat: this.categorySelectedDel
       }).subscribe({
         next: () => {
@@ -160,4 +189,7 @@ export class PageNotFoundComponent implements OnInit{
   }
 
 
+
+
 }
+

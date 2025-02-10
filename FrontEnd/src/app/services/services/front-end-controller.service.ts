@@ -14,21 +14,33 @@ import { StrictHttpResponse } from '../strict-http-response';
 import { bakeryDetail } from '../fn/front-end-controller/bakery-detail';
 import { BakeryDetail$Params } from '../fn/front-end-controller/bakery-detail';
 import { BakeryfrontEndResponse } from '../models/bakeryfront-end-response';
+import { BakeryNavBarResponse } from '../models/bakery-nav-bar-response';
 import { checkOwner } from '../fn/front-end-controller/check-owner';
 import { CheckOwner$Params } from '../fn/front-end-controller/check-owner';
 import { getAllCategory } from '../fn/front-end-controller/get-all-category';
 import { GetAllCategory$Params } from '../fn/front-end-controller/get-all-category';
+import { getBAkeryById } from '../fn/front-end-controller/get-b-akery-by-id';
+import { GetBAkeryById$Params } from '../fn/front-end-controller/get-b-akery-by-id';
 import { getCategory } from '../fn/front-end-controller/get-category';
 import { GetCategory$Params } from '../fn/front-end-controller/get-category';
+import { getInfo } from '../fn/front-end-controller/get-info';
+import { GetInfo$Params } from '../fn/front-end-controller/get-info';
 import { getPlaneAdd } from '../fn/front-end-controller/get-plane-add';
 import { GetPlaneAdd$Params } from '../fn/front-end-controller/get-plane-add';
 import { getRandomData } from '../fn/front-end-controller/get-random-data';
 import { GetRandomData$Params } from '../fn/front-end-controller/get-random-data';
+import { getRandomForCarosello } from '../fn/front-end-controller/get-random-for-carosello';
+import { GetRandomForCarosello$Params } from '../fn/front-end-controller/get-random-for-carosello';
 import { getWeek } from '../fn/front-end-controller/get-week';
 import { GetWeek$Params } from '../fn/front-end-controller/get-week';
+import { isOpen } from '../fn/front-end-controller/is-open';
+import { IsOpen$Params } from '../fn/front-end-controller/is-open';
 import { ListCategoryFrontEnd } from '../models/list-category-front-end';
 import { PlanAddBkery } from '../models/plan-add-bkery';
+import { RandomDataBakeryCarosello } from '../models/random-data-bakery-carosello';
 import { RandomDataBakeryResponse } from '../models/random-data-bakery-response';
+import { searchBakery } from '../fn/front-end-controller/search-bakery';
+import { SearchBakery$Params } from '../fn/front-end-controller/search-bakery';
 import { testCategory } from '../fn/front-end-controller/test-category';
 import { TestCategory$Params } from '../fn/front-end-controller/test-category';
 import { Week } from '../models/week';
@@ -68,6 +80,56 @@ export class FrontEndControllerService extends BaseService {
     );
   }
 
+  /** Path part for operation `searchBakery()` */
+  static readonly SearchBakeryPath = '/frontEnd/searchBakery';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `searchBakery()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  searchBakery$Response(params: SearchBakery$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<BakeryNavBarResponse>>> {
+    return searchBakery(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `searchBakery$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  searchBakery(params: SearchBakery$Params, context?: HttpContext): Observable<Array<BakeryNavBarResponse>> {
+    return this.searchBakery$Response(params, context).pipe(
+      map((r: StrictHttpResponse<Array<BakeryNavBarResponse>>): Array<BakeryNavBarResponse> => r.body)
+    );
+  }
+
+  /** Path part for operation `isOpen()` */
+  static readonly IsOpenPath = '/frontEnd/isOpen';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `isOpen()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  isOpen$Response(params: IsOpen$Params, context?: HttpContext): Observable<StrictHttpResponse<boolean>> {
+    return isOpen(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `isOpen$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  isOpen(params: IsOpen$Params, context?: HttpContext): Observable<boolean> {
+    return this.isOpen$Response(params, context).pipe(
+      map((r: StrictHttpResponse<boolean>): boolean => r.body)
+    );
+  }
+
   /** Path part for operation `getWeek()` */
   static readonly GetWeekPath = '/frontEnd/getWeek';
 
@@ -90,6 +152,31 @@ export class FrontEndControllerService extends BaseService {
   getWeek(params: GetWeek$Params, context?: HttpContext): Observable<Week> {
     return this.getWeek$Response(params, context).pipe(
       map((r: StrictHttpResponse<Week>): Week => r.body)
+    );
+  }
+
+  /** Path part for operation `getRandomForCarosello()` */
+  static readonly GetRandomForCaroselloPath = '/frontEnd/getRandomForCarosello';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `getRandomForCarosello()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getRandomForCarosello$Response(params?: GetRandomForCarosello$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<RandomDataBakeryCarosello>>> {
+    return getRandomForCarosello(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `getRandomForCarosello$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getRandomForCarosello(params?: GetRandomForCarosello$Params, context?: HttpContext): Observable<Array<RandomDataBakeryCarosello>> {
+    return this.getRandomForCarosello$Response(params, context).pipe(
+      map((r: StrictHttpResponse<Array<RandomDataBakeryCarosello>>): Array<RandomDataBakeryCarosello> => r.body)
     );
   }
 
@@ -143,6 +230,35 @@ export class FrontEndControllerService extends BaseService {
     );
   }
 
+  /** Path part for operation `getInfo()` */
+  static readonly GetInfoPath = '/frontEnd/getInfo';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `getInfo()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getInfo$Response(params: GetInfo$Params, context?: HttpContext): Observable<StrictHttpResponse<{
+}>> {
+    return getInfo(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `getInfo$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getInfo(params: GetInfo$Params, context?: HttpContext): Observable<{
+}> {
+    return this.getInfo$Response(params, context).pipe(
+      map((r: StrictHttpResponse<{
+}>): {
+} => r.body)
+    );
+  }
+
   /** Path part for operation `getCategory()` */
   static readonly GetCategoryPath = '/frontEnd/getCategory';
 
@@ -169,6 +285,31 @@ export class FrontEndControllerService extends BaseService {
       map((r: StrictHttpResponse<{
 }>): {
 } => r.body)
+    );
+  }
+
+  /** Path part for operation `getBAkeryById()` */
+  static readonly GetBAkeryByIdPath = '/frontEnd/getBAkeryById';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `getBAkeryById()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getBAkeryById$Response(params: GetBAkeryById$Params, context?: HttpContext): Observable<StrictHttpResponse<BakeryNavBarResponse>> {
+    return getBAkeryById(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `getBAkeryById$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getBAkeryById(params: GetBAkeryById$Params, context?: HttpContext): Observable<BakeryNavBarResponse> {
+    return this.getBAkeryById$Response(params, context).pipe(
+      map((r: StrictHttpResponse<BakeryNavBarResponse>): BakeryNavBarResponse => r.body)
     );
   }
 

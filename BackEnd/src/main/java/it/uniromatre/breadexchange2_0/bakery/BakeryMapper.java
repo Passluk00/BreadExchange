@@ -1,9 +1,10 @@
 package it.uniromatre.breadexchange2_0.bakery;
 
-import it.uniromatre.breadexchange2_0.items.item.Item;
+import it.uniromatre.breadexchange2_0.bakery.fav.BakeryFav;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class BakeryMapper {
@@ -42,6 +43,47 @@ public class BakeryMapper {
                 bac.getCategories()
         );
     }
+
+
+    public BakeryNavBarResponse toBakeryNavBar(Bakery bac){
+        return new BakeryNavBarResponse(
+                bac.getId(),
+                bac.getName(),
+                bac.getUrl_picture()
+        );
+    }
+
+    public List<BakeryNavBarResponse> toBakeryNavBar(List<Bakery> bacs){
+        return bacs.stream().map(this::toBakeryNavBar)
+                .collect(Collectors.toList());
+    }
+
+
+    public BakeryFav toBakeryFav(Bakery bac){
+        return new BakeryFav(
+                bac.getId(),
+                bac.getName(),
+                bac.getUrl_picture(),
+                bac.getOpenStatus()
+        );
+    }
+
+    public RandomDataBakeryCarosello toRandomDataBakeryCarosello(Bakery bac){
+        return new RandomDataBakeryCarosello(
+                bac.getId(),
+                bac.getUrl_backImg(),
+                bac.getName(),
+                bac.getDescription()
+        );
+    }
+
+    public List<RandomDataBakeryCarosello> toRandomDataBakeryCarosello(List<Bakery> bacs){
+        return bacs.stream().map(this::toRandomDataBakeryCarosello)
+                .collect(Collectors.toList());
+    }
+
+
+
 
 
 

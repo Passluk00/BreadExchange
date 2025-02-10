@@ -27,19 +27,12 @@
 
   <div *ngFor="let request of bakerys.content" class="mt-[40px]">
 
-    <!--
-
-    <div class="mx-4 justify-center bg-black h-[250px] "></div>
-
-    -->
 
     <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mx-10 h-60 flex relative bg-gray-300">
 
       <div class="absolute">
 
 
-
-        <!-- TODO implementare link per bakery personalizzata -->
 
         <a [routerLink]="['/bakery/', request.id]" class="text-3xl no-underline text-black font-bold">{{request.name}}</a>
 
@@ -49,13 +42,13 @@
 
 
 
-
-
       </div>
 
       <div class="absolute right-2">
 
-        Mostrare altre cose
+        <button *ngIf="!request.enable" class="btn btn-success" (click)="banUnbanBakery(request)">UnBan</button>
+
+        <button *ngIf="request.enable" class="btn btn-danger" (click)="banUnbanBakery(request)">Ban</button>
 
       </div>
 
