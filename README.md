@@ -1,102 +1,125 @@
-# 📌 BreadExchange  
-**Un marketplace innovativo per panifici, pasticcerie e forni!**  
+# 🥖 BreadExchange  
+**An innovative marketplace for bakeries, pastry shops, and artisan ovens!**
+
+![Java](https://img.shields.io/badge/Java-17%2B-blue?logo=java&logoColor=white)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-Backend-success?logo=springboot&logoColor=white)
+![Angular](https://img.shields.io/badge/Angular-Frontend-red?logo=angular&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/Database-PostgreSQL-blue?logo=postgresql&logoColor=white)
+![Docker](https://img.shields.io/badge/Container-Docker-2496ED?logo=docker&logoColor=white)
+![Node.js](https://img.shields.io/badge/Node.js-18%2B-brightgreen?logo=node.js&logoColor=white)
+![Status](https://img.shields.io/badge/Status-Work%20In%20Progress-orange)
+![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20Linux%20%7C%20macOS-blueviolet)
 
 ---
 
-## 📖 Descrizione del Progetto  
-**BreadExchange** è una piattaforma web che permette agli utenti di consultare i menu dei rivenditori locali, effettuare ordini e gestire la propria attività.  
+## 📖 Project Overview  
 
-Il progetto utilizza **Java** per il back-end, **Angular** per il front-end e **PostgreSQL** come database.  
+**BreadExchange** is a web platform designed to connect users with local bakeries, pastry shops, and bread artisans.  
+It allows users to browse vendor menus, place and track orders, and for businesses to manage their storefronts directly on the platform.  
 
-### 🎯 Funzionalità principali  
-
-#### 🔹 Utente non loggato  
-- Ricerca e navigazione tra i rivenditori  
-- Consultazione dei menu disponibili  
-
-#### 🔹 Utente loggato  
-- Personalizzazione del profilo  
-- Possibilità di effettuare ordini e monitorarne lo stato  
-- Sezione "Preferiti" per salvare rivenditori preferiti  
-- Richiesta di registrazione come rivenditore  
-
-#### 🔹 Rivenditore  
-- Gestione della propria pagina e dei prodotti offerti  
-- Gestione degli ordini ricevuti  
-
-#### 🔹 Admin  
-- Controllo e moderazione del sito  
-- Gestione di utenti e rivenditori  
+The project leverages **Java (Spring Boot)** for the back-end, **Angular** for the front-end, and **PostgreSQL** as the main database.
 
 ---
 
-## 🛠 Tecnologie Utilizzate  
+## 🎯 Main Features  
 
-### **Back-end**  
+### 👤 Guest Users  
+- Browse and search among local vendors  
+- View available menus and products  
+
+### 🔐 Registered Users  
+- Customize personal profiles  
+- Place and track orders in real-time  
+- Manage a **Favorites** list for preferred vendors  
+- Request registration as a vendor  
+
+### 🏪 Vendors  
+- Manage store details and product catalog  
+- Handle and track incoming orders  
+
+### 🛡️ Administrators  
+- Full control and moderation of the platform  
+- Manage users and vendor accounts  
+
+---
+
+## 🛠️ Technologies Used  
+
+### **Back-End**  
 - **Java + Spring Boot**  
 - **PostgreSQL**  
-- **JWT** per autenticazione  
+- **JWT Authentication**  
 - **Role-Based Authorization**  
-- **Error Handler personalizzati**  
-- **OpenAPI** per la comunicazione con il front-end  
-- **Impaginazione delle entità** per ottimizzare le richieste  
-- **Docker** per il servizio di invio email  
+- **Custom Error Handlers**  
+- **OpenAPI** for API documentation  
+- **Entity Pagination** for optimized queries  
+- **Docker** for the email delivery service  
 
-### **Front-end**  
+### **Front-End**  
 - **Angular**  
-- **HTML + CSS**  
-- **Bootstrap, Tailwind, Flowbite, Angular Material Design**  
-- **Google Maps API** per la gestione delle mappe  
+- **HTML, CSS**  
+- **Bootstrap, Tailwind, Flowbite, Angular Material**  
+- **Google Maps API** for location management  
 
 ---
 
-## ⚙ Requisiti di Sistema  
+## ⚙️ System Requirements  
+
 - **Java 17+**  
-- **Node.js 18+** e **npm**  
+- **Node.js 18+** and **npm**  
 - **Angular CLI**  
 - **PostgreSQL**  
-- **Docker** (per il servizio email)  
+- **Docker** (for email service)  
 
 ---
 
-## 🚀 Guida all'Installazione  
+## 🚀 Installation Guide  
 
-### **1️⃣ Clonare il Repository**  
+### **1️⃣ Clone the Repository**  
 ```bash
 git clone https://github.com/tuo-username/BreadExchange.git
 cd BreadExchange
 ```
 
-### **2️⃣ Configurare Il Database**
-> Nota, prima di digitare il comando verifica di avere installato PostgresSql sul tuo dispositivo
+### **2️⃣ Configure the Database**
+> ⚠️ Make sure PostgreSQL is installed on your system.
 ```bash
 CREATE DATABASE BreadExchange
 ```
-- Dopodiche verifica e aggiora il file **application.properies** con le credenziali corrette del database
+- Then update the application.properties file with your PostgreSQL credentials.
 
-### **3️⃣ Configurare Docker**
-> Nota, Verificare di aver installato docker e dopodiche installa MailDev dal DokerHub o manualmente dalla sua repo
-> https://github.com/maildev/maildev
+### **3️⃣ Configure Docker**
+> ⚠️ Ensure Docker is installed and running on your system.
+You can install MailDev from DockerHub or directly from its repository:
+🔗 https://github.com/maildev/maildev
 
-- Avviare docker
-- Avviare il container MailDev
+- Start Docker
+- Launch the MailDev container
+- Update the application.properties file with the container IP and listening port
 
-- Aggiornare il file **application.properties** inserendo ip del container e la porta di ascolto
-
-### **4️⃣ Avviare Il Back-End**
+### **4️⃣ Run the Back-End**
 
 ```bash
 cd backend
 ./mwn spring-boot:run
 ```
 
-### **5️⃣ Installare e Avviare Angular**
+### **5️⃣ Install and Run the Front-End**
 
 ```bash
 cd frontend
 npm install
 ng serve
 ```
-- L'app sarà disponibile su http://localhost:4200/
+- The application will be available at 👉 http://localhost:4200/
 
+---
+
+## 🧩 Future Improvements
+
+- Integration with payment gateways
+- Push notifications for order updates
+- Advanced analytics dashboard for vendors
+
+## Developed with ❤️ by Passluk
 
